@@ -10,3 +10,5 @@ out/
 nbproject/
 build.xml
 *.mf
+*.MF
+META-INF/
