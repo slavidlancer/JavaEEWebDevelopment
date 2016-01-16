@@ -1,0 +1,12 @@
+*.class
+bin/
+.settings/
+.classpath
+.project
+*.*~
+.idea/
+out/
+*.iml
+nbproject/
+build.xml
+*.mf
