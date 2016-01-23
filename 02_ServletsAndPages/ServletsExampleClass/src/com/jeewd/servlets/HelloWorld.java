@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/HelloWorld")
 public class HelloWorld extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -22,34 +22,34 @@ public class HelloWorld extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request,
-	        HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(
-		        request.getContextPath());
-		response.getWriter().append(System.lineSeparator());
-		response.getWriter().append("hello world");
-		response.getWriter().append(System.lineSeparator());
-		response.getWriter().append("the time/date: ").append(new Date().
-		        toString());
-		response.getWriter().append(System.lineSeparator());
-		
-		Integer count = (Integer) request.getSession().getAttribute("COUNTER");
-        
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(
+                request.getContextPath());
+        response.getWriter().append(System.lineSeparator());
+        response.getWriter().append("hello world");
+        response.getWriter().append(System.lineSeparator());
+        response.getWriter().append("the time/date: ").append(new Date().
+                toString());
+        response.getWriter().append(System.lineSeparator());
+
+        Integer count = (Integer) request.getSession().getAttribute("COUNTER");
+
         if (count == null) {
             count = 0;
         }
-        
-        response.getWriter().append(count.toString());
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request,
-	        HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+        response.getWriter().append(count.toString());
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
