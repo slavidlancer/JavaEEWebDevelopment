@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/DynamicContent")
 public class DynamicContent extends HttpServlet {
-    /**
-     * 
-     */
     private static final long serialVersionUID = 4643448211103623946L;
     
     public DynamicContent() {
