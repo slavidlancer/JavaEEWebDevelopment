@@ -34,6 +34,15 @@ public class HelloWorld extends HttpServlet {
 		response.getWriter().append(System.lineSeparator());
 		response.getWriter().append("the time/date: ").append(new Date().
 		        toString());
+		response.getWriter().append(System.lineSeparator());
+		
+		Integer count = (Integer) request.getSession().getAttribute("COUNTER");
+        
+        if (count == null) {
+            count = 0;
+        }
+        
+        response.getWriter().append(count.toString());
 	}
 
 	/**
