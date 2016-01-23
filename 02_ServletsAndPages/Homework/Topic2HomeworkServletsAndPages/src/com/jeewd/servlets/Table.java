@@ -41,6 +41,7 @@ public class Table extends HttpServlet {
 
     private String formatTable() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<!DOCTYPE html>");
         stringBuilder.append("<html>");
         stringBuilder.append("<head><title>").append("Table Servlet").
             append("</title></head>");

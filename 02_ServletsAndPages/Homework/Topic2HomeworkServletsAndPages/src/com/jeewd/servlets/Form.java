@@ -40,6 +40,7 @@ public class Form extends HttpServlet {
     
     private String formatForm() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<!DOCTYPE html>");
         stringBuilder.append("<html>");
         stringBuilder.append("<head><title>").append("Form Servlet").
             append("</title></head>");

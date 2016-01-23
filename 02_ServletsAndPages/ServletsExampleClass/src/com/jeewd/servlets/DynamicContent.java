@@ -51,6 +51,7 @@ public class DynamicContent extends HttpServlet {
 
     private String formatDynamicContent(int count) {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<!DOCTYPE html>");
         stringBuilder.append("<html>");
         stringBuilder.append("<head><title>").append("Dynamic Servlet").
             append("</title></head>");
