@@ -57,7 +57,7 @@ public class DynamicContent extends HttpServlet {
         stringBuilder.append("<body>");
         stringBuilder.append("<h2>timestamp: " + new Date() + "<br>").
             append("times: " + count + "</h2>");
-        stringBuilder.append("</body></html>");
+        stringBuilder.append("</body>");
         stringBuilder.append("<html>");
         
         return stringBuilder.toString();
