@@ -1,6 +1,8 @@
 package com.jeewd.servlets;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +36,9 @@ public class DynamicContent extends HttpServlet {
         response.getWriter().append(count.toString());
         
         request.getSession().setAttribute("COUNTER", ++count);
+        
+        response.getWriter().println(formatDynamicContent(
+                (Integer) request.getSession().getAttribute("COUNTER")));
     }
 
     /**
@@ -42,5 +47,19 @@ public class DynamicContent extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+    }
+    
+    private String formatDynamicContent(int count) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<html>");
+        stringBuilder.append("<head><title>").append("Dynamic Servlet").
+            append("</title></head>");
+        stringBuilder.append("<body>");
+        stringBuilder.append("<h2>timestamp: " + new Date() + "<br>").
+            append("times: " + count + "</h2>");
+        stringBuilder.append("</body></html>");
+        stringBuilder.append("<html>");
+        
+        return stringBuilder.toString();
     }
 }
