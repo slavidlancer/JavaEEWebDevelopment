@@ -53,11 +53,9 @@ public class Table extends HttpServlet {
         stringBuilder.append("<table border=\"1\" class=\"width: 100%\">");
         stringBuilder.append("<tbody><tr><th>Topic</th><th>Date</th></tr>");
         stringBuilder.append("<tr><td>Web Basics</td>");
-        stringBuilder.append("<td>" + firstDate + "</td>");
-        stringBuilder.append("</tr>");
+        stringBuilder.append("<td>" + firstDate + "</td></tr>");
         stringBuilder.append("<tr><td>Servlets and Pages</td>");
-        stringBuilder.append("<td>" + secondDate + "</td>");
-        stringBuilder.append("</tr>");
+        stringBuilder.append("<td>" + secondDate + "</td></tr>");
         stringBuilder.append("</tbody></table>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");

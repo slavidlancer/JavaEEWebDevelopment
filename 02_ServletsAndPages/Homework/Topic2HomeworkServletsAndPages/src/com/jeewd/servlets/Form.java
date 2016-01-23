@@ -52,8 +52,9 @@ public class Form extends HttpServlet {
         stringBuilder.append("<br>");
         stringBuilder.append("Date:<br><input type=\"text\" name=\"date\">");
         stringBuilder.append("<br><br>");
-        stringBuilder.append("<input type=\"submit\" value=\"Submit\">&nbsp");
-        stringBuilder.append("&nbsp<input type=\"button\" value=\"Cancel\">");
+        stringBuilder.append("<input type=\"submit\" value=\"Submit\">");
+        stringBuilder.append("&nbsp&nbsp");
+        stringBuilder.append("<input type=\"button\" value=\"Cancel\">");
         stringBuilder.append("</form>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
