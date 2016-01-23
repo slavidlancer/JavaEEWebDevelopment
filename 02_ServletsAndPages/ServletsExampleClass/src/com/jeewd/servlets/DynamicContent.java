@@ -26,8 +26,17 @@ public class DynamicContent extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(
-                request.getContextPath());
+        response.setContentType("text/html");
+        
+        Integer count = (Integer) request.getSession().getAttribute("COUNTER");
+        
+        if (count == null) {
+            count = 0;
+        }
+        
+        response.getWriter().append(count.toString());
+        
+        request.getSession().setAttribute("COUNTER", ++count);
     }
 
     /**
