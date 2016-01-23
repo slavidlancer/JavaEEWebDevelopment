@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DynamicContent")
 public class DynamicContent extends HttpServlet {
     private static final long serialVersionUID = 4643448211103623946L;
-    
+
     public DynamicContent() {
         super();
     }
@@ -26,17 +26,17 @@ public class DynamicContent extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        
+
         Integer count = (Integer) request.getSession().getAttribute("COUNTER");
-        
+
         if (count == null) {
             count = 0;
         }
-        
+
         response.getWriter().append(count.toString());
-        
+
         request.getSession().setAttribute("COUNTER", ++count);
-        
+
         response.getWriter().println(formatDynamicContent(
                 (Integer) request.getSession().getAttribute("COUNTER")));
     }
@@ -48,7 +48,7 @@ public class DynamicContent extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
-    
+
     private String formatDynamicContent(int count) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<html>");
@@ -59,7 +59,7 @@ public class DynamicContent extends HttpServlet {
             append("times: " + count + "</h2>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
-        
+
         return stringBuilder.toString();
     }
 }

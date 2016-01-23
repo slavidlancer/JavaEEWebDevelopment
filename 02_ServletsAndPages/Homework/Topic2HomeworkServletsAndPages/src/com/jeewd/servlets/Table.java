@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Table")
 public class Table extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -23,23 +23,23 @@ public class Table extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request,
-	        HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().print(formatTable());
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().print(formatTable());
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request,
-	        HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request,
+            HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
-	private String formatTable() {
+    private String formatTable() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<html>");
         stringBuilder.append("<head><title>").append("Table Servlet").
@@ -51,7 +51,7 @@ public class Table extends HttpServlet {
                 "</td></tr></tbody></table>");
         stringBuilder.append("</body>");
         stringBuilder.append("</html>");
-        
+
         return stringBuilder.toString();
     }
 }
