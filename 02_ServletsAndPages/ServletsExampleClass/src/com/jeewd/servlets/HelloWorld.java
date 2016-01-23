@@ -52,5 +52,4 @@ public class HelloWorld extends HttpServlet {
 	        HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
