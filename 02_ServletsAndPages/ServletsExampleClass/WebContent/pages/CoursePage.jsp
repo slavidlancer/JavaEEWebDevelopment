@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="ct" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,6 +8,7 @@
     <title>CoursePage</title>
   </head>
   <body>
+    <ct:Header title="CoursePage"/>
     <table border="1">
       <thead>
         <tr>
@@ -25,5 +27,6 @@
         </tr>
       </tbody>
     </table>
+    <ct:Footer/>
   </body>
 </html>
