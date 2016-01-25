@@ -21,7 +21,7 @@
       <input type="text" name="date">
       <br><br>
       <input type="submit" value="Submit">
-      &nbsp&nbsp
+      &nbsp;&nbsp;
       <input type="button" value="Cancel">
     </form>
   </body>
