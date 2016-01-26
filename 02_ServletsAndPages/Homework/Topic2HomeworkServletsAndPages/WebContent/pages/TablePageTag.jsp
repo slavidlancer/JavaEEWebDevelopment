@@ -33,22 +33,24 @@
   </head>
   <body>
     <pt:Page title="TablePageTag" systemVersion="1.0.0">
-      <table border="1" class="width: 100%">
-        <tbody>
-          <tr>
-            <th>Topic</th>
-            <th>Date</th>
-          </tr>
-          <tr>
-            <td>Web Basics</td>
-            <td>${firstDateVar}</td>
-          </tr>
-          <tr>
-            <td>Servlets and Pages</td>
-            <td>${secondDateVar}</td>
-          </tr>
-        </tbody>
-      </table>
+      <jsp:body>
+        <table border="1" class="width: 100%">
+          <tbody>
+            <tr>
+              <th>Topic</th>
+              <th>Date</th>
+            </tr>
+            <tr>
+              <td>Web Basics</td>
+              <td>${firstDateVar}</td>
+            </tr>
+            <tr>
+              <td>Servlets and Pages</td>
+              <td>${secondDateVar}</td>
+            </tr>
+          </tbody>
+        </table>
+      </jsp:body>
     </pt:Page>
   </body>
 </html>
