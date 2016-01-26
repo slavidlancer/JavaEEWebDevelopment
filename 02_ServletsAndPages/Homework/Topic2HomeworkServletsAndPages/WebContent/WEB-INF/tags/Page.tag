@@ -1,8 +1,8 @@
-<%@ tag import="java.util.Date"%>
-<%@ attribute name="title"%>
-<%@ attribute name="systemVersion"%>
-
-<h1>${title}</h1>
-<p>content</p>
-<h4>${systemVersion}</h4>
-<% new Date(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="currentDate" value="<%= new java.util.Date() %>"/>
+<%@ include file="Header.tag" %>
+<jsp:doBody/>
+<br>
+<%@ include file="Footer.tag" %>
+${showCurrentDate = "true"}
+${showCurrentDate ? currentDate : "" }
