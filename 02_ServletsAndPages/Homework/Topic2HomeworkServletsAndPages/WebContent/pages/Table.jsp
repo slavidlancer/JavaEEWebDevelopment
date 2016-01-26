@@ -17,7 +17,7 @@
         return dateObject;
     }
 
-    Date firstDate = getDateAndTimeAsObject("21.01.2016 18:00");
+    Date firstDate = getDateAndTimeAsObject("14.01.2016 18:00");
     Date secondDate = getDateAndTimeAsObject("28.01.2016 18:00");
 %>
 <!DOCTYPE html>
