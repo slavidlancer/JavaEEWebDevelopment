@@ -34,7 +34,7 @@
           <th>Date</th>
         </tr>
         <tr>
-          <td>Web Basics</td>
+          <td>Web Development Basics</td>
           <td><%= firstDate %></td>
         </tr>
         <tr>
