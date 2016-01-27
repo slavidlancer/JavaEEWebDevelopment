@@ -4,5 +4,11 @@
 <c:set var="topic" value="2"/>
 <ct:Page title="CoursePageTag">
     <jsp:body>
+      <ct:VerticalTable>
+        <jsp:attribute name="row1-title">Course</jsp:attribute>
+        <jsp:attribute name="row1-value">Web Development Basics</jsp:attribute>
+        <jsp:attribute name="row2-title">Date</jsp:attribute>
+        <jsp:attribute name="row2-value">${date}</jsp:attribute>
+      </ct:VerticalTable>
     </jsp:body>
 </ct:Page>
