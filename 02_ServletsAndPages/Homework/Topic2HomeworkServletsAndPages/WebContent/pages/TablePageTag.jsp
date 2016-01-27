@@ -1,6 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ taglib prefix="pt" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="ct" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,33 +24,23 @@
 %>
 <c:set var="firstDateVar" value="<%= firstDate %>"/>
 <c:set var="secondDateVar" value="<%= secondDate %>"/>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>TablePageTag</title>
-  </head>
-  <body>
-    <pt:Page title="TablePageTag" systemVersion="1.0.0">
-      <jsp:body>
-        <table border="1" class="width: 100%">
-          <tbody>
-            <tr>
-              <th>Topic</th>
-              <th>Date</th>
-            </tr>
-            <tr>
-              <td>Web Basics</td>
-              <td>${firstDateVar}</td>
-            </tr>
-            <tr>
-              <td>Servlets and Pages</td>
-              <td>${secondDateVar}</td>
-            </tr>
-          </tbody>
-        </table>
-      </jsp:body>
-    </pt:Page>
-  </body>
-</html>
+<ct:Page title="TablePageTag" systemVersion="1.0.0">
+  <jsp:body>
+    <table border="1" class="width: 100%">
+      <tbody>
+        <tr>
+          <th>Topic</th>
+          <th>Date</th>
+        </tr>
+        <tr>
+          <td>Web Development Basics</td>
+          <td>${firstDateVar}</td>
+        </tr>
+        <tr>
+          <td>Servlets and Pages</td>
+          <td>${secondDateVar}</td>
+        </tr>
+      </tbody>
+    </table>
+  </jsp:body>
+</ct:Page>
