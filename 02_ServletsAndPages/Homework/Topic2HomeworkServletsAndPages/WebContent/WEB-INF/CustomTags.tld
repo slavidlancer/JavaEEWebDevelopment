@@ -8,6 +8,14 @@
         <path>/WEB-INF/tags/Page.tag</path>
     </tag-file>
     <tag-file>
+        <name>Header</name>
+        <path>/WEB-INF/tags/Header.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>Footer</name>
+        <path>/WEB-INF/tags/Footer.tag</path>
+    </tag-file>
+    <tag-file>
         <name>VerticalTableHeading</name>
         <path>/WEB-INF/tags/VerticalTableHeading.tag</path>
     </tag-file>
