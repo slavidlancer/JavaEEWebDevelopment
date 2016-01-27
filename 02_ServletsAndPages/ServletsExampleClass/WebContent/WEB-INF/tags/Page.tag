@@ -10,6 +10,7 @@
   <body>
     <ct:Header title="${title}"/>
     <jsp:doBody/>
+    <br>
     <ct:Footer/>
   </body>
 </html>
