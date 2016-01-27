@@ -24,7 +24,8 @@
 %>
 <c:set var="firstDateVar" value="<%= firstDate %>"/>
 <c:set var="secondDateVar" value="<%= secondDate %>"/>
-<ct:Page title="VerticalTableHeadingPageTag" systemVersion="1.0.0">
+<ct:Page title="VerticalTableHeadingPageTag" systemVersion="1.0.0"
+    showDate="true">
   <ct:VerticalTableHeading>
     <jsp:attribute name="row1-title">Topic</jsp:attribute>
     <jsp:attribute name="row1-value">Web Development Basics</jsp:attribute>

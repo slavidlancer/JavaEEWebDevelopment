@@ -2,7 +2,8 @@
 <%@ taglib prefix="ct" uri="http://servlets.jeewd.com/tags" %>
 <%@ attribute name="title" %>
 <%@ attribute name="systemVersion" %>
-<c:set var="showCurrentDate" value="true"/>
+<%@ attribute name="showDate" %>
+<c:set var="showCurrentDate" value="${showDate}"/>
 <c:set var="currentDate" value="<%= new java.util.Date() %>"/>
 <c:set var="currentDateWithBr" value="${currentDate}<br><br>"/>
 <!DOCTYPE html>

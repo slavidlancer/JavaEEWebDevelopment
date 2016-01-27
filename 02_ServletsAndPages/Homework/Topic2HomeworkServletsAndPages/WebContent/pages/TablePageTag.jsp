@@ -24,7 +24,7 @@
 %>
 <c:set var="firstDateVar" value="<%= firstDate %>"/>
 <c:set var="secondDateVar" value="<%= secondDate %>"/>
-<ct:Page title="TablePageTag" systemVersion="1.0.0">
+<ct:Page title="TablePageTag" systemVersion="1.0.0" showDate="true">
   <jsp:body>
     <table border="1" class="width: 100%">
       <tbody>
