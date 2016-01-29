@@ -1,5 +1,6 @@
 package com.jeewd.listeners;
 
+import java.util.Date;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
@@ -12,8 +13,11 @@ public class SessionListenerExample implements HttpSessionListener {
                 sessionEvent.getSession().getId());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void sessionDestroyed(HttpSessionEvent arg0) {
-        
+    public void sessionDestroyed(HttpSessionEvent sessionEvent) {
+        System.out.println("Session destroyed at " +
+                new Date().toLocaleString() + ". ID: " +
+                sessionEvent.getSession().getId());
     }
 }
