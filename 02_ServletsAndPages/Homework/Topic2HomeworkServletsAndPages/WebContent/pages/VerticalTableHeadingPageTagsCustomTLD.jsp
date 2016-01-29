@@ -26,14 +26,16 @@
 <c:set var="secondDateVar" value="<%= secondDate %>"/>
 <ct:Page title="VerticalTableHeadingPageTag" systemVersion="1.0.0"
     showDate="true">
-  <ct:VerticalTableHeading>
-    <jsp:attribute name="row1-title">Topic</jsp:attribute>
-    <jsp:attribute name="row1-value">Web Development Basics</jsp:attribute>
-    <jsp:attribute name="row2-title">Date</jsp:attribute>
-    <jsp:attribute name="row2-value">${firstDateVar}</jsp:attribute>
-    <jsp:attribute name="row3-title">Topic</jsp:attribute>
-    <jsp:attribute name="row3-value">Servlets and Pages</jsp:attribute>
-    <jsp:attribute name="row4-title">Date</jsp:attribute>
-    <jsp:attribute name="row4-value">${secondDateVar}</jsp:attribute>
-  </ct:VerticalTableHeading>
+  <jsp:body>
+    <ct:VerticalTableHeading>
+      <jsp:attribute name="row1-title">Topic</jsp:attribute>
+      <jsp:attribute name="row1-value">Web Development Basics</jsp:attribute>
+      <jsp:attribute name="row2-title">Date</jsp:attribute>
+      <jsp:attribute name="row2-value">${firstDateVar}</jsp:attribute>
+      <jsp:attribute name="row3-title">Topic</jsp:attribute>
+      <jsp:attribute name="row3-value">Servlets and Pages</jsp:attribute>
+      <jsp:attribute name="row4-title">Date</jsp:attribute>
+      <jsp:attribute name="row4-value">${secondDateVar}</jsp:attribute>
+    </ct:VerticalTableHeading>
+  </jsp:body>
 </ct:Page>
