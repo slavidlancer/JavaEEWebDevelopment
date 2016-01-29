@@ -8,38 +8,32 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet Filter implementation class SecurityFilter
- */
-@WebFilter("/SecurityFilter")
+@WebFilter("/pages/Homepage.jsp")
 public class SecurityFilter implements Filter {
-    /**
-     * Default constructor. 
-     */
-    public SecurityFilter() {
+    @Override
+    public void destroy() {}
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String userName = (String) httpRequest.getSession().
+                getAttribute("username");
+        String requestUserName = request.getParameter("user");
+        
+        if ((userName == null) && (requestUserName == null)) {
+            ((HttpServletResponse) response).sendRedirect(
+                    "Loginform.jsp");
+        } else if (requestUserName != null) {
+            httpRequest.getSession().setAttribute("username", requestUserName);
+        }
+        
+        chain.doFilter(request, response);
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-	}
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response,
-	        FilterChain chain) throws IOException, ServletException {
-		// place your code here
-
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
-	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-	}
+    @Override
+    public void init(FilterConfig fConfig) throws ServletException {}
 }
