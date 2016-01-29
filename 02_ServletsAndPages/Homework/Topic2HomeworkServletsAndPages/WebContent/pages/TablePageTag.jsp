@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%!
     private Date getDateAndTimeAsObject(String date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
@@ -22,8 +23,10 @@
     Date firstDate = getDateAndTimeAsObject("14.01.2016 18:00");
     Date secondDate = getDateAndTimeAsObject("21.01.2016 18:00");
 %>
+
 <c:set var="firstDateVar" value="<%= firstDate %>"/>
 <c:set var="secondDateVar" value="<%= secondDate %>"/>
+
 <ct:Page title="TablePageTag" systemVersion="1.0.0" showDate="true">
   <jsp:body>
     <table border="1" class="width: 100%">

@@ -2,6 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%!
     private Date getDateAndTimeAsObject(String date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
@@ -20,6 +21,7 @@
     Date firstDate = getDateAndTimeAsObject("14.01.2016 18:00");
     Date secondDate = getDateAndTimeAsObject("28.01.2016 18:00");
 %>
+
 <!DOCTYPE html>
 <html>
   <head>
