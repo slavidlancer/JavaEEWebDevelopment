@@ -1,5 +1,6 @@
 <%@ tag dynamic-attributes="dynattrs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <table border="1">
   <c:set var="attributesCount" value="${dynattrs.size()/2}"/>
   <c:forEach var="i" begin="1" end="${attributesCount}">

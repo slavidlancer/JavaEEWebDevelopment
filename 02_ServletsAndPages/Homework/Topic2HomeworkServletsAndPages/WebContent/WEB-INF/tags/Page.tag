@@ -3,9 +3,11 @@
 <%@ attribute name="title" %>
 <%@ attribute name="systemVersion" %>
 <%@ attribute name="showDate" %>
+
 <c:set var="showCurrentDate" value="${showDate}"/>
 <c:set var="currentDate" value="<%= new java.util.Date() %>"/>
 <c:set var="currentDateWithBr" value="${currentDate}<br><br>"/>
+
 <!DOCTYPE html>
 <html>
   <head>
