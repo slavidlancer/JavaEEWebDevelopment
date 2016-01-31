@@ -16,11 +16,21 @@ public class RequestLogger implements ServletRequestListener {
         Date dateValue = new Date();
         HttpServletRequest servletRequest = (HttpServletRequest)
                 requestEvent.getServletRequest();
-        System.out.println("\tRequest");
-        System.out.println("IP address: " + servletRequest.getRemoteAddr());
+        String requestUserName = servletRequest.getParameter("user");
+        
+        System.out.println("#\tRequest       #");
+        System.out.println("[IP address: " + servletRequest.getRemoteAddr());
         System.out.println("Session ID: " + servletRequest.getSession().
                 getId());
-        System.out.println("Type: " + servletRequest.getDispatcherType());
-        System.out.println("Date and time: " + dateValue);
+        
+        if (requestUserName == null) {
+            System.out.println("Request type: Normal request");
+        } else {
+            System.out.println("Request type: Login attempt");
+        }
+        
+        /*System.out.println("Dispatcher type: " +
+                servletRequest.getDispatcherType());*/
+        System.out.println("Date and time: " + dateValue + "]\n##");
     }
 }
