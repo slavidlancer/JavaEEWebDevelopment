@@ -43,6 +43,8 @@ public class SecurityFilter implements Filter {
             } else if (userName == null) {
                 httpResponse.sendRedirect("Loginform.jsp");
             }
+        } else if (userName == null) {
+            httpResponse.sendRedirect("Loginform.jsp");
         }
         
         chain.doFilter(request, response);
