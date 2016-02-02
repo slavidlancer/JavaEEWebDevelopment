@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter("/pages/Homepage.jsp")
 public class SecurityFilter implements Filter {
-    private final String USER_NAME = "nickname";
-    private final String PASS_WORD = "0123456789";
+    private static final String USER_NAME = "nickname";
+    private static final String PASS_WORD = "0123456789";
     
     @Override
     public void destroy() {}
