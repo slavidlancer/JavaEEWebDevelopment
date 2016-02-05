@@ -3,18 +3,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ct" uri="http://ejbs.jeewd.com/tags" %>
-<c:set var="user" value='<%= session.getAttribute("id") %>'/>
+<c:set var="id" value='<%= session.getAttribute("id") %>'/>
 
 <ct:Page title="Web Banking Page"
     projectName="Topic4HomeworkEnterpriseJavaBeans"
     currentVersion="1.0.0">
   <jsp:body>
-    <p>Current user: ${user}</p>
     <form action="../BankOperationController" method="post">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">Client:</jsp:attribute>
-        <jsp:attribute name="row1-value"><input type="text" name="id">
-            </jsp:attribute>
+        <jsp:attribute name="row1-value"><input type="text" name="id"
+            value='${id}'></jsp:attribute>
         <jsp:attribute name="row2-title">Current bank account amount:
             </jsp:attribute>
         <jsp:attribute name="row2-value"><input type="text"
