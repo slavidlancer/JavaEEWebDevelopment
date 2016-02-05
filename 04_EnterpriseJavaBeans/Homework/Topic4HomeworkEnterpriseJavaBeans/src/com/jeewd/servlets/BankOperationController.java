@@ -1,4 +1,4 @@
-package com.jeewd.ejbs;
+package com.jeewd.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
