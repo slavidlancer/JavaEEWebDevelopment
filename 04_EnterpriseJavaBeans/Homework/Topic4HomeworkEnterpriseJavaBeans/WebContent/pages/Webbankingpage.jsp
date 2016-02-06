@@ -39,6 +39,6 @@
             </jsp:attribute>
       </ct:VerticalTableHeading>
     </form>
-    <br><p>${newClientMessage}</p><p>${incorrectAmount}</p><br>
+    <br><p>${newClientMessage}</p><p>${incorrectAmount}</p>
   </jsp:body>
 </ct:Page>
