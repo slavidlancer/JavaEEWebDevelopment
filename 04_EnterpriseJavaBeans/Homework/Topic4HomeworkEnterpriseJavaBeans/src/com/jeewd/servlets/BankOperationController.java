@@ -30,13 +30,15 @@ public class BankOperationController extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         //doGet(request, response);
         response.getWriter().println("Processing Bank Operations .... "
-                + "\nPlease wait ....\nPossible error occurred!\nPlease enter"
-                + "proper values!");
+                + "\nPlease wait ....\nPossible error occurred!\nPlease enter "
+                + "proper values! Please reload again the Web Banking Page or "
+                + "go back!");
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession httpSession = httpRequest.getSession();
-        httpSession.setAttribute("responsemessage", "");
+        httpSession.setAttribute("newclientmessage", "");
+        httpSession.setAttribute("incorrectammount", "");
         
         String client = request.getParameter("id");
         double currentAmount = (Double.parseDouble(request.getParameter(
@@ -56,11 +58,17 @@ public class BankOperationController extends HttpServlet {
         }
         
         if (bankOperation.doesNotContainClient(client)) {
-            httpSession.setAttribute("responsemessage", "New Client, no "
-                    + "withdraws are allowed! Deposits only.");
+            httpSession.setAttribute("newclientmessage", "New Client added, no "
+                    + "withdraws were allowed! Deposits only.");
         }
         
-        System.out.println(client + " " + currentAmount + " " + changeAmount);
+        if (bankOperation.incorrectAmmountToChange()) {
+            httpSession.setAttribute("incorrectammount", "Incorrect ammount "
+                    + "to change! Please enter proper values: deposit and "
+                    + "withdraw ammounts should be positive values, withdraw "
+                    + "operation can be fulfilled with ammount less than 50 % "
+                    + "of the current ammount!");
+        }
         
         httpSession.setAttribute("id", client);
         httpSession.setAttribute("currentamount", currentAmount);
