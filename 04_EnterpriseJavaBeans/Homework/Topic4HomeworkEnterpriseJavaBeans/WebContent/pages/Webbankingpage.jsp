@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ct" uri="http://ejbs.jeewd.com/tags" %>
 <c:set var="id" value='<%= session.getAttribute("id") %>'/>
+<c:set var="currentAmount" value='<%= session.getAttribute("currentamount") %>'
+  />
+<c:set var="changeAmount" value='<%= session.getAttribute("changeamount") %>'/>
+<c:set var="responseMessage" value='<%= session.getAttribute("responsemessage")
+  %>'/>
 
 <ct:Page title="Web Banking Page"
     projectName="Topic4HomeworkEnterpriseJavaBeans"
@@ -17,7 +22,7 @@
         <jsp:attribute name="row2-title">Current bank account amount:
             </jsp:attribute>
         <jsp:attribute name="row2-value"><input type="text"
-            name="currentamount"></jsp:attribute>
+            name="currentamount" value='${currentAmount}'></jsp:attribute>
         <jsp:attribute name="row3-title">Operation:</jsp:attribute>
         <jsp:attribute name="row3-value"><select name="operation">
                 <option value="deposit">Deposit</option>
@@ -32,6 +37,6 @@
             </jsp:attribute>
       </ct:VerticalTableHeading>
     </form>
-    <br><br>
+    <br><p>${responseMessage}</p><br>
   </jsp:body>
 </ct:Page>
