@@ -7,8 +7,10 @@
 <c:set var="currentAmount" value='<%= session.getAttribute("currentamount") %>'
   />
 <c:set var="changeAmount" value='<%= session.getAttribute("changeamount") %>'/>
-<c:set var="responseMessage" value='<%= session.getAttribute("responsemessage")
-  %>'/>
+<c:set var="newClientMessage" value='<%= session.getAttribute(
+        "newclientmessage") %>'/>
+<c:set var="incorrectAmmount" value='<%= session.getAttribute(
+        "incorrectammount") %>'/>
 
 <ct:Page title="Web Banking Page"
     projectName="Topic4HomeworkEnterpriseJavaBeans"
@@ -30,13 +32,13 @@
               </select>
             </jsp:attribute>
         <jsp:attribute name="row4-title">Amount to change:</jsp:attribute>
-        <jsp:attribute name="row4-value"><input type="text" name="changeamount">
-            </jsp:attribute>
+        <jsp:attribute name="row4-value"><input type="text" name="changeamount"
+            value="0"></jsp:attribute>
         <jsp:attribute name="row5-title"/>
         <jsp:attribute name="row5-value"><input type="submit" value="Submit">
             </jsp:attribute>
       </ct:VerticalTableHeading>
     </form>
-    <br><p>${responseMessage}</p><br>
+    <br><p>${newClientMessage}</p><p>${incorrectAmmount}</p><br>
   </jsp:body>
 </ct:Page>
