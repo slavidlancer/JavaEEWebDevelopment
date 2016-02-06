@@ -43,11 +43,25 @@ public class BankOperationController extends HttpServlet {
         
         String rawClient = request.getParameter("id");
         String client;
-        BigDecimal currentAmount = new BigDecimal(request.getParameter(
-                "currentamount").replaceAll(",", "")); //try-catch
+        BigDecimal currentAmount = new BigDecimal(0);
+        BigDecimal changeAmount = new BigDecimal(0);
+        boolean incorrectBigDecimalValues = false;
+        
+        try {
+            currentAmount = new BigDecimal(request.getParameter(
+                    "currentamount").replaceAll(",", ""));
+        } catch (NumberFormatException nfe) {
+            incorrectBigDecimalValues = true;
+        }
+        
+        try {
+            changeAmount = new BigDecimal(request.getParameter(
+                    "changeamount").replaceAll(",", ""));
+        } catch (NumberFormatException nfe) {
+            incorrectBigDecimalValues = true;
+        }
+        
         String operation = request.getParameter("operation");
-        BigDecimal changeAmount = new BigDecimal(request.getParameter(
-                "changeamount").replaceAll(",", "")); //try-catch
         
         if (rawClient.equals(null) || rawClient.equals("")) {
             client = "undefined client";
@@ -70,7 +84,8 @@ public class BankOperationController extends HttpServlet {
                     + "withdraws were allowed! Deposits only.");
         }
         
-        if (bankOperation.incorrectAmountToChange()) {
+        if (bankOperation.incorrectAmountToChange() ||
+                incorrectBigDecimalValues) {
             httpSession.setAttribute("incorrectamount", "Incorrect amount "
                     + "to change!<br>Please enter proper values: deposit and "
                     + "withdraw amounts<br>should be positive values,<br>"
