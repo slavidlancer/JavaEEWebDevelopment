@@ -31,9 +31,9 @@ public class BankOperationController extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         //doGet(request, response);
         response.getWriter().println("Processing Bank Operations .... "
-                + "\nPlease wait ....\nPossible error occurred!\nPlease enter "
-                + "proper values! Please, reload again the Web Banking Page or "
-                + "go back!");
+                + "\nPlease wait ....\nPossible error occurred!\nPlease, enter "
+                + "proper values!\nPlease, reload again the Web Banking Page "
+                + "or go back!");
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -41,12 +41,19 @@ public class BankOperationController extends HttpServlet {
         httpSession.setAttribute("newclientmessage", "");
         httpSession.setAttribute("incorrectamount", "");
         
-        String client = request.getParameter("id");
+        String rawClient = request.getParameter("id");
+        String client;
         BigDecimal currentAmount = new BigDecimal(request.getParameter(
                 "currentamount").replaceAll(",", "")); //try-catch
         String operation = request.getParameter("operation");
         BigDecimal changeAmount = new BigDecimal(request.getParameter(
                 "changeamount").replaceAll(",", "")); //try-catch
+        
+        if (rawClient.equals(null) || rawClient.equals("")) {
+            client = "undefined client";
+        } else {
+            client = rawClient;
+        }
         
         if (operation.equals("deposit")) {
             currentAmount = bankOperation.deposit(client, currentAmount,
@@ -65,10 +72,10 @@ public class BankOperationController extends HttpServlet {
         
         if (bankOperation.incorrectAmountToChange()) {
             httpSession.setAttribute("incorrectamount", "Incorrect amount "
-                    + "to change! Please enter proper values: deposit and "
-                    + "withdraw amounts should be positive values, withdraw "
-                    + "operation can be fulfilled with amount less than 50 % "
-                    + "of the current amount!");
+                    + "to change!<br>Please enter proper values: deposit and "
+                    + "withdraw amounts<br>should be positive values,<br>"
+                    + "withdraw operation can be fulfilled with amount<br>"
+                    + "less than 50 % of the current amount!");
         }
         
         httpSession.setAttribute("id", client);
