@@ -32,14 +32,14 @@ public class BankOperationController extends HttpServlet {
         //doGet(request, response);
         response.getWriter().println("Processing Bank Operations .... "
                 + "\nPlease wait ....\nPossible error occurred!\nPlease enter "
-                + "proper values! Please reload again the Web Banking Page or "
+                + "proper values! Please, reload again the Web Banking Page or "
                 + "go back!");
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession httpSession = httpRequest.getSession();
         httpSession.setAttribute("newclientmessage", "");
-        httpSession.setAttribute("incorrectammount", "");
+        httpSession.setAttribute("incorrectamount", "");
         
         String client = request.getParameter("id");
         BigDecimal currentAmount = new BigDecimal(request.getParameter(
@@ -63,12 +63,12 @@ public class BankOperationController extends HttpServlet {
                     + "withdraws were allowed! Deposits only.");
         }
         
-        if (bankOperation.incorrectAmmountToChange()) {
-            httpSession.setAttribute("incorrectammount", "Incorrect ammount "
+        if (bankOperation.incorrectAmountToChange()) {
+            httpSession.setAttribute("incorrectamount", "Incorrect amount "
                     + "to change! Please enter proper values: deposit and "
-                    + "withdraw ammounts should be positive values, withdraw "
-                    + "operation can be fulfilled with ammount less than 50 % "
-                    + "of the current ammount!");
+                    + "withdraw amounts should be positive values, withdraw "
+                    + "operation can be fulfilled with amount less than 50 % "
+                    + "of the current amount!");
         }
         
         httpSession.setAttribute("id", client);

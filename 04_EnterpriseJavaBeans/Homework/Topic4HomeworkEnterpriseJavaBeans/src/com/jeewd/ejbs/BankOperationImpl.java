@@ -71,7 +71,7 @@ public class BankOperationImpl implements BankOperation {
     }
 
     @Override
-    public boolean incorrectAmmountToChange() {
+    public boolean incorrectAmountToChange() {
         return incorrectValues;
     }
 }

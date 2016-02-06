@@ -9,8 +9,8 @@
 <c:set var="changeAmount" value='<%= session.getAttribute("changeamount") %>'/>
 <c:set var="newClientMessage" value='<%= session.getAttribute(
         "newclientmessage") %>'/>
-<c:set var="incorrectAmmount" value='<%= session.getAttribute(
-        "incorrectammount") %>'/>
+<c:set var="incorrectAmount" value='<%= session.getAttribute(
+        "incorrectamount") %>'/>
 
 <ct:Page title="Web Banking Page"
     projectName="Topic4HomeworkEnterpriseJavaBeans"
@@ -39,6 +39,6 @@
             </jsp:attribute>
       </ct:VerticalTableHeading>
     </form>
-    <br><p>${newClientMessage}</p><p>${incorrectAmmount}</p><br>
+    <br><p>${newClientMessage}</p><p>${incorrectAmount}</p><br>
   </jsp:body>
 </ct:Page>

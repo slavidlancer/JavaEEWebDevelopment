@@ -10,5 +10,5 @@ public interface BankOperation {
     BigDecimal withdraw(String client, BigDecimal currentAmount,
             BigDecimal changeAmount);
     boolean doesNotContainClient(String client);
-    boolean incorrectAmmountToChange();
+    boolean incorrectAmountToChange();
 }
