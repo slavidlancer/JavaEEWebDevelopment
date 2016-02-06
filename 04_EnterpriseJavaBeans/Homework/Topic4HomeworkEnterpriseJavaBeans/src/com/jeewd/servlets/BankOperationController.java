@@ -63,7 +63,7 @@ public class BankOperationController extends HttpServlet {
         
         String operation = request.getParameter("operation");
         
-        if (rawClient.equals(null) || rawClient.equals("")) {
+        if (rawClient == null || rawClient.equals("")) {
             client = "undefined client";
         } else {
             client = rawClient;
