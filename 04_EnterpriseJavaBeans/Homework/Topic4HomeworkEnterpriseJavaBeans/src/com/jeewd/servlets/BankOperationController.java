@@ -1,6 +1,7 @@
 package com.jeewd.servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,11 +42,11 @@ public class BankOperationController extends HttpServlet {
         httpSession.setAttribute("incorrectammount", "");
         
         String client = request.getParameter("id");
-        double currentAmount = (Double.parseDouble(request.getParameter(
-                "currentamount").replaceAll(",", ""))); //try-catch
+        BigDecimal currentAmount = new BigDecimal(request.getParameter(
+                "currentamount").replaceAll(",", "")); //try-catch
         String operation = request.getParameter("operation");
-        double changeAmount = (Double.parseDouble(request.getParameter(
-                "changeamount").replaceAll(",", ""))); //try-catch
+        BigDecimal changeAmount = new BigDecimal(request.getParameter(
+                "changeamount").replaceAll(",", "")); //try-catch
         
         if (operation.equals("deposit")) {
             currentAmount = bankOperation.deposit(client, currentAmount,

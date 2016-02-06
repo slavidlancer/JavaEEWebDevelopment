@@ -1,18 +1,19 @@
 package com.jeewd.ejbs;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.Stateless;
 
 @Stateless
 public class BankOperationImpl implements BankOperation {
-    private Map<String, Double> clientAccount = new HashMap<>();
+    private Map<String, BigDecimal> clientAccount = new HashMap<>();
     private boolean newClientAdded;
     private boolean incorrectValues;
 
     @Override
-    public double deposit(String client, double currentAmount,
-            double changeAmount) {
+    public BigDecimal deposit(String client, BigDecimal currentAmount,
+            BigDecimal changeAmount) {
         if (clientAccount.containsKey(client)) {
             currentAmount = clientAccount.get(client);
             newClientAdded = false;
@@ -21,11 +22,11 @@ public class BankOperationImpl implements BankOperation {
             newClientAdded = true;
         }
         
-        if (changeAmount > 0.0d) {
-            clientAccount.put(client, (currentAmount + changeAmount));
+        if (changeAmount.compareTo(new BigDecimal(0)) == 1) {
+            clientAccount.put(client, currentAmount.add(changeAmount));
             incorrectValues = false;
             
-            return currentAmount + changeAmount;
+            return currentAmount.add(changeAmount);
         }
         
         incorrectValues = true;
@@ -34,8 +35,8 @@ public class BankOperationImpl implements BankOperation {
     }
 
     @Override
-    public double withdraw(String client, double currentAmount,
-            double changeAmount) {
+    public BigDecimal withdraw(String client, BigDecimal currentAmount,
+            BigDecimal changeAmount) {
         if (!clientAccount.containsKey(client)) {
             newClientAdded = true;
             
@@ -45,11 +46,14 @@ public class BankOperationImpl implements BankOperation {
             newClientAdded = false;
         }
         
-        if ((changeAmount > 0.0d) && (changeAmount <= (0.50 * currentAmount))) {
-            clientAccount.put(client, (currentAmount - changeAmount));
+        BigDecimal halfAmount = currentAmount.multiply(new BigDecimal(0.50));
+        
+        if ((changeAmount.compareTo(new BigDecimal(0)) == 1) &&
+                (changeAmount.compareTo(halfAmount) <= 0)) {
+            clientAccount.put(client, currentAmount.subtract(changeAmount));
             incorrectValues = false;
             
-            return currentAmount - changeAmount;
+            return currentAmount.subtract(changeAmount);
         }
         
         incorrectValues = true;

@@ -1,11 +1,14 @@
 package com.jeewd.ejbs;
 
+import java.math.BigDecimal;
 import javax.ejb.Local;
 
 @Local
 public interface BankOperation {
-    double deposit(String client, double currentAmount, double changeAmount);
-    double withdraw(String client, double currentAmount, double changeAmount);
+    BigDecimal deposit(String client, BigDecimal currentAmount,
+            BigDecimal changeAmount);
+    BigDecimal withdraw(String client, BigDecimal currentAmount,
+            BigDecimal changeAmount);
     boolean doesNotContainClient(String client);
     boolean incorrectAmmountToChange();
 }
