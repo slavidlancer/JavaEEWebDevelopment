@@ -8,6 +8,6 @@ public class StatelessHelloWorldImpl implements StatelessHelloWorld {
     
     @Override
     public String helloStatelessEjb() {
-        return "hello from statless EJB " + counter++;
+        return "hello from stateless EJB " + counter++;
     }
 }
