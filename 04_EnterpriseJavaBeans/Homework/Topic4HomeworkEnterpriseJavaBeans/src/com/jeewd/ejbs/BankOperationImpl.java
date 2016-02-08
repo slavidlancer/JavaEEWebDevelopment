@@ -3,9 +3,9 @@ package com.jeewd.ejbs;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 
-@Stateless
+@Stateful
 public class BankOperationImpl implements BankOperation {
     private Map<String, BigDecimal> clientAccount = new HashMap<>();
     private boolean newClientAdded;
