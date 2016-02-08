@@ -7,10 +7,16 @@ import javax.ejb.Stateful;
 
 @Stateful
 public class BankOperationImpl implements BankOperation {
-    private Map<String, BigDecimal> clientAccount = new HashMap<>();
+    private Map<String, BigDecimal> clientAccount;
+    private Map<String, String> accountCurrency;
     private boolean newClientAdded;
     private boolean incorrectValues;
-
+    
+    public BankOperationImpl() {
+        clientAccount = new HashMap<>();
+        accountCurrency = new HashMap<>();
+    }
+    
     @Override
     public BigDecimal deposit(String client, BigDecimal currentAmount,
             BigDecimal changeAmount) {
