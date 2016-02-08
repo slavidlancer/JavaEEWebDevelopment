@@ -32,8 +32,8 @@ public class SecurityFilter implements Filter {
         String requestPassWord = request.getParameter("pwd");
         
         if ((requestUserName != null) && (requestPassWord != null)) {
-            if (requestUserName.equals(USER_NAME) &&
-                    requestPassWord.equals(PASS_WORD)) {
+            if (SecurityFilter.USER_NAME.equals(requestUserName) &&
+                    SecurityFilter.PASS_WORD.equals(requestPassWord)) {
                 httpSession.setAttribute("username", requestUserName);
                 httpSession.setMaxInactiveInterval(30 * 60);
                 Cookie userNameCookie = new Cookie("username", requestUserName);
