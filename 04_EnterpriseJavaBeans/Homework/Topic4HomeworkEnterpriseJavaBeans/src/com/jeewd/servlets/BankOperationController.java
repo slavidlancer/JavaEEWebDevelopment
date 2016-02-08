@@ -46,6 +46,7 @@ public class BankOperationController extends HttpServlet {
         BigDecimal currentAmount = new BigDecimal(0);
         BigDecimal changeAmount = new BigDecimal(0);
         boolean incorrectBigDecimalValues = false;
+        String accountCurrency = "BGN";
         
         try {
             currentAmount = new BigDecimal(request.getParameter(
@@ -95,6 +96,7 @@ public class BankOperationController extends HttpServlet {
         
         httpSession.setAttribute("id", client);
         httpSession.setAttribute("currentamount", currentAmount);
+        httpSession.setAttribute("accountcurrency", accountCurrency);
         
         httpResponse.sendRedirect("pages/Webbankingpage.jsp");
     }
