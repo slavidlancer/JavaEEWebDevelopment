@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.jeewd.ejbs.BankOperation;
+import com.jeewd.ejbs.CurrencyConversion;
 
 @WebServlet("/BankOperationController")
 public class BankOperationController extends HttpServlet {
@@ -17,6 +18,9 @@ public class BankOperationController extends HttpServlet {
     
     @EJB(beanName = "BankOperationImpl")
     private BankOperation bankOperation;
+    
+    @EJB
+    private CurrencyConversion currencyConversion;
 
     public BankOperationController() {
         super();
@@ -44,9 +48,9 @@ public class BankOperationController extends HttpServlet {
         String rawClient = request.getParameter("id");
         String client;
         BigDecimal currentAmount = new BigDecimal(0);
+        String accountCurrency = request.getParameter("accountcurrency");
         BigDecimal changeAmount = new BigDecimal(0);
         boolean incorrectBigDecimalValues = false;
-        String accountCurrency = "BGN";
         
         try {
             currentAmount = new BigDecimal(request.getParameter(
@@ -92,6 +96,14 @@ public class BankOperationController extends HttpServlet {
                     + "withdraw amounts<br>should be positive values,<br>"
                     + "withdraw operation can be fulfilled with amount<br>"
                     + "less than 50 % of the current amount!");
+        }
+        
+        if (accountCurrency.equals("bgn")) {
+            httpSession.setAttribute("selectedbgn", "selected");
+        } else if (accountCurrency.equals("usd")) {
+            httpSession.setAttribute("selectedusd", "selected");
+        } else if (accountCurrency.equals("eur")) {
+            httpSession.setAttribute("selectedeur", "selected");
         }
         
         httpSession.setAttribute("id", client);
