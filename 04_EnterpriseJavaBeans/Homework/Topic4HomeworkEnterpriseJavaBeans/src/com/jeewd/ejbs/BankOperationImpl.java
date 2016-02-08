@@ -80,4 +80,9 @@ public class BankOperationImpl implements BankOperation {
     public boolean incorrectAmountToChange() {
         return incorrectValues;
     }
+
+    @Override
+    public void setCurrency(String account, String currency) {
+        accountCurrency.put(account, currency);
+    }
 }

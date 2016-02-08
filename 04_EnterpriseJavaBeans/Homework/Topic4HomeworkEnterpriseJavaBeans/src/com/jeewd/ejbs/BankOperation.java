@@ -9,6 +9,7 @@ public interface BankOperation {
             BigDecimal changeAmount);
     BigDecimal withdraw(String client, BigDecimal currentAmount,
             BigDecimal changeAmount);
+    void setCurrency(String account, String currency);
     boolean doesNotContainClient(String client);
     boolean incorrectAmountToChange();
 }
