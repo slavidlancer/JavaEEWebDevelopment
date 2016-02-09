@@ -51,7 +51,7 @@ public class BankOperationController extends HttpServlet {
         String rawClient = request.getParameter("id");
         String client;
         BigDecimal currentAmount = new BigDecimal(0);
-        String accountCurrency = request.getParameter("accountcurrency");
+        String rawAccountCurrency = request.getParameter("accountcurrency");
         BigDecimal changeAmount = new BigDecimal(0);
         String changeCurrency = request.getParameter("changecurrency");
         boolean incorrectBigDecimalValues = false;
@@ -78,14 +78,59 @@ public class BankOperationController extends HttpServlet {
             client = rawClient;
         }
         
-        if (BankOperationController.currencyBGN.equals(accountCurrency)) {
-            bankOperation.setCurrency(client,
-                    BankOperationController.currencyBGN);
+        if (!client.equals(httpSession.getAttribute("id"))) {
+            if (BankOperationController.currencyBGN.
+                    equals(rawAccountCurrency)) {
+                bankOperation.setCurrency(client, 
+                        BankOperationController.currencyBGN);
+                httpSession.setAttribute("accountcurrency", "bgn");
+                httpSession.setAttribute("selectedbgn", "selected");
+                httpSession.setAttribute("selectedusd", "");
+                httpSession.setAttribute("selectedeur", "");
+            } else if (BankOperationController.currencyUSD.
+                    equals(rawAccountCurrency)) {
+                bankOperation.setCurrency(client,
+                        BankOperationController.currencyUSD);
+                httpSession.setAttribute("accountcurrency", "usd");
+                httpSession.setAttribute("selectedbgn", "");
+                httpSession.setAttribute("selectedusd", "selected");
+                httpSession.setAttribute("selectedeur", "");
+            } else if (BankOperationController.currencyEUR.
+                    equals(rawAccountCurrency)) {
+                bankOperation.setCurrency(client,
+                        BankOperationController.currencyEUR);
+                httpSession.setAttribute("accountcurrency", "eur");
+                httpSession.setAttribute("selectedbgn", "");
+                httpSession.setAttribute("selectedusd", "");
+                httpSession.setAttribute("selectedeur", "selected");
+            }
+        } else if (BankOperationController.currencyBGN.
+                equals(rawAccountCurrency) && BankOperationController.
+                currencyBGN.equals(httpSession.
+                        getAttribute("accountcurrency"))) {
             httpSession.setAttribute("selectedbgn", "selected");
             httpSession.setAttribute("selectedusd", "");
             httpSession.setAttribute("selectedeur", "");
-            
-            if (!accountCurrency.equals(changeCurrency)) {
+        } else if (BankOperationController.currencyUSD.
+                equals(rawAccountCurrency) && BankOperationController.
+                currencyUSD.equals(httpSession.
+                        getAttribute("accountcurrency"))) {
+            httpSession.setAttribute("selectedbgn", "");
+            httpSession.setAttribute("selectedusd", "selected");
+            httpSession.setAttribute("selectedeur", "");
+        } else if (BankOperationController.currencyEUR.
+                equals(rawAccountCurrency) && BankOperationController.
+                currencyEUR.equals(httpSession.
+                        getAttribute("accountcurrency"))) {
+            httpSession.setAttribute("selectedbgn", "");
+            httpSession.setAttribute("selectedusd", "");
+            httpSession.setAttribute("selectedeur", "selected");
+        }
+        
+        if (BankOperationController.currencyBGN.equals(httpSession.
+                getAttribute("accountcurrency"))) {
+            if (!httpSession.getAttribute("accountcurrency").
+                    equals(changeCurrency)) {
                 if (BankOperationController.currencyUSD.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
@@ -99,14 +144,9 @@ public class BankOperationController extends HttpServlet {
                 }
             }
         } else if (BankOperationController.currencyUSD.
-                equals(accountCurrency)) {
-            bankOperation.setCurrency(client,
-                    BankOperationController.currencyUSD);
-            httpSession.setAttribute("selectedbgn", "");
-            httpSession.setAttribute("selectedusd", "selected");
-            httpSession.setAttribute("selectedeur", "");
-            
-            if (!accountCurrency.equals(changeCurrency)) {
+                equals(httpSession.getAttribute("accountcurrency"))) {
+            if (!httpSession.getAttribute("accountcurrency").
+                    equals(changeCurrency)) {
                 if (BankOperationController.currencyBGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
@@ -120,14 +160,9 @@ public class BankOperationController extends HttpServlet {
                 }
             }
         } else if (BankOperationController.currencyEUR.
-                equals(accountCurrency)) {
-            bankOperation.setCurrency(client,
-                    BankOperationController.currencyEUR);
-            httpSession.setAttribute("selectedbgn", "");
-            httpSession.setAttribute("selectedusd", "");
-            httpSession.setAttribute("selectedeur", "selected");
-            
-            if (!accountCurrency.equals(changeCurrency)) {
+                equals(httpSession.getAttribute("accountcurrency"))) {
+            if (!httpSession.getAttribute("accountcurrency").
+                    equals(changeCurrency)) {
                 if (BankOperationController.currencyBGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
