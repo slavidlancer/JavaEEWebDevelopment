@@ -15,9 +15,13 @@ import com.jeewd.ejbs.CurrencyConversion;
 @WebServlet("/BankOperationController")
 public class BankOperationController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String currencyBGN = "bgn";
-    private static final String currencyUSD = "usd";
-    private static final String currencyEUR = "eur";
+    private static final String CURRENCY_BGN = "bgn";
+    private static final String CURRENCY_USD = "usd";
+    private static final String CURRENCY_EUR = "eur";
+    private static final BigDecimal EXCHANGE_RATE_BGN_TO_EUR =
+            new BigDecimal(0.511292);
+    private static final BigDecimal EXCHANGE_RATE_EUR_TO_BGN =
+            new BigDecimal(1.95583);
     
     @EJB(beanName = "BankOperationImpl")
     private BankOperation bankOperation;
@@ -55,6 +59,10 @@ public class BankOperationController extends HttpServlet {
         BigDecimal changeAmount = new BigDecimal(0);
         String changeCurrency = request.getParameter("changecurrency");
         boolean incorrectBigDecimalValues = false;
+        BigDecimal exchangeRateUSDtoEUR = new BigDecimal(0.894269);
+        BigDecimal exchangeRateEURtoUSD = new BigDecimal(1.11823);
+        BigDecimal exchangeRateUSDtoBGN = new BigDecimal(1.76185);
+        BigDecimal exchangeRateBGNtoUSD = new BigDecimal(0.567585);
         
         try {
             currentAmount = new BigDecimal(request.getParameter(
@@ -79,100 +87,102 @@ public class BankOperationController extends HttpServlet {
         }
         
         if (!client.equals(httpSession.getAttribute("id"))) {
-            if (BankOperationController.currencyBGN.
+            if (BankOperationController.CURRENCY_BGN.
                     equals(rawAccountCurrency)) {
                 bankOperation.setCurrency(client, 
-                        BankOperationController.currencyBGN);
+                        BankOperationController.CURRENCY_BGN);
                 httpSession.setAttribute("accountcurrency", "bgn");
                 httpSession.setAttribute("selectedbgn", "selected");
                 httpSession.setAttribute("selectedusd", "");
                 httpSession.setAttribute("selectedeur", "");
-            } else if (BankOperationController.currencyUSD.
+            } else if (BankOperationController.CURRENCY_USD.
                     equals(rawAccountCurrency)) {
                 bankOperation.setCurrency(client,
-                        BankOperationController.currencyUSD);
+                        BankOperationController.CURRENCY_USD);
                 httpSession.setAttribute("accountcurrency", "usd");
                 httpSession.setAttribute("selectedbgn", "");
                 httpSession.setAttribute("selectedusd", "selected");
                 httpSession.setAttribute("selectedeur", "");
-            } else if (BankOperationController.currencyEUR.
+            } else if (BankOperationController.CURRENCY_EUR.
                     equals(rawAccountCurrency)) {
                 bankOperation.setCurrency(client,
-                        BankOperationController.currencyEUR);
+                        BankOperationController.CURRENCY_EUR);
                 httpSession.setAttribute("accountcurrency", "eur");
                 httpSession.setAttribute("selectedbgn", "");
                 httpSession.setAttribute("selectedusd", "");
                 httpSession.setAttribute("selectedeur", "selected");
             }
-        } else if (BankOperationController.currencyBGN.
+        } else if (BankOperationController.CURRENCY_BGN.
                 equals(rawAccountCurrency) && BankOperationController.
-                currencyBGN.equals(httpSession.
+                CURRENCY_BGN.equals(httpSession.
                         getAttribute("accountcurrency"))) {
             httpSession.setAttribute("selectedbgn", "selected");
             httpSession.setAttribute("selectedusd", "");
             httpSession.setAttribute("selectedeur", "");
-        } else if (BankOperationController.currencyUSD.
+        } else if (BankOperationController.CURRENCY_USD.
                 equals(rawAccountCurrency) && BankOperationController.
-                currencyUSD.equals(httpSession.
+                CURRENCY_USD.equals(httpSession.
                         getAttribute("accountcurrency"))) {
             httpSession.setAttribute("selectedbgn", "");
             httpSession.setAttribute("selectedusd", "selected");
             httpSession.setAttribute("selectedeur", "");
-        } else if (BankOperationController.currencyEUR.
+        } else if (BankOperationController.CURRENCY_EUR.
                 equals(rawAccountCurrency) && BankOperationController.
-                currencyEUR.equals(httpSession.
+                CURRENCY_EUR.equals(httpSession.
                         getAttribute("accountcurrency"))) {
             httpSession.setAttribute("selectedbgn", "");
             httpSession.setAttribute("selectedusd", "");
             httpSession.setAttribute("selectedeur", "selected");
         }
         
-        if (BankOperationController.currencyBGN.equals(httpSession.
+        if (BankOperationController.CURRENCY_BGN.equals(httpSession.
                 getAttribute("accountcurrency"))) {
             if (!httpSession.getAttribute("accountcurrency").
                     equals(changeCurrency)) {
-                if (BankOperationController.currencyUSD.
+                if (BankOperationController.CURRENCY_USD.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(1.76185));
-                } else if (BankOperationController.currencyEUR.
+                                    exchangeRateUSDtoBGN);
+                } else if (BankOperationController.CURRENCY_EUR.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(1.95583)); //Euro is fixed
+                                    BankOperationController.
+                                    EXCHANGE_RATE_EUR_TO_BGN); //Euro is fixed
                 }
             }
-        } else if (BankOperationController.currencyUSD.
+        } else if (BankOperationController.CURRENCY_USD.
                 equals(httpSession.getAttribute("accountcurrency"))) {
             if (!httpSession.getAttribute("accountcurrency").
                     equals(changeCurrency)) {
-                if (BankOperationController.currencyBGN.
+                if (BankOperationController.CURRENCY_BGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(0.567585));
-                } else if (BankOperationController.currencyEUR.
+                                    exchangeRateBGNtoUSD);
+                } else if (BankOperationController.CURRENCY_EUR.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(1.50));
+                                    exchangeRateEURtoUSD);
                 }
             }
-        } else if (BankOperationController.currencyEUR.
+        } else if (BankOperationController.CURRENCY_EUR.
                 equals(httpSession.getAttribute("accountcurrency"))) {
             if (!httpSession.getAttribute("accountcurrency").
                     equals(changeCurrency)) {
-                if (BankOperationController.currencyBGN.
+                if (BankOperationController.CURRENCY_BGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(0.511292)); //fixed exchange rate
-                } else if (BankOperationController.currencyUSD.
+                                    BankOperationController.
+                                    EXCHANGE_RATE_BGN_TO_EUR); //fixed exchange rate
+                } else if (BankOperationController.CURRENCY_USD.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
                             convertFromCurrencyToAnother(changeAmount,
-                                    new BigDecimal(1.50));
+                                    exchangeRateUSDtoEUR);
                 }
             }
         }
