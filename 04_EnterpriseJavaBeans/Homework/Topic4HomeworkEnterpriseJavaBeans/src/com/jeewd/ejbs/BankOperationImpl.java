@@ -29,10 +29,14 @@ public class BankOperationImpl implements BankOperation {
         }
         
         if (changeAmount.compareTo(new BigDecimal(0)) == 1) {
-            clientAccount.put(client, currentAmount.add(changeAmount));
+            BigDecimal changeAmountScaled = changeAmount.setScale(2,
+                    BigDecimal.ROUND_HALF_UP);
+            BigDecimal currentValue = (currentAmount.add(changeAmountScaled)).
+                    setScale(2, BigDecimal.ROUND_HALF_UP);
+            clientAccount.put(client, currentValue);
             incorrectValues = false;
             
-            return currentAmount.add(changeAmount);
+            return currentValue;
         }
         
         incorrectValues = true;
@@ -56,10 +60,15 @@ public class BankOperationImpl implements BankOperation {
         
         if ((changeAmount.compareTo(new BigDecimal(0)) == 1) &&
                 (changeAmount.compareTo(halfAmount) <= 0)) {
-            clientAccount.put(client, currentAmount.subtract(changeAmount));
+            BigDecimal changeAmountScaled = changeAmount.setScale(2,
+                    BigDecimal.ROUND_HALF_UP);
+            BigDecimal currentValue = (currentAmount.
+                    subtract(changeAmountScaled)).setScale(2,
+                            BigDecimal.ROUND_HALF_UP);
+            clientAccount.put(client, currentValue);
             incorrectValues = false;
             
-            return currentAmount.subtract(changeAmount);
+            return currentValue;
         }
         
         incorrectValues = true;
