@@ -7,6 +7,4 @@ import javax.ejb.Local;
 public interface CurrencyConversion {
     BigDecimal convertFromCurrencyToAnother(BigDecimal fromValue,
             BigDecimal exchangeRate);
-    /*addExchangeRate();
-    getExchangeRate();*/
 }
