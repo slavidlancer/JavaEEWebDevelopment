@@ -56,6 +56,7 @@ public class BankOperationController extends HttpServlet {
         String client;
         BigDecimal currentAmount = new BigDecimal(0);
         String rawAccountCurrency = request.getParameter("accountcurrency");
+        String accountCurrency;
         BigDecimal changeAmount = new BigDecimal(0);
         String changeCurrency = request.getParameter("changecurrency");
         boolean incorrectBigDecimalValues = false;
@@ -135,10 +136,10 @@ public class BankOperationController extends HttpServlet {
             httpSession.setAttribute("selectedeur", "selected");
         }
         
-        if (BankOperationController.CURRENCY_BGN.equals(httpSession.
-                getAttribute("accountcurrency"))) {
-            if (!httpSession.getAttribute("accountcurrency").
-                    equals(changeCurrency)) {
+        accountCurrency = (String) httpSession.getAttribute("accountcurrency");
+        
+        if (BankOperationController.CURRENCY_BGN.equals(accountCurrency)) {
+            if (!accountCurrency.equals(changeCurrency)) {
                 if (BankOperationController.CURRENCY_USD.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
@@ -153,9 +154,8 @@ public class BankOperationController extends HttpServlet {
                 }
             }
         } else if (BankOperationController.CURRENCY_USD.
-                equals(httpSession.getAttribute("accountcurrency"))) {
-            if (!httpSession.getAttribute("accountcurrency").
-                    equals(changeCurrency)) {
+                equals(accountCurrency)) {
+            if (!accountCurrency.equals(changeCurrency)) {
                 if (BankOperationController.CURRENCY_BGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
@@ -169,9 +169,8 @@ public class BankOperationController extends HttpServlet {
                 }
             }
         } else if (BankOperationController.CURRENCY_EUR.
-                equals(httpSession.getAttribute("accountcurrency"))) {
-            if (!httpSession.getAttribute("accountcurrency").
-                    equals(changeCurrency)) {
+                equals(accountCurrency)) {
+            if (!accountCurrency.equals(changeCurrency)) {
                 if (BankOperationController.CURRENCY_BGN.
                         equals(changeCurrency)) {
                     changeAmount = currencyConversion.
