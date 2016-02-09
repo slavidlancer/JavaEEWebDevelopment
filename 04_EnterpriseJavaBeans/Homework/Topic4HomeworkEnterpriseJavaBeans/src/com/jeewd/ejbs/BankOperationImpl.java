@@ -85,4 +85,9 @@ public class BankOperationImpl implements BankOperation {
     public void setCurrency(String account, String currency) {
         accountCurrency.put(account, currency);
     }
+
+    @Override
+    public String getCurrency(String account) {
+        return accountCurrency.get(account);
+    }
 }
