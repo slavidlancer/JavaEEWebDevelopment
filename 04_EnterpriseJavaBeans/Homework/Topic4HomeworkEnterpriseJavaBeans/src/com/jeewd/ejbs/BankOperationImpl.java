@@ -20,19 +20,25 @@ public class BankOperationImpl implements BankOperation {
     @Override
     public BigDecimal deposit(String client, BigDecimal currentAmount,
             BigDecimal changeAmount) {
+        BigDecimal currentAmountScaled = currentAmount.setScale(2,
+                BigDecimal.ROUND_HALF_UP);
+        
         if (clientAccount.containsKey(client)) {
             currentAmount = clientAccount.get(client);
+            currentAmountScaled = currentAmount.setScale(2,
+                    BigDecimal.ROUND_HALF_UP);
             newClientAdded = false;
         } else {
-            clientAccount.put(client, currentAmount);
+            clientAccount.put(client, currentAmountScaled);
             newClientAdded = true;
         }
         
-        if (changeAmount.compareTo(new BigDecimal(0)) == 1) {
-            BigDecimal changeAmountScaled = changeAmount.setScale(2,
-                    BigDecimal.ROUND_HALF_UP);
-            BigDecimal currentValue = (currentAmount.add(changeAmountScaled)).
-                    setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal changeAmountScaled = changeAmount.setScale(2,
+                BigDecimal.ROUND_HALF_UP);
+        
+        if (changeAmountScaled.compareTo(new BigDecimal(0)) == 1) {
+            BigDecimal currentValue = currentAmountScaled.add(
+                    changeAmountScaled);
             clientAccount.put(client, currentValue);
             incorrectValues = false;
             
@@ -41,30 +47,35 @@ public class BankOperationImpl implements BankOperation {
         
         incorrectValues = true;
         
-        return currentAmount;
+        return currentAmountScaled;
     }
 
     @Override
     public BigDecimal withdraw(String client, BigDecimal currentAmount,
             BigDecimal changeAmount) {
+        BigDecimal currentAmountScaled = currentAmount.setScale(2,
+                BigDecimal.ROUND_HALF_UP);
+        
         if (!clientAccount.containsKey(client)) {
             newClientAdded = true;
             
             return deposit(client, currentAmount, changeAmount);
         } else if (clientAccount.containsKey(client)) {
             currentAmount = clientAccount.get(client);
+            currentAmountScaled = currentAmount.setScale(2,
+                    BigDecimal.ROUND_HALF_UP);
             newClientAdded = false;
         }
         
-        BigDecimal halfAmount = currentAmount.multiply(new BigDecimal(0.50));
+        BigDecimal changeAmountScaled = changeAmount.setScale(2,
+                BigDecimal.ROUND_HALF_UP);
+        BigDecimal halfAmount = currentAmountScaled.multiply(
+                new BigDecimal(0.50));
         
-        if ((changeAmount.compareTo(new BigDecimal(0)) == 1) &&
-                (changeAmount.compareTo(halfAmount) <= 0)) {
-            BigDecimal changeAmountScaled = changeAmount.setScale(2,
-                    BigDecimal.ROUND_HALF_UP);
-            BigDecimal currentValue = (currentAmount.
-                    subtract(changeAmountScaled)).setScale(2,
-                            BigDecimal.ROUND_HALF_UP);
+        if ((changeAmountScaled.compareTo(new BigDecimal(0)) == 1) &&
+                (changeAmountScaled.compareTo(halfAmount) <= 0)) {
+            BigDecimal currentValue = currentAmountScaled.subtract(
+                    changeAmountScaled);
             clientAccount.put(client, currentValue);
             incorrectValues = false;
             
@@ -73,7 +84,7 @@ public class BankOperationImpl implements BankOperation {
         
         incorrectValues = true;
         
-        return currentAmount;
+        return currentAmountScaled;
     }
 
     @Override
