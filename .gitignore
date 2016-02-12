@@ -12,3 +12,6 @@ build.xml
 *.mf
 *.MF
 META-INF/
+target/
+pom.xml
+web.xml
