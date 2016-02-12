@@ -15,5 +15,5 @@ META-INF/
 target/
 pom.xml
 web.xml
-resources/log4j.xml
+log4j.xml
 .springBeans
