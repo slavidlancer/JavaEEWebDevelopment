@@ -4,7 +4,9 @@
 <%@ taglib prefix="ct" uri="http://ejbs.jeewd.com/tags" %>
 <c:set var="id" value='<%= session.getAttribute("id") %>'/>
 <c:set var="currentAmount" value='<%= session.getAttribute("currentamount") %>'
-  />
+    />
+<c:set var="accountCurrency" value='<%= session.getAttribute("accountcurrency")
+    %>'/>
 
 <ct:Page title="Web Banking Page"
     projectName="Topic4HomeworkEnterpriseJavaBeans"
@@ -28,7 +30,7 @@
           Current bank account amount:<br><br>
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          ${currentAmount}&nbsp;<br><br>
+          ${currentAmount}&nbsp;${accountCurrency}<br><br>
         </jsp:attribute>
         <jsp:attribute name="row4-title">
           Operation:
@@ -44,6 +46,11 @@
         </jsp:attribute>
         <jsp:attribute name="row5-value">
           <input type="text" name="changeamount" value="0" size="20">&nbsp;
+          <select name="changecurrency">
+            <option value="bgn">BGN</option>
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+          </select>
         </jsp:attribute>
         <jsp:attribute name="row6-title"/>
         <jsp:attribute name="row6-value">
