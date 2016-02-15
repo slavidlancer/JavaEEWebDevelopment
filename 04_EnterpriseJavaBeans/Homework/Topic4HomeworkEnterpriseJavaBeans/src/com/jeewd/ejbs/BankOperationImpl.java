@@ -43,7 +43,7 @@ public class BankOperationImpl implements BankOperation {
         BigDecimal result = new BigDecimal(0).setScale(2);
         this.withdrawSoFar = withdrawSoFar.add(changeAmountScaled);
         this.allowedWithdrawMaxAmount = currentAmount.multiply(new BigDecimal(
-                0.50)).setScale(2);
+                0.50));
         
         if ((changeAmountScaled.compareTo(result) == 1) &&
                 (this.withdrawSoFar.compareTo(this.allowedWithdrawMaxAmount)
