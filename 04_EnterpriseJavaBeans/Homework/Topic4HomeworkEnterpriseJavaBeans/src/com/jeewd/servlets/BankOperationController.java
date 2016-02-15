@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.jeewd.ejbs.Account;
 import com.jeewd.ejbs.BankOperation;
 import com.jeewd.ejbs.CurrencyConversion;
 import com.jeewd.ejbs.UserData;
+import com.jeewd.model.Account;
 
 @WebServlet("/BankOperationController")
 public class BankOperationController extends HttpServlet {
@@ -79,7 +79,8 @@ public class BankOperationController extends HttpServlet {
         } else {
             userData.getUsersWithAccountsList().put(clientName, new Account(
                     initialAmount, accountCurrency));
-            currentAmount = bankOperation.deposit(initialAmount, changeAmount);
+            currentAmount = bankOperation.deposit(clientName, initialAmount,
+                    changeAmount);
             userData.getUsersWithAccountsList().get(clientName).
                 setCurrentAmount(currentAmount);
             isUserWithAccountPresent = false;
@@ -93,13 +94,14 @@ public class BankOperationController extends HttpServlet {
         
         if (operation.equals("deposit")) {
             if (isUserWithAccountPresent) {
-                currentAmount = bankOperation.deposit(currentAmount,
+                currentAmount = bankOperation.deposit(clientName, currentAmount,
                         changeAmount);
                 userData.getUsersWithAccountsList().get(clientName).
                     setCurrentAmount(currentAmount);
             }
         } else if (operation.equals("withdraw") && isUserWithAccountPresent) {
-            currentAmount = bankOperation.withdraw(currentAmount, changeAmount);
+            currentAmount = bankOperation.withdraw(clientName, currentAmount,
+                    changeAmount);
             userData.getUsersWithAccountsList().get(clientName).
                 setCurrentAmount(currentAmount);
         } else {

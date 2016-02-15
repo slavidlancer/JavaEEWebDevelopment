@@ -5,6 +5,8 @@ import javax.ejb.Local;
 
 @Local
 public interface BankOperation {
-    BigDecimal deposit(BigDecimal currentAmount, BigDecimal changeAmount);
-    BigDecimal withdraw(BigDecimal currentAmount, BigDecimal changeAmount);
+    BigDecimal deposit(String clientName, BigDecimal currentAmount,
+            BigDecimal changeAmount);
+    BigDecimal withdraw(String clientName, BigDecimal currentAmount,
+            BigDecimal changeAmount);
 }
