@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.jeewd.ejbs.Account;
 import com.jeewd.ejbs.BankOperation;
+import com.jeewd.ejbs.CurrencyConversion;
 import com.jeewd.ejbs.UserData;
 
 @WebServlet("/BankOperationController")
@@ -22,6 +23,9 @@ public class BankOperationController extends HttpServlet {
     
     @EJB(beanName = "BankOperationImpl")
     private BankOperation bankOperation;
+    
+    @EJB
+    private CurrencyConversion currencyConversion;
     
     private boolean isUserWithAccountPresent;
 
@@ -79,6 +83,12 @@ public class BankOperationController extends HttpServlet {
             userData.getUsersWithAccountsList().get(clientName).
                 setCurrentAmount(currentAmount);
             isUserWithAccountPresent = false;
+        }
+        
+        if (!(changeAmount.compareTo(new BigDecimal(0)) == 0)) {
+            changeAmount = currencyConversion.convert(changeAmount,
+                    accountCurrency, userData.getUsersWithAccountsList().
+                    get(clientName).getCurrency());
         }
         
         if (operation.equals("deposit")) {
