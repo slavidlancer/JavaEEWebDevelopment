@@ -1,7 +1,6 @@
 package com.jeewd.ejbs;
 
 import java.util.Map;
-
 import javax.ejb.Local;
 
 @Local
