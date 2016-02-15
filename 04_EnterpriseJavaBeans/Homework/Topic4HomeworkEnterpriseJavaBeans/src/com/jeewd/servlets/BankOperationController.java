@@ -23,22 +23,11 @@ public class BankOperationController extends HttpServlet {
     @EJB(beanName = "BankOperationImpl")
     private BankOperation bankOperation;
     
-    private BigDecimal allowedSessionAmountToWithdraw;
     private boolean isUserWithAccountPresent;
 
     public BankOperationController() {
         super();
-        setAllowedSessionAmountToWithdraw(new BigDecimal(0));
         isUserWithAccountPresent = false;
-    }
-
-    public BigDecimal getAllowedSessionAmountToWithdraw() {
-        return allowedSessionAmountToWithdraw;
-    }
-
-    public void setAllowedSessionAmountToWithdraw(BigDecimal
-            allowedSessionAmountToWithdraw) {
-        this.allowedSessionAmountToWithdraw = allowedSessionAmountToWithdraw;
     }
 
     protected void doGet(HttpServletRequest request,
@@ -60,9 +49,11 @@ public class BankOperationController extends HttpServlet {
         
         String rawClientName = request.getParameter("id");
         String clientName;
+        BigDecimal initialAmount = new BigDecimal(0).setScale(2);
         BigDecimal currentAmount = new BigDecimal(0).setScale(2);
         BigDecimal changeAmount = new BigDecimal(0).setScale(2);
         String operation = request.getParameter("operation");
+        String accountCurrency = request.getParameter("changecurrency");
         
         if (rawClientName == null || rawClientName.equals("")) {
             clientName = "undefined client";
@@ -81,10 +72,13 @@ public class BankOperationController extends HttpServlet {
             currentAmount = userData.getUsersWithAccountsList().get(clientName).
                     getCurrentAmount();
             isUserWithAccountPresent = true;
-            System.out.println("get amount, present");
         } else {
             userData.getUsersWithAccountsList().put(clientName, new Account(
-                    new BigDecimal(0).setScale(2)));
+                    initialAmount, accountCurrency));
+            currentAmount = bankOperation.deposit(initialAmount, changeAmount);
+            userData.getUsersWithAccountsList().get(clientName).
+                setCurrentAmount(currentAmount);
+            isUserWithAccountPresent = false;
         }
         
         if (operation.equals("deposit")) {
@@ -93,16 +87,11 @@ public class BankOperationController extends HttpServlet {
                         changeAmount);
                 userData.getUsersWithAccountsList().get(clientName).
                     setCurrentAmount(currentAmount);
-                System.out.println("deposit, present");
-            } else {
-                userData.getUsersWithAccountsList().get(clientName).
-                    setCurrentAmount(changeAmount);
             }
         } else if (operation.equals("withdraw") && isUserWithAccountPresent) {
             currentAmount = bankOperation.withdraw(currentAmount, changeAmount);
             userData.getUsersWithAccountsList().get(clientName).
                 setCurrentAmount(currentAmount);
-            System.out.println("withdraw, present");
         } else {
             response.getWriter().println("Unknown operation!");
         }
@@ -110,11 +99,13 @@ public class BankOperationController extends HttpServlet {
         if (isUserWithAccountPresent) {
             userData.getUsersWithAccountsList().get(clientName).
                 setCurrentAmount(currentAmount);
-            System.out.println("set amount, present");
         }
         
+        accountCurrency = userData.getUsersWithAccountsList().get(clientName).
+                getCurrency();
         httpSession.setAttribute("id", clientName);
         httpSession.setAttribute("currentamount", currentAmount);
+        httpSession.setAttribute("accountcurrency", accountCurrency);
         
         httpResponse.sendRedirect("pages/Webbankingpage.jsp");
     }
