@@ -24,19 +24,11 @@ public class BankOperationImpl implements BankOperation {
                 BigDecimal.ROUND_HALF_UP);
         BigDecimal result = new BigDecimal(0).setScale(2);
         
-        System.out.printf("%s %s %s\t", currentAmountScaled, changeAmountScaled, result);
-        
         if (changeAmountScaled.compareTo(result) == 1) {
             result = currentAmountScaled.add(changeAmountScaled);
-            System.out.println(result + "first if");
         } else {
             result = currentAmountScaled;
-            System.out.println(result + "second if");
         }
-        
-        this.allowedWithdrawMaxAmount = (result.multiply(new BigDecimal(0.50))).
-                setScale(2);
-        System.out.printf("\nw: %s a:%s\n", withdrawSoFar, allowedWithdrawMaxAmount);
         
         return result;
     }
@@ -50,23 +42,17 @@ public class BankOperationImpl implements BankOperation {
                 BigDecimal.ROUND_HALF_UP);
         BigDecimal result = new BigDecimal(0).setScale(2);
         this.withdrawSoFar = withdrawSoFar.add(changeAmountScaled);
-        
-        
-        System.out.printf("%s %s %s\t", currentAmountScaled, changeAmountScaled, result);
-        System.out.printf("\nw: %s a: %s\n", withdrawSoFar, allowedWithdrawMaxAmount);
+        this.allowedWithdrawMaxAmount = currentAmount.multiply(new BigDecimal(
+                0.50)).setScale(2);
         
         if ((changeAmountScaled.compareTo(result) == 1) &&
                 (this.withdrawSoFar.compareTo(this.allowedWithdrawMaxAmount)
                         < 1)) {
             result = currentAmountScaled.subtract(changeAmountScaled);
-            System.out.println(result + "first if");
         } else {
             result = currentAmountScaled;
             this.withdrawSoFar = withdrawSoFar.subtract(changeAmountScaled);
-            System.out.println(result + "second if");
         }
-        
-        System.out.printf("\nw: %s\n", withdrawSoFar);
         
         return result;
     }
