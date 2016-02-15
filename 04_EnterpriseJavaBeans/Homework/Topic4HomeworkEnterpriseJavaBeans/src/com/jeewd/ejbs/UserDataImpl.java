@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import com.jeewd.model.Account;
 
 @Singleton
 public class UserDataImpl implements UserData {

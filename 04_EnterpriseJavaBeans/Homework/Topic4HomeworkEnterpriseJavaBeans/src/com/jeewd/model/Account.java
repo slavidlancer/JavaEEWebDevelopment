@@ -1,4 +1,4 @@
-package com.jeewd.ejbs;
+package com.jeewd.model;
 
 import java.math.BigDecimal;
 
