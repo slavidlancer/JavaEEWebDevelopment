@@ -30,7 +30,7 @@
           Current bank account amount:<br><br>
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          ${currentAmount}&nbsp;${accountCurrency}<br><br>
+          ${currentAmount}&nbsp; ${accountCurrency}<br><br>
         </jsp:attribute>
         <jsp:attribute name="row4-title">
           Operation:
@@ -47,9 +47,15 @@
         <jsp:attribute name="row5-value">
           <input type="text" name="changeamount" value="0" size="20">&nbsp;
           <select name="changecurrency">
-            <option value="bgn">BGN</option>
-            <option value="usd">USD</option>
-            <option value="eur">EUR</option>
+            <option value="BGN" ${accountCurrency eq "BGN" ? "selected" : ""}>
+              BGN
+            </option>
+            <option value="USD" ${accountCurrency eq "USD" ? "selected" : ""}>
+              USD
+            </option>
+            <option value="EUR" ${accountCurrency eq "EUR" ? "selected" : ""}>
+              EUR
+            </option>
           </select>
         </jsp:attribute>
         <jsp:attribute name="row6-title"/>
