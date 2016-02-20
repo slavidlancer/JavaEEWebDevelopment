@@ -13,7 +13,5 @@ build.xml
 *.MF
 META-INF/
 target/
-pom.xml
-web.xml
 log4j.xml
 .springBeans
