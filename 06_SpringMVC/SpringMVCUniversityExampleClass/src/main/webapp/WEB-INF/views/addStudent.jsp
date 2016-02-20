@@ -12,7 +12,7 @@
 <title>Student addition</title>
 </head>
 <body>
-<h1>Student addition!</h1>
+<h1>Student addition</h1>
 <form:form method="POST" action="${contextPath}/addStudentSave"
     modelAttribute="student">
   <table>
