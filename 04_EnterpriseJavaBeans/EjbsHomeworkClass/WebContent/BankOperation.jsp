@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="BankOperation" method="post">
-  Client: <input type="text" name="username" value="${requestScope.client}">
+  Client: <input type="text" name="client" value="${requestScope.client}">
   <br><br>
   Current amount: <input type="text" name="currentAmount"
       value="${requestScope.currentAmount}"><br><br>
