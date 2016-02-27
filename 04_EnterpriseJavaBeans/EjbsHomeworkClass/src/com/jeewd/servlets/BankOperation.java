@@ -28,9 +28,17 @@ public class BankOperation extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         String client = request.getParameter("client");
         String operation = request.getParameter("operation");
-        BigDecimal amount = new BigDecimal(request.getParameter("amount"));
+        BigDecimal amount = new BigDecimal(0).setScale(2);
+        
+        try {
+            amount = new BigDecimal(request.getParameter("amount").toString().
+                    replaceAll(",", "")).setScale(2);
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }
+        
         String currency = request.getParameter("currency");
-        BigDecimal currentAmount = new BigDecimal(0);
+        BigDecimal currentAmount = new BigDecimal(0).setScale(2);
         
         //D - deposit, W - withdraw
         if ("D".equals(operation)) {
