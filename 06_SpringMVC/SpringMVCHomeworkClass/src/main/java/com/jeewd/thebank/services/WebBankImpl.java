@@ -34,7 +34,7 @@ public class WebBankImpl implements WebBank {
     @Override
     public BigDecimal deposit(String client, BigDecimal amount,
             String currency) {
-Account userAccount = bankAccounts.get(client);
+        Account userAccount = bankAccounts.get(client);
         
         if (userAccount == null) {
             userAccount = new Account();
