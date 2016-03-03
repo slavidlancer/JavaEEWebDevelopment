@@ -1,7 +1,6 @@
 package com.jeewd.secureuni.utils;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.jeewd.secureuni.security.User;
 
 public class UserUtils {
