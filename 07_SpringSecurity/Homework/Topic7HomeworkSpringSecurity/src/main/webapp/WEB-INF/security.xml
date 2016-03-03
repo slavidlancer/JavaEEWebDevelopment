@@ -11,8 +11,8 @@
         <security:form-login login-page="/login"/>
         <security:csrf disabled="true"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
-        <!-- <security:intercept-url pattern="/studentsRegister" access="permitAll"/>
-        <security:intercept-url pattern="/**" access="hasRole('USER')"/> -->
+        <security:intercept-url pattern="/bankRegister" access="permitAll"/>
+        <security:intercept-url pattern="/**" access="hasRole('USER')"/>
         <security:logout logout-success-url="/login?logout=true"
                 invalidate-session="true"
                 delete-cookies="JSESSIONID"/>
