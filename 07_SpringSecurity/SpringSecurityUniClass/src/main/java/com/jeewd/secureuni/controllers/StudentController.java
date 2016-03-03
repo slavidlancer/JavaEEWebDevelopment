@@ -2,7 +2,7 @@ package com.jeewd.secureuni.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.annotation.Secured;
+//import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +19,7 @@ public class StudentController {
     @Qualifier("studentServiceImpl")
     private StudentService studentService;
     
-    @Secured("ROLE_USER")
+    //@Secured("ROLE_USER")
     @RequestMapping(value = UrlConstants.STUDENT_REGISTER_URL,
             method = RequestMethod.GET)
     public String getStudents(Model model) {
