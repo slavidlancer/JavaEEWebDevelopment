@@ -11,6 +11,10 @@
         <security:form-login login-page="/login"/>
         <security:csrf disabled="true"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/bankRegister"
+                access="hasRole('USER')"/>
+        <security:intercept-url pattern="/createAccount"
+                access="hasRole('BANK_EMPLOYEE')"/>
         <security:intercept-url pattern="/**" access="hasRole('USER')"/>
         <security:logout logout-success-url="/login?logout=true"
                 invalidate-session="true"
