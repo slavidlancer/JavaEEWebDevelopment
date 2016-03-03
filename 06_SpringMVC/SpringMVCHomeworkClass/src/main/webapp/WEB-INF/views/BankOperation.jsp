@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 <title>Web Bank</title>
 </head>
 <body>
-<form action="/thebank/bankOp" method="post" modelAttribute="bankOp">
+<form:form action="/thebank/bankOp" method="post" modelAttribute="bankOp">
   Client: <input type="text" name="client" value="${bankOp.client}">
   <br><br>
   Current amount: <input type="text" name="currentAmount"
@@ -16,6 +18,6 @@
   Amount: <input type="text" name="amount"><br><br>
   Currency: <input type="text" name="currency"><br><br>
   <input type="submit" value="Submit">
-</form>
+</form:form>
 </body>
 </html>
