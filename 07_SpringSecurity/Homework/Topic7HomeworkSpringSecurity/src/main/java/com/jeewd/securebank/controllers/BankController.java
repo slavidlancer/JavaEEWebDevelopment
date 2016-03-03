@@ -10,7 +10,7 @@ import com.jeewd.constants.UrlConstants;
 public class BankController {
     @RequestMapping(value = UrlConstants.BANK_REGISTER_PAGE_URL,
             method = RequestMethod.GET)
-    public String getStudents(Model model) {
+    public String getBankAccounts(Model model) {
         //model.addAttribute("students", studentService.getStudents());
         /*model.addAttribute("addStudentUrl",
                 UrlConstants.ADD_STUDENT_URL);*/
