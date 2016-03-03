@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
     private static final long serialVersionUID = -4311253778065295185L;
     
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
     private String username;
@@ -18,20 +18,20 @@ public class User implements UserDetails {
     public User(String username, String password,
             Collection<GrantedAuthority> authorities) {
         this.enabled = true;
-        this.isAccountNonExpired = true;
+        this.accountNonExpired = true;
         this.credentialsNonExpired = true;
-        this.isAccountNonLocked = true;
+        this.accountNonLocked = true;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public void setAccountNonExpired(boolean isAccountNonExpired) {
-        this.isAccountNonExpired = isAccountNonExpired;
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
     }
 
-    public void setAccountNonLocked(boolean isAccountNonLocked) {
-        this.isAccountNonLocked = isAccountNonLocked;
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
@@ -71,12 +71,12 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+        return accountNonLocked;
     }
 
     @Override
