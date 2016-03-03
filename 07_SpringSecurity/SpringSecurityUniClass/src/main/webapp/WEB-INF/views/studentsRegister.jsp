@@ -10,8 +10,11 @@
 <body>
 <h1>Student Registry</h1>
 <sec:authorize access="hasRole('ROLE_USER')">
-  <button type="button" onclick="location='${contextPath}${addStudentUrl}'">
+  <button type="button" onclick="location='${contextPath}/addStudent'">
     Add Student
+  </button>
+  <button type="button" onclick="location='${contextPath}${addStudentUrl}'">
+    Add Student (constant URL)
   </button>
 </sec:authorize>
 <table border="1">

@@ -19,6 +19,16 @@ public class StudentController {
     @Qualifier("studentServiceImpl")
     private StudentService studentService;
     
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String defaultPage(Model model) {
+        model.addAttribute("students", studentService.getStudents());
+        model.addAttribute("addStudentUrl",
+                UrlConstants.ADD_STUDENT_URL);
+        model.addAttribute("user", UserUtils.getUser());
+        
+        return "studentsRegister";
+    }
+    
     //@Secured("ROLE_USER")
     @RequestMapping(value = UrlConstants.STUDENT_REGISTER_URL,
             method = RequestMethod.GET)
