@@ -13,7 +13,7 @@
   <label>Password</label>
   <input id="password" name="password" type="password"/>
   <input name="submit" type="submit" value="Login"/>
-  <%--<input type="hidden" name="${_csrf.parameterName}"
+  <%-- <input type="hidden" name="${_csrf.parameterName}"
       value="${_csrf.token}"/> --%>
 </form>
 </body>
