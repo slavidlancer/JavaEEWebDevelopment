@@ -23,6 +23,8 @@
 	
 	<context:component-scan base-package="com.jeewd.securebank" />
 	
-	
+	<context:annotation-config/>
+
+    <beans:import resource="security.xml"/>
 	
 </beans:beans>
