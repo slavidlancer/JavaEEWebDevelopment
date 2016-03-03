@@ -11,7 +11,7 @@
   <jsp:body>
     <ct:VerticalTableHeading>
       <jsp:attribute name="row1-title">
-        Username:<br><br>
+        Username:
       </jsp:attribute>
       <jsp:attribute name="row1-value">
         ${username}
@@ -23,7 +23,7 @@
         ${accountNumber}
       </jsp:attribute>
       <jsp:attribute name="row3-title">
-        Current Amount:<br><br>
+        Current Amount:
       </jsp:attribute>
       <jsp:attribute name="row3-value">
         ${currentAmount}
