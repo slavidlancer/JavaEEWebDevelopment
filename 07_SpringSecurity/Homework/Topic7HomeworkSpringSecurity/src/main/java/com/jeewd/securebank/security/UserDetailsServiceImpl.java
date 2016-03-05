@@ -14,7 +14,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throws UsernameNotFoundException {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_BANK_EMPLOYEE"));
+        
+        if ("admin".equals(username)) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_BANK_EMPLOYEE"));
+            
+            return new User(username, "c4ca4238a0b923820dcc509a6f75849b",
+                    authorities);
+        }
         
         return new User(username, "e10adc3949ba59abbe56e057f20f883e",
                 authorities);
