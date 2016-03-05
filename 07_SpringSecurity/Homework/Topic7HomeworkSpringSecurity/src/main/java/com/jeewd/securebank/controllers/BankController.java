@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
+import com.jeewd.securebank.utils.UserUtils;
 
 @Controller
 public class BankController {
@@ -18,6 +19,7 @@ public class BankController {
         model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
         model.addAttribute("processOperationUrl",
                 UrlConstants.PROCESS_OPERATION_URL);
+        model.addAttribute("username", UserUtils.getUser());
         
         return "Bankregisterpage";
     }
