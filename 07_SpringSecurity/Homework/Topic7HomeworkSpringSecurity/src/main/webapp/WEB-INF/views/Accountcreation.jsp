@@ -16,7 +16,7 @@
           Username:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="username" value='${username}'>
+          <input type="text" name="username">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
           Account Number:
