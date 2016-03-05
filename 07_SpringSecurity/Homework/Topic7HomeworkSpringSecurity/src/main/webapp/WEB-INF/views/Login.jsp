@@ -24,7 +24,7 @@
         </jsp:attribute>
         <jsp:attribute name="row3-title"/>
         <jsp:attribute name="row3-value">
-          <input name="login" type="submit" value="Login"/>
+          <input name="submit" type="submit" value="Login"/>
         </jsp:attribute>
       </ct:VerticalTableHeading>
       <%-- <input type="hidden" name="${_csrf.parameterName}"
