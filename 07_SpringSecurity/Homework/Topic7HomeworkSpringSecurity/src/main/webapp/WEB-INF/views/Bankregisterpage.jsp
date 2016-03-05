@@ -42,17 +42,20 @@
       </jsp:attribute>
       <jsp:attribute name="row6-title">
         <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+          <br><br>
           <input type="button" value="New Account"
               onclick="location='${contextPath}${createAccountUrl}'">
         </sec:authorize>
       </jsp:attribute>
       <jsp:attribute name="row6-value">
+        <br><br>
         <input type="button" value="Operation"
             onclick="location='${contextPath}${operationUrl}'">
       </jsp:attribute>
     </ct:VerticalTableHeading>
-    <br>
+    <br><br>
     <input type="button" value="Logout"
         onclick="location='${contextPath}/logout'">
+    <br>
   </jsp:body>
 </ct:Page>
