@@ -19,7 +19,7 @@ public class BankController {
         model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
         model.addAttribute("processOperationUrl",
                 UrlConstants.PROCESS_OPERATION_URL);
-        model.addAttribute("username", UserUtils.getUser());
+        model.addAttribute("user", UserUtils.getUser());
         
         return "Bankregisterpage";
     }
