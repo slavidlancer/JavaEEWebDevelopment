@@ -10,6 +10,15 @@ import com.jeewd.constants.UrlConstants;
 public class BankController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String goToDefaultPage(Model model) {
+        model.addAttribute("bankRegisterUrl",
+                UrlConstants.BANK_REGISTER_PAGE_URL);
+        model.addAttribute("createAccountUrl",
+                UrlConstants.ACCOUNT_CREATION_PAGE_URL);
+        model.addAttribute("operationUrl", UrlConstants.OPERATION_PAGE_URL);
+        model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
+        model.addAttribute("processOperationUrl",
+                UrlConstants.PROCESS_OPERATION_URL);
+        
         return "Bankregisterpage";
     }
     
@@ -29,5 +38,17 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToOperation(Model model) {
         return "Operation";
+    }
+    
+    @RequestMapping(value = UrlConstants.ADD_ACCOUNT_URL,
+            method = RequestMethod.POST)
+    public String addAccount(Model model) {
+        return "Bankregisterpage";
+    }
+    
+    @RequestMapping(value = UrlConstants.PROCESS_OPERATION_URL,
+            method = RequestMethod.POST)
+    public String processOperation(Model model) {
+        return "Bankregisterpage";
     }
 }
