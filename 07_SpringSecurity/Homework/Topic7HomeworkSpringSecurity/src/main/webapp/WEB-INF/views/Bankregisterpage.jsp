@@ -14,7 +14,7 @@
         Username:
       </jsp:attribute>
       <jsp:attribute name="row1-value">
-        ${username}
+        ${user.username}
       </jsp:attribute>
       <jsp:attribute name="row2-title">
         Account Number:
@@ -29,7 +29,7 @@
         ${currentAmount}
       </jsp:attribute>
       <jsp:attribute name="row4-title">
-        AccountCurrency:
+        Account Currency:
       </jsp:attribute>
       <jsp:attribute name="row4-value">
         ${accountCurrency}
