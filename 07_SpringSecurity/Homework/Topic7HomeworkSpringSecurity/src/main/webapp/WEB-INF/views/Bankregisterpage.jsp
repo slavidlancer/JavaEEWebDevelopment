@@ -9,51 +9,43 @@
     projectName="Topic7HomeworkSpringSecurity"
     currentVersion="1.0.0">
   <jsp:body>
-    <ct:VerticalTableHeading>
-      <jsp:attribute name="row1-title">
-        Username:
-      </jsp:attribute>
-      <jsp:attribute name="row1-value">
-        ${user.username}
-      </jsp:attribute>
-      <jsp:attribute name="row2-title">
-        Account Number:
-      </jsp:attribute>
-      <jsp:attribute name="row2-value">
-        ${accounts.number}
-      </jsp:attribute>
-      <jsp:attribute name="row3-title">
-        Current Amount:
-      </jsp:attribute>
-      <jsp:attribute name="row3-value">
-        ${accounts.amount}
-      </jsp:attribute>
-      <jsp:attribute name="row4-title">
-        Account Currency:
-      </jsp:attribute>
-      <jsp:attribute name="row4-value">
-        ${accounts.currency}
-      </jsp:attribute>
-      <jsp:attribute name="row5-title">
-        Created By:
-      </jsp:attribute>
-      <jsp:attribute name="row5-value">
-        ${accounts.username}
-      </jsp:attribute>
-      <jsp:attribute name="row6-title"/>
-      <jsp:attribute name="row6-value">
-        <sec:authorize access="hasRole('ROLE_USER')">
-          <input type="button" value="Operation"
-              onclick="location='${contextPath}${operationUrl}'">
-        </sec:authorize>
-      </jsp:attribute>
-    </ct:VerticalTableHeading>
-    <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+    <table border="1">
+      <thead>
+        <tr align="center">
+          <th>Username</th>
+          <th>Account Number</th>
+          <th>Current Amount</th>
+          <th>Account Currency</th>
+          <th>Created By</th>
+        </tr>
+      </thead>
+      <c:if test="${not empty accounts}">
+        <tbody>
+          <c:forEach var="a" items="${accounts}">
+            <tr align="center">
+              <td>${a.username}</td>
+              <td>${a.number}</td>
+              <td>${a.amount}</td>
+              <td>${a.currency}</td>
+              <td>${a.createdBy}</td>
+            </tr>
+          </c:forEach>
+        </tbody>
+      </c:if>
+    </table>
+    <br>
+    <sec:authorize access="hasRole('ROLE_USER')">
       <br>
+      <input type="button" value="Operation"
+          onclick="location='${contextPath}${operationUrl}'">
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+      &nbsp;
       <input type="button" value="New Account"
           onclick="location='${contextPath}${createAccountUrl}'">
     </sec:authorize>
     <br><br>
+    ${user.username} (logged in)&nbsp;
     <input type="button" value="Logout"
         onclick="location='${contextPath}/logout'">
     <br>
