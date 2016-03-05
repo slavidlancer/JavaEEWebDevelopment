@@ -10,13 +10,13 @@
     currentVersion="1.0.0">
   <jsp:body>
     <form:form action="${contextPath}${processOperationUrl}" method="post"
-        modelAttibute="bankAccount">
+        modelAttibute="bankOperation">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
           Account Number:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="accountnumber">
+          <input type="text" name="accountNumber">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
           Operation:
@@ -37,7 +37,7 @@
           Currency:
         </jsp:attribute>
         <jsp:attribute name="row4-value">
-          <select name="accountcurrency">
+          <select name="currency">
             <option value="BGN">
               BGN
             </option>
@@ -51,7 +51,7 @@
         </jsp:attribute>
         <jsp:attribute name="row5-title"/>
         <jsp:attribute name="row5-value">
-          <input type="submit" value="Submit">
+          <input type="submit" id="buttonsubmit" value="Submit">
         </jsp:attribute>
       </ct:VerticalTableHeading>
     </form:form>

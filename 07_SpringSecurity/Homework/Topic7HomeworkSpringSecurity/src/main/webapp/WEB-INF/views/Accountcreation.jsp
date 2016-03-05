@@ -22,19 +22,19 @@
           Account Number:
         </jsp:attribute>
         <jsp:attribute name="row2-value">
-          <input type="text" name="accountnumber">
+          <input type="text" name="number">
         </jsp:attribute>
         <jsp:attribute name="row3-title">
           Initial Amount:
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          <input type="text" name="initialamount">
+          <input type="text" name="amount">
         </jsp:attribute>
         <jsp:attribute name="row4-title">
           Account Currency:
         </jsp:attribute>
         <jsp:attribute name="row4-value">
-          <select name="accountcurrency">
+          <select name="currency">
             <option value="BGN">
               BGN
             </option>

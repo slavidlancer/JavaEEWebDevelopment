@@ -20,30 +20,32 @@
         Account Number:
       </jsp:attribute>
       <jsp:attribute name="row2-value">
-        ${accountNumber}
+        ${accounts.number}
       </jsp:attribute>
       <jsp:attribute name="row3-title">
         Current Amount:
       </jsp:attribute>
       <jsp:attribute name="row3-value">
-        ${currentAmount}
+        ${accounts.amount}
       </jsp:attribute>
       <jsp:attribute name="row4-title">
         Account Currency:
       </jsp:attribute>
       <jsp:attribute name="row4-value">
-        ${accountCurrency}
+        ${accounts.currency}
       </jsp:attribute>
       <jsp:attribute name="row5-title">
         Created By:
       </jsp:attribute>
       <jsp:attribute name="row5-value">
-        ${createdBy}
+        ${accounts.username}
       </jsp:attribute>
       <jsp:attribute name="row6-title"/>
       <jsp:attribute name="row6-value">
-        <input type="button" value="Operation"
-            onclick="location='${contextPath}${operationUrl}'">
+        <sec:authorize access="hasRole('ROLE_USER')">
+          <input type="button" value="Operation"
+              onclick="location='${contextPath}${operationUrl}'">
+        </sec:authorize>
       </jsp:attribute>
     </ct:VerticalTableHeading>
     <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
