@@ -7,15 +7,8 @@ public class BankAccount {
     private String number;
     private BigDecimal amount;
     private CurrencyID currency;
+    private String createdBy;
     
-    public BankAccount(String username, String number, BigDecimal amount,
-            CurrencyID currency) {
-        this.username = username;
-        this.number = number;
-        this.amount = amount;
-        this.currency = currency;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -46,5 +39,13 @@ public class BankAccount {
     
     public void setCurrency(CurrencyID currency) {
         this.currency = currency;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }
