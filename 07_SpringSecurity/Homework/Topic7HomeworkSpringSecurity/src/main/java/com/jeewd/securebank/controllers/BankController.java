@@ -24,15 +24,7 @@ public class BankController {
     @RequestMapping(value = {"/", UrlConstants.BANK_REGISTER_PAGE_URL},
             method = RequestMethod.GET)
     public String goToBankRegister(Model model) {
-        model.addAttribute("bankRegisterUrl",
-                UrlConstants.BANK_REGISTER_PAGE_URL);
-        model.addAttribute("createAccountUrl",
-                UrlConstants.ACCOUNT_CREATION_PAGE_URL);
-        model.addAttribute("operationUrl", UrlConstants.OPERATION_PAGE_URL);
-        model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
-        model.addAttribute("processOperationUrl",
-                UrlConstants.PROCESS_OPERATION_URL);
-        model.addAttribute("user", UserUtils.getUser());
+        initializeAttributes(model);
         model.addAttribute("accounts", accountService.getAllAccounts());
         
         return "Bankregisterpage";
@@ -42,15 +34,7 @@ public class BankController {
     @RequestMapping(value = UrlConstants.ACCOUNT_CREATION_PAGE_URL,
             method = RequestMethod.GET)
     public String goToAccountCreation(Model model) {
-        model.addAttribute("bankRegisterUrl",
-                UrlConstants.BANK_REGISTER_PAGE_URL);
-        model.addAttribute("createAccountUrl",
-                UrlConstants.ACCOUNT_CREATION_PAGE_URL);
-        model.addAttribute("operationUrl", UrlConstants.OPERATION_PAGE_URL);
-        model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
-        model.addAttribute("processOperationUrl",
-                UrlConstants.PROCESS_OPERATION_URL);
-        model.addAttribute("user", UserUtils.getUser());
+        initializeAttributes(model);
         
         return "Accountcreation";
     }
@@ -59,15 +43,7 @@ public class BankController {
     @RequestMapping(value = UrlConstants.OPERATION_PAGE_URL,
             method = RequestMethod.GET)
     public String goToOperation(Model model) {
-        model.addAttribute("bankRegisterUrl",
-                UrlConstants.BANK_REGISTER_PAGE_URL);
-        model.addAttribute("createAccountUrl",
-                UrlConstants.ACCOUNT_CREATION_PAGE_URL);
-        model.addAttribute("operationUrl", UrlConstants.OPERATION_PAGE_URL);
-        model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
-        model.addAttribute("processOperationUrl",
-                UrlConstants.PROCESS_OPERATION_URL);
-        model.addAttribute("user", UserUtils.getUser());
+        initializeAttributes(model);
         
         return "Operation";
     }
@@ -78,16 +54,8 @@ public class BankController {
     public String addAccount(Model model, @ModelAttribute(value = "bankAccount")
             BankAccount bankAccount) {
         String user = UserUtils.getUser().getUsername();
-        model.addAttribute("bankRegisterUrl",
-                UrlConstants.BANK_REGISTER_PAGE_URL);
-        model.addAttribute("createAccountUrl",
-                UrlConstants.ACCOUNT_CREATION_PAGE_URL);
-        model.addAttribute("operationUrl", UrlConstants.OPERATION_PAGE_URL);
-        model.addAttribute("addAccountUrl", UrlConstants.ADD_ACCOUNT_URL);
-        model.addAttribute("processOperationUrl",
-                UrlConstants.PROCESS_OPERATION_URL);
+        initializeAttributes(model);
         accountService.addAccount(bankAccount, user);
-        model.addAttribute("user", UserUtils.getUser());
         model.addAttribute("accounts", accountService.getAllAccounts());
         
         return "Bankregisterpage";
@@ -98,6 +66,13 @@ public class BankController {
             method = RequestMethod.POST)
     public String processOperation(Model model, @ModelAttribute("bankOperation")
             BankOperation bankOperation) {
+        initializeAttributes(model);
+        model.addAttribute("accounts", accountService.getAllAccounts());
+        
+        return "Bankregisterpage";
+    }
+    
+    private static void initializeAttributes(Model model) {
         model.addAttribute("bankRegisterUrl",
                 UrlConstants.BANK_REGISTER_PAGE_URL);
         model.addAttribute("createAccountUrl",
@@ -107,8 +82,5 @@ public class BankController {
         model.addAttribute("processOperationUrl",
                 UrlConstants.PROCESS_OPERATION_URL);
         model.addAttribute("user", UserUtils.getUser());
-        model.addAttribute("accounts", accountService.getAllAccounts());
-        
-        return "Bankregisterpage";
     }
 }
