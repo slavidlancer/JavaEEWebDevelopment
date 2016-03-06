@@ -15,9 +15,34 @@ public class AccountServiceImpl implements AccountService {
     
     @Override
     public boolean addAccount(BankAccount bankAccount, String user) {
+        boolean toFill = true;
         bankAccount.setCreatedBy(user);
-        bankAccounts.add(bankAccount);
-        database.put(bankAccount.getUsername(), bankAccounts);
+        
+        /*if (!bankAccounts.isEmpty()) {
+            System.out.println("not empty");
+            for (BankAccount bankAccountItem : bankAccounts) {
+                System.out.println("for-each");
+                if (!bankAccountItem.getUsername().equals(bankAccount.
+                        getUsername())) {
+                    System.out.println("1 condition met");
+                    
+                    if (!bankAccountItem.getNumber().equals(bankAccount.
+                            getNumber())) {
+                        System.out.println("2 condition met");
+                        toFill = true;
+                    }
+                }
+            }
+        } else {
+            System.out.println("empty, else condition");
+            bankAccounts.add(bankAccount);
+            database.put(bankAccount.getUsername(), bankAccounts);
+        }*/
+        
+        if (toFill) {
+            bankAccounts.add(bankAccount);
+            database.put(bankAccount.getUsername(), bankAccounts);
+        }
         
         return true;
     }
