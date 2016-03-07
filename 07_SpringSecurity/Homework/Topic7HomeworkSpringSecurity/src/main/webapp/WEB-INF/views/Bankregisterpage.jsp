@@ -19,19 +19,38 @@
           <th>Created By</th>
         </tr>
       </thead>
-      <c:if test="${not empty accounts}">
-        <tbody>
-          <c:forEach var="a" items="${accounts}">
-            <tr align="center">
-              <td>${a.username}</td>
-              <td>${a.number}</td>
-              <td>${a.amount}</td>
-              <td>${a.currency}</td>
-              <td>${a.createdBy}</td>
-            </tr>
-          </c:forEach>
-        </tbody>
-      </c:if>
+      <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+        <c:if test="${not empty accounts}">
+          <tbody>
+            <c:forEach var="a" items="${accounts}">
+              <tr align="center">
+                <td>${a.username}</td>
+                <td>${a.number}</td>
+                <td>${a.amount}</td>
+                <td>${a.currency}</td>
+                <td>${a.createdBy}</td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </c:if>
+      </sec:authorize>
+      <sec:authorize access="hasRole('ROLE_USER')">
+        <c:if test="${not empty accounts}">
+          <tbody>
+            <c:forEach var="a" items="${accounts}">
+              <c:if test="${user.username == a.username}">
+                <tr align="center">
+                  <td>${a.username}</td>
+                  <td>${a.number}</td>
+                  <td>${a.amount}</td>
+                  <td>${a.currency}</td>
+                  <td>${a.createdBy}</td>
+                </tr>
+              </c:if>
+            </c:forEach>
+          </tbody>
+        </c:if>
+      </sec:authorize>
     </table>
     <br>
     <sec:authorize access="hasRole('ROLE_USER')">
