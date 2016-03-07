@@ -30,7 +30,15 @@ public class BankAccount {
     }
     
     public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+        if (amount == null) {
+            amount = new BigDecimal(0).setScale(2);
+        }
+        
+        if (new BigDecimal(0).compareTo(amount) <= 0) {
+            this.amount = amount.setScale(2);
+        } else {
+            this.amount = new BigDecimal(0).setScale(2);
+        }
     }
     
     public CurrencyID getCurrency() {

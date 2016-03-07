@@ -15,6 +15,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean addAccount(BankAccount bankAccount, String user) {
         bankAccount.setCreatedBy(user);
+
+        /*System.out.println(bankAccount.getAmount());
+        System.out.println(bankAccount.getAmount().toString() + "?");*/
         
         if (!bankAccounts.contains(bankAccount)) {
             bankAccounts.add(bankAccount);
