@@ -30,6 +30,12 @@
       <%-- <input type="hidden" name="${_csrf.parameterName}"
       value="${_csrf.token}"/> --%>
     </form>
-    <br>
+    <br><br>
+    1 user with ROLE_BANK_EMPLOYEE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;username: admin<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;password: 1<br><br>
+    many users (any username) with ROLE_USER<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;password: 123456
+    <br><br>
   </jsp:body>
 </ct:Page>

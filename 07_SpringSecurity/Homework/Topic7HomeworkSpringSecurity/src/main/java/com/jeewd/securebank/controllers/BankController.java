@@ -14,6 +14,7 @@ import com.jeewd.securebank.entity.BankAccount;
 import com.jeewd.securebank.services.AccountService;
 import com.jeewd.securebank.utils.UserUtils;
 
+//http://localhost:8080/securebank
 @Controller
 public class BankController {
     @Autowired
