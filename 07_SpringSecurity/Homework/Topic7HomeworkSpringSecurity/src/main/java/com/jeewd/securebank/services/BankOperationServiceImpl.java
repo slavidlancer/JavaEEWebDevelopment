@@ -13,10 +13,12 @@ public class BankOperationServiceImpl implements BankOperationService {
 
     @Override
     public void withdraw(BankAccount bankAccount, BigDecimal changeAmount) {
-        bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
+        BigDecimal compareAmount = new BigDecimal(bankAccount.getAmount().
+                toString()).subtract(changeAmount);
         
-        if (new BigDecimal(0).compareTo(bankAccount.getAmount()) > 0) {
-            bankAccount.setAmount(new BigDecimal(0).setScale(2));
+        if (new BigDecimal(0).compareTo(compareAmount) <= 0) {
+            bankAccount.setAmount(bankAccount.getAmount().subtract(
+                    changeAmount));
         }
     }
 }
