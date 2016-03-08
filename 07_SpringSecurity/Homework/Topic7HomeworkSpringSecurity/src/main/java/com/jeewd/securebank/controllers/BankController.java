@@ -18,6 +18,7 @@ import com.jeewd.securebank.entity.BankAccount;
 import com.jeewd.securebank.security.User;
 import com.jeewd.securebank.services.AccountService;
 import com.jeewd.securebank.services.BankOperationService;
+import com.jeewd.securebank.services.CurrencyConversionService;
 import com.jeewd.securebank.utils.UserUtils;
 
 //http://localhost:8080/securebank
@@ -29,6 +30,9 @@ public class BankController {
     
     @Autowired
     private BankOperationService bankOperationService;
+    
+    @Autowired
+    private CurrencyConversionService currencyConversionService;
     
     @Secured({"ROLE_USER", "ROLE_BANK_EMPLOYEE"})
     @RequestMapping(value = {"/", UrlConstants.BANK_REGISTER_PAGE_URL},
@@ -84,6 +88,8 @@ public class BankController {
                 user.getAuthorities();
         String operation = request.getParameter("operation");
         BigDecimal amount = new BigDecimal(0).setScale(2);
+        String currency = request.getParameter("currency");
+        String accountCurrency = "";
         
         try {
             amount = new BigDecimal(request.getParameter("amount")).setScale(2,
@@ -111,6 +117,11 @@ public class BankController {
             bankAccount = accountService.getAccountNumberByUsername(username,
                     accountNumber);
         }
+        
+        accountCurrency = bankAccount.getCurrency().toString();
+        
+        amount = currencyConversionService.convert(amount, currency,
+                accountCurrency);
         
         if ("deposit".equals(operation)) {
             bankOperationService.deposit(bankAccount, amount);

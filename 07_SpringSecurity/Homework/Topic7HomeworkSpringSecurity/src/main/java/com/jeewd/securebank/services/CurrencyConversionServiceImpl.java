@@ -1,7 +1,9 @@
 package com.jeewd.securebank.services;
 
 import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CurrencyConversionServiceImpl
         implements CurrencyConversionService {
     private static final String CURRENCY_BGN = "BGN";
@@ -80,6 +82,6 @@ public class CurrencyConversionServiceImpl
             }
         }
         
-        return result;
+        return result.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 }
