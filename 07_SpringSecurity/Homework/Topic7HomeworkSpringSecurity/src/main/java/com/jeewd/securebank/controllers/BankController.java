@@ -1,8 +1,15 @@
 package com.jeewd.securebank.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.securebank.entity.BankAccount;
+import com.jeewd.securebank.security.User;
 import com.jeewd.securebank.services.AccountService;
 import com.jeewd.securebank.services.BankOperationService;
 import com.jeewd.securebank.utils.UserUtils;
@@ -58,9 +66,9 @@ public class BankController {
             method = RequestMethod.POST)
     public String addAccount(Model model, @ModelAttribute(value = "bankAccount")
             BankAccount bankAccount) {
-        String user = UserUtils.getUser().getUsername();
+        String username = UserUtils.getUser().getUsername();
         initializeAttributes(model);
-        accountService.addAccount(bankAccount, user);
+        accountService.addAccount(bankAccount, username);
         model.addAttribute("accounts", accountService.getAllAccounts());
         
         return "Bankregisterpage";
@@ -69,7 +77,27 @@ public class BankController {
     @Secured({"ROLE_USER", "ROLE_BANK_EMPLOYEE"})
     @RequestMapping(value = UrlConstants.PROCESS_OPERATION_URL,
             method = RequestMethod.POST)
-    public String processOperation(Model model) {
+    public String processOperation(Model model, HttpServletRequest request) {
+        User user = UserUtils.getUser();
+        String username = user.getUsername();
+        Collection<? extends GrantedAuthority> authorities =
+                user.getAuthorities();
+        String accountNumber = request.getParameter("number");
+        
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_USER")) &&
+                !authorities.contains(new SimpleGrantedAuthority(
+                        "ROLE_BANK_EMPLOYEE"))) {
+            System.out.println("role_user");
+        }
+        
+        if (authorities.contains(new SimpleGrantedAuthority(
+                "ROLE_BANK_EMPLOYEE"))) {
+            System.out.println("role_bank_employee");
+        }
+        
+        System.out.println(username);
+        System.out.println(accountNumber);
+        
         initializeAttributes(model);
         model.addAttribute("accounts", accountService.getAllAccounts());
         
