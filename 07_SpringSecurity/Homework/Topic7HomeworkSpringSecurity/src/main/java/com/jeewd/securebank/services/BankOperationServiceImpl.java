@@ -1,8 +1,10 @@
 package com.jeewd.securebank.services;
 
 import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 import com.jeewd.securebank.entity.BankAccount;
 
+@Service
 public class BankOperationServiceImpl implements BankOperationService {
     @Override
     public BigDecimal deposit(BankAccount bankAccount,

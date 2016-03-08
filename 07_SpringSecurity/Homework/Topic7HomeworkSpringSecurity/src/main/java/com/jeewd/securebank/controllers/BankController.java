@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.securebank.entity.BankAccount;
 import com.jeewd.securebank.services.AccountService;
+import com.jeewd.securebank.services.BankOperationService;
 import com.jeewd.securebank.utils.UserUtils;
 
 //http://localhost:8080/securebank
@@ -19,6 +20,9 @@ public class BankController {
     @Autowired
     @Qualifier("accountServiceImpl")
     private AccountService accountService;
+    
+    @Autowired
+    private BankOperationService bankOperationService;
     
     @Secured({"ROLE_USER", "ROLE_BANK_EMPLOYEE"})
     @RequestMapping(value = {"/", UrlConstants.BANK_REGISTER_PAGE_URL},
