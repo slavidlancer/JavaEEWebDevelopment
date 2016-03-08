@@ -31,7 +31,7 @@
       value="${_csrf.token}"/> --%>
     </form>
     <br><br>
-    1 user with ROLE_BANK_EMPLOYEE:<br>
+    1 user with ROLE_BANK_EMPLOYEE<br>
     &nbsp;&nbsp;&nbsp;&nbsp;username: admin<br>
     &nbsp;&nbsp;&nbsp;&nbsp;password: 1<br><br>
     many users (any username) with ROLE_USER<br>
