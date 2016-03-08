@@ -101,7 +101,6 @@ public class BankController {
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_USER")) &&
                 !authorities.contains(new SimpleGrantedAuthority(
                         "ROLE_BANK_EMPLOYEE"))) {
-            System.out.println("role_user");
             username = user.getUsername();
             accountNumber = request.getParameter("number");
             bankAccount = accountService.getAccountNumberByUsername(username,
