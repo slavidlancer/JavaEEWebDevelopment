@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="ct" uri="http://securebank.jeewd.com/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -16,7 +17,28 @@
           Account Number:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="accountNumber">
+          <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+            <c:if test="${not empty accounts}">
+              <select name="number" style="width: 100%;">
+                <c:forEach var="a" items="${accounts}">
+                  <option value="${a.number}">${a.username}/${a.number}</option>
+                </c:forEach>
+              </select>
+            </c:if>
+          </sec:authorize>
+          <sec:authorize access="hasRole('ROLE_USER')">
+            <sec:authorize access="!hasRole('ROLE_BANK_EMPLOYEE')">
+              <c:if test="${not empty accounts}">
+                <select name="number" style="width: 100%;">
+                  <c:forEach var="a" items="${accounts}">
+                    <c:if test="${user.username == a.username}">
+                      <option value="${a.number}">${a.number}</option>
+                    </c:if>
+                  </c:forEach>
+                </select>
+              </c:if>
+            </sec:authorize>
+          </sec:authorize>
         </jsp:attribute>
         <jsp:attribute name="row2-title">
           Operation:

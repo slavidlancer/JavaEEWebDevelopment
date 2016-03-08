@@ -45,6 +45,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToOperation(Model model) {
         initializeAttributes(model);
+        model.addAttribute("accounts", accountService.getAllAccounts());
         
         return "Operation";
     }
@@ -65,8 +66,7 @@ public class BankController {
     @Secured({"ROLE_USER", "ROLE_BANK_EMPLOYEE"})
     @RequestMapping(value = UrlConstants.PROCESS_OPERATION_URL,
             method = RequestMethod.POST)
-    public String processOperation(Model model, @ModelAttribute(
-            value = "bankAccount") BankAccount bankAccount) {
+    public String processOperation(Model model) {
         initializeAttributes(model);
         model.addAttribute("accounts", accountService.getAllAccounts());
         
