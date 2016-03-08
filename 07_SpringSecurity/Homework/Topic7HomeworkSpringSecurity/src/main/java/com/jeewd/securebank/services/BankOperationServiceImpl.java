@@ -7,15 +7,16 @@ import com.jeewd.securebank.entity.BankAccount;
 @Service
 public class BankOperationServiceImpl implements BankOperationService {
     @Override
-    public BigDecimal deposit(BankAccount bankAccount,
-            BigDecimal changeAmount) {
-        return bankAccount.getAmount().add(changeAmount);
+    public void deposit(BankAccount bankAccount, BigDecimal changeAmount) {
+        bankAccount.setAmount(bankAccount.getAmount().add(changeAmount));
     }
 
     @Override
-    public BigDecimal withdraw(BankAccount bankAccount,
-            BigDecimal changeAmount) {
-        // TODO Auto-generated method stub
-        return bankAccount.getAmount().add(changeAmount);
+    public void withdraw(BankAccount bankAccount, BigDecimal changeAmount) {
+        bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
+        
+        if (new BigDecimal(0).compareTo(bankAccount.getAmount()) > 0) {
+            bankAccount.setAmount(new BigDecimal(0).setScale(2));
+        }
     }
 }

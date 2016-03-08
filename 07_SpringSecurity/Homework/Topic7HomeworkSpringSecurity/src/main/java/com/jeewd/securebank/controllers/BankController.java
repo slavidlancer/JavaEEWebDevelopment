@@ -77,10 +77,11 @@ public class BankController {
             method = RequestMethod.POST)
     public String processOperation(Model model, HttpServletRequest request) {
         User user = UserUtils.getUser();
-        String username = user.getUsername();
+        String username = "";
+        String accountNumber = "";
+        BankAccount bankAccount = null;
         Collection<? extends GrantedAuthority> authorities =
                 user.getAuthorities();
-        String accountNumber = request.getParameter("number");
         String operation = request.getParameter("operation");
         BigDecimal amount = new BigDecimal(0).setScale(2);
         
@@ -95,60 +96,26 @@ public class BankController {
                 !authorities.contains(new SimpleGrantedAuthority(
                         "ROLE_BANK_EMPLOYEE"))) {
             System.out.println("role_user");
-            /*BankAccount bankAccount = accountService.
-                    getAccountNumberByUsername(username, accountNumber);*/
-            
-            if ("deposit".equals(operation)) {
-                accountService.getAccountNumberByUsername(username,
-                        accountNumber).setAmount(accountService.
-                                getAccountNumberByUsername(username,
-                                        accountNumber).getAmount().add(amount));
-            } else if ("withdraw".equals(operation)) {
-                accountService.getAccountNumberByUsername(username,
-                        accountNumber).setAmount(accountService.
-                                getAccountNumberByUsername(username,
-                                        accountNumber).getAmount().subtract(
-                                                amount));
-                
-                if (new BigDecimal(0).compareTo(accountService.
-                        getAccountNumberByUsername(username, accountNumber).
-                        getAmount()) > 0) {
-                    accountService.getAccountNumberByUsername(username,
-                            accountNumber).setAmount(new BigDecimal(0).
-                                    setScale(2));
-                }
-            }
+            username = user.getUsername();
+            accountNumber = request.getParameter("number");
+            bankAccount = accountService.getAccountNumberByUsername(username,
+                    accountNumber);
         }
         
         if (authorities.contains(new SimpleGrantedAuthority(
                 "ROLE_BANK_EMPLOYEE"))) {
             String usernameAndNumber[] = request.getParameter("number").
                     split("/_/");
-            String usernameSplitted = usernameAndNumber[0];
-            String accountNumberSplitted = usernameAndNumber[1];
-            
-            if ("deposit".equals(operation)) {
-                accountService.getAccountNumberByUsername(usernameSplitted,
-                        accountNumberSplitted).setAmount(accountService.
-                                getAccountNumberByUsername(usernameSplitted,
-                                        accountNumberSplitted).getAmount().add(
-                                                amount));
-            } else if ("withdraw".equals(operation)) {
-                accountService.getAccountNumberByUsername(usernameSplitted,
-                        accountNumberSplitted).setAmount(accountService.
-                                getAccountNumberByUsername(usernameSplitted,
-                                        accountNumberSplitted).getAmount().
-                                subtract(amount));
-                
-                if (new BigDecimal(0).compareTo(accountService.
-                        getAccountNumberByUsername(usernameSplitted,
-                                accountNumberSplitted).
-                        getAmount()) > 0) {
-                    accountService.getAccountNumberByUsername(usernameSplitted,
-                            accountNumberSplitted).setAmount(new BigDecimal(0).
-                                    setScale(2));
-                }
-            }
+            username = usernameAndNumber[0];
+            accountNumber = usernameAndNumber[1];
+            bankAccount = accountService.getAccountNumberByUsername(username,
+                    accountNumber);
+        }
+        
+        if ("deposit".equals(operation)) {
+            bankOperationService.deposit(bankAccount, amount);
+        } else if ("withdraw".equals(operation)) {
+            bankOperationService.withdraw(bankAccount, amount);
         }
         
         initializeAttributes(model);
