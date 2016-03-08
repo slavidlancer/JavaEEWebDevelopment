@@ -10,8 +10,7 @@
     projectName="Topic7HomeworkSpringSecurity"
     currentVersion="1.0.0">
   <jsp:body>
-    <form:form action="${contextPath}${processOperationUrl}" method="post"
-        modelAttibute="bankOperation">
+    <form:form action="${contextPath}${processOperationUrl}" method="post">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
           Account Number:
