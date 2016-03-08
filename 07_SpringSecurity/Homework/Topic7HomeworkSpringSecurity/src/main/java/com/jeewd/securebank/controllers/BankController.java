@@ -1,9 +1,7 @@
 package com.jeewd.securebank.controllers;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -83,20 +81,75 @@ public class BankController {
         Collection<? extends GrantedAuthority> authorities =
                 user.getAuthorities();
         String accountNumber = request.getParameter("number");
+        String operation = request.getParameter("operation");
+        BigDecimal amount = new BigDecimal(0).setScale(2);
+        
+        try {
+            amount = new BigDecimal(request.getParameter("amount")).setScale(2,
+                    BigDecimal.ROUND_HALF_UP);
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+        }
         
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_USER")) &&
                 !authorities.contains(new SimpleGrantedAuthority(
                         "ROLE_BANK_EMPLOYEE"))) {
             System.out.println("role_user");
+            /*BankAccount bankAccount = accountService.
+                    getAccountNumberByUsername(username, accountNumber);*/
+            
+            if ("deposit".equals(operation)) {
+                accountService.getAccountNumberByUsername(username,
+                        accountNumber).setAmount(accountService.
+                                getAccountNumberByUsername(username,
+                                        accountNumber).getAmount().add(amount));
+            } else if ("withdraw".equals(operation)) {
+                accountService.getAccountNumberByUsername(username,
+                        accountNumber).setAmount(accountService.
+                                getAccountNumberByUsername(username,
+                                        accountNumber).getAmount().subtract(
+                                                amount));
+                
+                if (new BigDecimal(0).compareTo(accountService.
+                        getAccountNumberByUsername(username, accountNumber).
+                        getAmount()) > 0) {
+                    accountService.getAccountNumberByUsername(username,
+                            accountNumber).setAmount(new BigDecimal(0).
+                                    setScale(2));
+                }
+            }
         }
         
         if (authorities.contains(new SimpleGrantedAuthority(
                 "ROLE_BANK_EMPLOYEE"))) {
-            System.out.println("role_bank_employee");
+            String usernameAndNumber[] = request.getParameter("number").
+                    split("/_/");
+            String usernameSplitted = usernameAndNumber[0];
+            String accountNumberSplitted = usernameAndNumber[1];
+            
+            if ("deposit".equals(operation)) {
+                accountService.getAccountNumberByUsername(usernameSplitted,
+                        accountNumberSplitted).setAmount(accountService.
+                                getAccountNumberByUsername(usernameSplitted,
+                                        accountNumberSplitted).getAmount().add(
+                                                amount));
+            } else if ("withdraw".equals(operation)) {
+                accountService.getAccountNumberByUsername(usernameSplitted,
+                        accountNumberSplitted).setAmount(accountService.
+                                getAccountNumberByUsername(usernameSplitted,
+                                        accountNumberSplitted).getAmount().
+                                subtract(amount));
+                
+                if (new BigDecimal(0).compareTo(accountService.
+                        getAccountNumberByUsername(usernameSplitted,
+                                accountNumberSplitted).
+                        getAmount()) > 0) {
+                    accountService.getAccountNumberByUsername(usernameSplitted,
+                            accountNumberSplitted).setAmount(new BigDecimal(0).
+                                    setScale(2));
+                }
+            }
         }
-        
-        System.out.println(username);
-        System.out.println(accountNumber);
         
         initializeAttributes(model);
         model.addAttribute("accounts", accountService.getAllAccounts());

@@ -25,6 +25,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public BankAccount getAccountNumberByUsername(String username,
+            String number) {
+        for (BankAccount bankAccount : bankAccounts) {
+            if (username.equals(bankAccount.getUsername())) {
+                if (number.equals(bankAccount.getNumber())) {
+                    return bankAccount;
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    @Override
     public Set<BankAccount> getAllAccounts() {
         return bankAccounts;
     }

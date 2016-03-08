@@ -20,7 +20,9 @@
             <c:if test="${not empty accounts}">
               <select name="number" style="width: 100%;">
                 <c:forEach var="a" items="${accounts}">
-                  <option value="${a.number}">${a.username}/${a.number}</option>
+                  <option value="${a.username}/_/${a.number}">
+                    ${a.username}/${a.number}
+                  </option>
                 </c:forEach>
               </select>
             </c:if>
