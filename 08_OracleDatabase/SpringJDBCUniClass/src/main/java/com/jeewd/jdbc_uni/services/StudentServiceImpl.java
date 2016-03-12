@@ -2,10 +2,8 @@ package com.jeewd.jdbc_uni.services;
 
 //import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.jeewd.jdbc_uni.dao.StudentDao;
 import com.jeewd.jdbc_uni.entities.Student;
 
