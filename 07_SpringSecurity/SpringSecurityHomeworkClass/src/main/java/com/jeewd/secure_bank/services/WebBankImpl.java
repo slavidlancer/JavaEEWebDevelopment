@@ -2,12 +2,15 @@ package com.jeewd.secure_bank.services;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.jeewd.secure_bank.entity.Account;
 import com.jeewd.secure_bank.entity.ExchangeRate;
+import com.jeewd.secure_bank.utils.UserUtils;
 
 @Service
 public class WebBankImpl implements WebBank {
@@ -28,6 +31,28 @@ public class WebBankImpl implements WebBank {
         exchangeRate.setRate(EXCHANGE_RATE_EUR_TO_BGN);
         exchangeRate.setDate(new Date());
         exchangeRates.put("EUR", exchangeRate);
+    }
+    
+    @Override
+    public List<Account> getAccounts() {
+        List<Account> accounts = new ArrayList<>();
+        
+        for (Account account : bankAccounts.values()) {
+            accounts.add(account);
+        }
+        
+        return accounts;
+    }
+
+    @Override
+    public boolean createAccount(Account account) {
+        if (account.getCreatedBy() == null) {
+            account.setCreatedBy(UserUtils.getUser().getUsername());
+        }
+        
+        bankAccounts.put(account.getAccountNumber(), account);
+        
+        return false;
     }
     
     @Override
