@@ -9,14 +9,14 @@
 <title>Web Bank</title>
 </head>
 <body>
-<form:form action="/thebank/bankOp" method="post" modelAttribute="bankOp">
+<form:form action="/secure_bank/bankOp" method="post" modelAttribute="bankOp">
   Client: <input type="text" name="client" value="${bankOp.client}">
   <br><br>
   Current amount: <input type="text" name="currentAmount"
       value="${currentAmount}"><br><br>
   Operation: <input type="text" name="operation"><br><br>
   Amount: <input type="text" name="amount"><br><br>
-  Currency: <input type="text" name="currency"><br><br>
+  Currency: <input type="text" name="${bankOp.currency}"><br><br>
   <input type="submit" value="Submit">
 </form:form>
 </body>
