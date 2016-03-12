@@ -7,14 +7,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.jeewd.secure_bank.dto.BankOperation;
+import com.jeewd.secure_bank.entity.Account;
 import com.jeewd.secure_bank.services.WebBank;
 
 @Controller
 public class BankController {
     @Inject
     private WebBank webBank;
+    
+    @RequestMapping(value = "/bankRegistry", method = RequestMethod.GET)
+    public String getAccounts(Model model) {
+        model.addAttribute("accounts", webBank.getAccounts());
+        
+        return "BankRegister";
+    }
+    
+    @RequestMapping(value = "/addAccount", method = RequestMethod.GET)
+    public String addAccount() {
+        return "AddAccount";
+    }
+    
+    @RequestMapping(value = "/addAccountPost", method = RequestMethod.POST)
+    public String addAccountPost(Model model,
+            @ModelAttribute("account") Account account) {
+        webBank.createAccount(account);
+        model.addAttribute("accounts", webBank.getAccounts());
+        
+        return "BankRegister";
+    }
     
     @RequestMapping(value = "/bankAcc", method = RequestMethod.GET)
     public String getBankAccount() {
