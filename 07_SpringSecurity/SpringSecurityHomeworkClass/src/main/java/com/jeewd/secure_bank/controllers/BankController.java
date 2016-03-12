@@ -16,6 +16,13 @@ public class BankController {
     @Inject
     private WebBank webBank;
     
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String goToBankRegister(Model model) {
+        model.addAttribute("accounts", webBank.getAccounts());
+        
+        return "BankRegister";
+    }
+    
     @RequestMapping(value = "/bankRegistry", method = RequestMethod.GET)
     public String getAccounts(Model model) {
         model.addAttribute("accounts", webBank.getAccounts());
