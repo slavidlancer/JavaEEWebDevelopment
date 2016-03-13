@@ -54,12 +54,14 @@
     </table>
     <br>
     <sec:authorize access="hasRole('ROLE_USER')">
-      <br>
-      <input type="button" value="Operation"
-          onclick="location='${contextPath}${operationUrl}'">
+      <c:if test="${not empty accounts}">
+        <br>
+        <input type="button" value="Operation"
+            onclick="location='${contextPath}${operationUrl}'">
+        &nbsp;
+      </c:if>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
-      &nbsp;
       <input type="button" value="New Account"
           onclick="location='${contextPath}${createAccountUrl}'">
     </sec:authorize>
