@@ -7,7 +7,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Bank: Operation Page"
-    projectName="Topic7HomeworkSpringSecurity"
+    projectName="Topic8HomeworkSpringJDBCOracleDatabase"
     currentVersion="1.0.0">
   <jsp:body>
     <form:form action="${contextPath}${processOperationUrl}" method="post">

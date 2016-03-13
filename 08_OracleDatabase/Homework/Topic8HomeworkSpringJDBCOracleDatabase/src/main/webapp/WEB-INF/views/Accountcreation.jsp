@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Bank: Account Creation Page"
-    projectName="Topic7HomeworkSpringSecurity"
+    projectName="Topic8HomeworkSpringJDBCOracleDatabase"
     currentVersion="1.0.0">
   <jsp:body>
     <form:form action="${contextPath}${addAccountUrl}" method="post"

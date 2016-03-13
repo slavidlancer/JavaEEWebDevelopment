@@ -5,7 +5,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Bank: Login Page"
-    projectName="Topic7HomeworkSpringSecurity"
+    projectName="Topic8HomeworkSpringJDBCOracleDatabase"
     currentVersion="1.0.0">
   <jsp:body>
     <form action="${contextPath}/login" method="post">
