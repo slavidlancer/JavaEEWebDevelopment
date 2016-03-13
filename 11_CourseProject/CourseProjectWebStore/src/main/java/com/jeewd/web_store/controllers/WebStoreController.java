@@ -23,7 +23,7 @@ import com.jeewd.jdbc_bank.utils.UserUtils;*/
 
 //http://localhost:8080/securebank
 @Controller
-public class BankController {
+public class WebStoreController {
     /*@Autowired
     @Qualifier("accountServiceImpl")
     private AccountService accountService;
