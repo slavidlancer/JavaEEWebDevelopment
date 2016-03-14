@@ -19,7 +19,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         
         bankAccount.setCreatedBy(user);
         
-        return bankAccountDao.addBankAccount(bankAccount, user);
+        return bankAccountDao.addBankAccount(bankAccount);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
     }
     
     @Override
-    public boolean addBankAccount(BankAccount bankAccount, String user) {
+    public boolean addBankAccount(BankAccount bankAccount) {
         String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
                 + " amount, currency, created_by) VALUES (?, ?, ?, ?, ?, ?)";
         
