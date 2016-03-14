@@ -91,7 +91,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
     public BankAccount getBankAccountNumberByUsername(String username,
             String number) {
         BankAccount bankAccount = null;
-        String sqlRetrieve = "SELECT COUNT(1) FROM accounts WHERE username = '"
+        String sqlRetrieve = "SELECT * FROM accounts WHERE username = '"
                 + username + "' AND account_number = '" + number + "'";
         
         try (Connection connection = DriverManager.getConnection(
