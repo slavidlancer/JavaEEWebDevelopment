@@ -33,9 +33,21 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
-            String sqlRetrieve = "SELECT LAST_INSERT_ID() FROM operations";
+            String sqlRetrieve = "SELECT MAX(id) FROM operations";
+            
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
-            long lastId = Long.parseLong(resultSet.getString(1));
+            
+            Long lastId = 0L;
+            
+            try {
+                lastId = Long.parseLong(resultSet.getString(1));
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            
+            if ((lastId == null) || (lastId < 0)) {
+                lastId = 0L;
+            }
             
             preparedStatement.setLong(1, ++lastId);
             preparedStatement.setString(2, bankAccount.getNumber());
@@ -46,6 +58,32 @@ public class BankAccountDaoImpl implements BankAccountDao {
             preparedStatement.setString(6, bankAccount.getCreatedBy());
             
             preparedStatement.executeQuery();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            
+            return false;
+        }
+        
+        return true;
+    }
+    
+    @Override
+    public boolean containsBankAccount(BankAccount bankAccount) {
+        String sqlRetrieve = "SELECT COUNT(1) FROM account WHERE username = '?'"
+                + " AND account_number = '?'";
+        
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sqlRetrieve);) {
+            preparedStatement.setString(1, bankAccount.getUsername());
+            preparedStatement.setString(2, bankAccount.getNumber());
+            
+            ResultSet resultSet = preparedStatement.executeQuery(sqlRetrieve);
+            
+            if ((resultSet.getInt(1) == 0) || (resultSet.getInt(1) != 1)) {
+                return false;
+            }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             
@@ -119,6 +157,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
             String sql = "SELECT * FROM accounts";
+            
             ResultSet resultSet = statement.executeQuery(sql);
             
             while (resultSet.next()) {
