@@ -25,8 +25,8 @@ import com.jeewd.jdbc_bank.utils.UserUtils;
 @Controller
 public class BankController {
     @Autowired
-    @Qualifier("accountServiceImpl")
-    private BankAccountService accountService;
+    @Qualifier("bankAccountServiceImpl")
+    private BankAccountService bankAccountService;
     
     @Autowired
     private BankOperationService bankOperationService;
@@ -39,7 +39,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToBankRegister(Model model) {
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllBankAccounts());
+        model.addAttribute("accounts", bankAccountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
@@ -58,7 +58,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToOperation(Model model) {
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllBankAccounts());
+        model.addAttribute("accounts", bankAccountService.getAllBankAccounts());
         
         return "Operation";
     }
@@ -70,8 +70,8 @@ public class BankController {
             BankAccount bankAccount) {
         String username = UserUtils.getUser().getUsername();
         initializeAttributes(model);
-        accountService.addBankAccount(bankAccount, username);
-        model.addAttribute("accounts", accountService.getAllBankAccounts());
+        bankAccountService.addBankAccount(bankAccount, username);
+        model.addAttribute("accounts", bankAccountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
@@ -103,7 +103,7 @@ public class BankController {
                         "ROLE_BANK_EMPLOYEE"))) {
             username = user.getUsername();
             accountNumber = request.getParameter("number");
-            bankAccount = accountService.getBankAccountNumberByUsername(
+            bankAccount = bankAccountService.getBankAccountNumberByUsername(
                     username, accountNumber);
         }
         
@@ -113,7 +113,7 @@ public class BankController {
                     split("/_/");
             username = usernameAndNumber[0];
             accountNumber = usernameAndNumber[1];
-            bankAccount = accountService.getBankAccountNumberByUsername(
+            bankAccount = bankAccountService.getBankAccountNumberByUsername(
                     username, accountNumber);
         }
         
@@ -129,7 +129,7 @@ public class BankController {
         }
         
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllBankAccounts());
+        model.addAttribute("accounts", bankAccountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
