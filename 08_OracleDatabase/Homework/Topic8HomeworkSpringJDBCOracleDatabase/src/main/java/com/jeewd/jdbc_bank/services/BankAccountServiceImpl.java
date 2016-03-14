@@ -8,24 +8,24 @@ import com.jeewd.jdbc_bank.dao.BankAccountDao;
 import com.jeewd.jdbc_bank.entity.BankAccount;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class BankAccountServiceImpl implements BankAccountService {
     //private static Set<BankAccount> bankAccounts = new HashSet<>();
     @Autowired
     private BankAccountDao bankAccountDao;
     
     @Override
-    public boolean addAccount(BankAccount bankAccount, String user) {
+    public boolean addBankAccount(BankAccount bankAccount, String user) {
         /*bankAccount.setCreatedBy(user);
         
         if (!bankAccounts.contains(bankAccount)) {
             bankAccounts.add(bankAccount);
         }*/
         
-        return true;
+        return bankAccountDao.addBankAccount(bankAccount, user);
     }
 
     @Override
-    public BankAccount getAccountNumberByUsername(String username,
+    public BankAccount getBankAccountNumberByUsername(String username,
             String number) {
         /*for (BankAccount bankAccount : bankAccounts) {
             if (username.equals(bankAccount.getUsername())) {
@@ -35,12 +35,12 @@ public class AccountServiceImpl implements AccountService {
             }
         }*/
         
-        return null;
+        return bankAccountDao.getBankAccountNumberByUsername(username, number);
     }
     
     @Override
-    public Set<BankAccount> getAllAccounts() {
+    public Set<BankAccount> getAllBankAccounts() {
         //return bankAccounts;
-        return bankAccountDao.getBankAccounts();
+        return bankAccountDao.getAllBankAccounts();
     }
 }

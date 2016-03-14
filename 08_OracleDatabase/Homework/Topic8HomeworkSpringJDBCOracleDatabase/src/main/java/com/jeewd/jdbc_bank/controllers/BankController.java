@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.jdbc_bank.entity.BankAccount;
 import com.jeewd.jdbc_bank.security.User;
-import com.jeewd.jdbc_bank.services.AccountService;
+import com.jeewd.jdbc_bank.services.BankAccountService;
 import com.jeewd.jdbc_bank.services.BankOperationService;
 import com.jeewd.jdbc_bank.services.CurrencyConversionService;
 import com.jeewd.jdbc_bank.utils.UserUtils;
@@ -26,7 +26,7 @@ import com.jeewd.jdbc_bank.utils.UserUtils;
 public class BankController {
     @Autowired
     @Qualifier("accountServiceImpl")
-    private AccountService accountService;
+    private BankAccountService accountService;
     
     @Autowired
     private BankOperationService bankOperationService;
@@ -39,7 +39,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToBankRegister(Model model) {
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllAccounts());
+        model.addAttribute("accounts", accountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
@@ -58,7 +58,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToOperation(Model model) {
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllAccounts());
+        model.addAttribute("accounts", accountService.getAllBankAccounts());
         
         return "Operation";
     }
@@ -70,8 +70,8 @@ public class BankController {
             BankAccount bankAccount) {
         String username = UserUtils.getUser().getUsername();
         initializeAttributes(model);
-        accountService.addAccount(bankAccount, username);
-        model.addAttribute("accounts", accountService.getAllAccounts());
+        accountService.addBankAccount(bankAccount, username);
+        model.addAttribute("accounts", accountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
@@ -103,8 +103,8 @@ public class BankController {
                         "ROLE_BANK_EMPLOYEE"))) {
             username = user.getUsername();
             accountNumber = request.getParameter("number");
-            bankAccount = accountService.getAccountNumberByUsername(username,
-                    accountNumber);
+            bankAccount = accountService.getBankAccountNumberByUsername(
+                    username, accountNumber);
         }
         
         if (authorities.contains(new SimpleGrantedAuthority(
@@ -113,8 +113,8 @@ public class BankController {
                     split("/_/");
             username = usernameAndNumber[0];
             accountNumber = usernameAndNumber[1];
-            bankAccount = accountService.getAccountNumberByUsername(username,
-                    accountNumber);
+            bankAccount = accountService.getBankAccountNumberByUsername(
+                    username, accountNumber);
         }
         
         accountCurrency = bankAccount.getCurrency().toString();
@@ -129,7 +129,7 @@ public class BankController {
         }
         
         initializeAttributes(model);
-        model.addAttribute("accounts", accountService.getAllAccounts());
+        model.addAttribute("accounts", accountService.getAllBankAccounts());
         
         return "Bankregisterpage";
     }
