@@ -22,7 +22,7 @@ public class OperationDaoImpl implements OperationDao {
     @Override
     public boolean registerOperation(String accountNumber, String operation,
             String amount, String currency, String performedBy) {
-        String sqlInsert = "INSERT INTO operations (id, account_umber,"
+        String sqlInsert = "INSERT INTO operations (id, account_umber, "
                 + "operation, amount, currency, performed_by) VALUES (?, ?, ?, "
                 + "?, ?, ?)";
         

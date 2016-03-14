@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.stereotype.Repository;
 import com.jeewd.jdbc_bank.entity.BankAccount;
 
@@ -26,8 +26,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
     }
 
     @Override
-    public List<BankAccount> getBankAccounts() {
-        List<BankAccount> bankAccounts = new ArrayList<>();
+    public Set<BankAccount> getBankAccounts() {
+        Set<BankAccount> bankAccounts = new HashSet<>();
         
         try (Connection connection = DriverManager.getConnection(URL, USERNAME,
                     PASSWORD);
