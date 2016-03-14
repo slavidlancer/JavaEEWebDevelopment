@@ -11,9 +11,8 @@ public class AccountServiceImpl implements AccountService {
     
     @Override
     public boolean addAccount(BankAccount bankAccount, String user) {
-        bankAccount.setCreatedBy(user);
-        
         if (!bankAccounts.contains(bankAccount)) {
+            bankAccount.setCreatedBy(user);
             bankAccounts.add(bankAccount);
         }
         
