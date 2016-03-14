@@ -21,7 +21,7 @@ import com.jeewd.jdbc_bank.services.BankOperationService;
 import com.jeewd.jdbc_bank.services.CurrencyConversionService;
 import com.jeewd.jdbc_bank.utils.UserUtils;
 
-//http://localhost:8080/securebank
+//http://localhost:8080/jdbc_bank
 @Controller
 public class BankController {
     @Autowired
@@ -123,9 +123,9 @@ public class BankController {
                 accountCurrency);
         
         if ("deposit".equals(operation)) {
-            bankOperationService.deposit(bankAccount, amount);
+            bankOperationService.deposit(bankAccount, amount, user, currency);
         } else if ("withdraw".equals(operation)) {
-            bankOperationService.withdraw(bankAccount, amount);
+            bankOperationService.withdraw(bankAccount, amount, user, currency);
         }
         
         initializeAttributes(model);
