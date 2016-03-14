@@ -33,16 +33,11 @@ public class OperationDaoImpl implements OperationDao {
                         connection.prepareStatement(sqlInsert);) {
             String sqlRetrieve = "SELECT MAX(id) FROM operations";
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
-            Long lastId = 0L;
             
-            try {
-                lastId = Long.parseLong(resultSet.getString(1));
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
+            long lastId = 0L;
             
-            if ((lastId == null) || (lastId < 0)) {
-                lastId = 0L;
+            while (resultSet.next()) {
+                lastId = resultSet.getLong(1);
             }
             
             preparedStatement.setLong(1, ++lastId);

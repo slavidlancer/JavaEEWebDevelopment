@@ -33,20 +33,14 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
-            String sqlRetrieve = "SELECT MAX(id) FROM operations";
+            String sqlRetrieve = "SELECT COUNT(*) FROM operations";
             
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
             
-            Long lastId = 0L;
+            long lastId = 0L;
             
-            try {
-                lastId = Long.parseLong(resultSet.getString(1));
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-            
-            if ((lastId == null) || (lastId < 0)) {
-                lastId = 0L;
+            while (resultSet.next()) {
+                lastId = resultSet.getLong(1);
             }
             
             preparedStatement.setLong(1, ++lastId);
@@ -81,8 +75,10 @@ public class BankAccountDaoImpl implements BankAccountDao {
             
             ResultSet resultSet = preparedStatement.executeQuery(sqlRetrieve);
             
-            if ((resultSet.getInt(1) == 0) || (resultSet.getInt(1) != 1)) {
-                return false;
+            while (resultSet.next()) {
+                if ((resultSet.getInt(1) == 0) || (resultSet.getInt(1) != 1)) {
+                    return false;
+                }
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -109,37 +105,39 @@ public class BankAccountDaoImpl implements BankAccountDao {
             
             ResultSet resultSet = preparedStatement.executeQuery(sql);
             
-            bankAccount = new BankAccount();
-            CurrencyID currency = null;
+            while (resultSet.next()) {
+                bankAccount = new BankAccount();
+                CurrencyID currency = null;
+                    
+                bankAccount.setNumber(resultSet.getString(2));
+                bankAccount.setUsername(resultSet.getString(3));
+                bankAccount.setAmount(resultSet.getBigDecimal(4));
                 
-            bankAccount.setNumber(resultSet.getString(2));
-            bankAccount.setUsername(resultSet.getString(3));
-            bankAccount.setAmount(resultSet.getBigDecimal(4));
-            
-            switch (resultSet.getString(5)) {
-                case "BGN":
-                    currency = CurrencyID.BGN;
-                    
-                    break;
-                    
-                case "USD":
-                    currency = CurrencyID.USD;
-                    
-                    break;
-                    
-                case "EUR":
-                    currency = CurrencyID.EUR;
-                    
-                    break;
-                    
-                default:
-                    currency = CurrencyID.BGN;
-                    
-                    break;
+                switch (resultSet.getString(5)) {
+                    case "BGN":
+                        currency = CurrencyID.BGN;
+                        
+                        break;
+                        
+                    case "USD":
+                        currency = CurrencyID.USD;
+                        
+                        break;
+                        
+                    case "EUR":
+                        currency = CurrencyID.EUR;
+                        
+                        break;
+                        
+                    default:
+                        currency = CurrencyID.BGN;
+                        
+                        break;
+                }
+                
+                bankAccount.setCurrency(currency);
+                bankAccount.setCreatedBy(resultSet.getString(6));
             }
-            
-            bankAccount.setCurrency(currency);
-            bankAccount.setCreatedBy(resultSet.getString(6));
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             
