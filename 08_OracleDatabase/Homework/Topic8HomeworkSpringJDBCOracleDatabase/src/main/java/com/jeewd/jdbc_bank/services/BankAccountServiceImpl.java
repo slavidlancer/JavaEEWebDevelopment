@@ -13,11 +13,11 @@ public class BankAccountServiceImpl implements BankAccountService {
     
     @Override
     public boolean addBankAccount(BankAccount bankAccount, String user) {
-        bankAccount.setCreatedBy(user);
-        
         if (bankAccountDao.containsBankAccount(bankAccount)) {
             return false;
         }
+        
+        bankAccount.setCreatedBy(user);
         
         return bankAccountDao.addBankAccount(bankAccount, user);
     }
