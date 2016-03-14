@@ -33,7 +33,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
-            String sqlRetrieve = "SELECT COUNT(*) FROM operations";
+            String sqlRetrieve = "SELECT COUNT(*) FROM accounts";
             
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
             
@@ -63,20 +63,18 @@ public class BankAccountDaoImpl implements BankAccountDao {
     
     @Override
     public boolean containsBankAccount(BankAccount bankAccount) {
-        String sqlRetrieve = "SELECT COUNT(1) FROM account WHERE username = '?'"
-                + " AND account_number = '?'";
+        String sqlRetrieve = "SELECT COUNT(1) FROM accounts WHERE username = '"
+                + bankAccount.getUsername() + "' AND account_number = '" +
+                bankAccount.getNumber() + "'";
         
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
-                PreparedStatement preparedStatement =
+                Statement statement =
                         connection.prepareStatement(sqlRetrieve);) {
-            preparedStatement.setString(1, bankAccount.getUsername());
-            preparedStatement.setString(2, bankAccount.getNumber());
-            
-            ResultSet resultSet = preparedStatement.executeQuery(sqlRetrieve);
+            ResultSet resultSet = statement.executeQuery(sqlRetrieve);
             
             while (resultSet.next()) {
-                if ((resultSet.getInt(1) == 0) || (resultSet.getInt(1) != 1)) {
+                if (resultSet.getInt(1) == 0) {
                     return false;
                 }
             }
@@ -93,17 +91,14 @@ public class BankAccountDaoImpl implements BankAccountDao {
     public BankAccount getBankAccountNumberByUsername(String username,
             String number) {
         BankAccount bankAccount = null;
-        String sql = "SELECT * FROM accounts WHERE username = '?' AND "
-                + "account_number = '?'";
+        String sqlRetrieve = "SELECT COUNT(1) FROM accounts WHERE username = '"
+                + username + "' AND account_number = '" + number + "'";
         
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
-                PreparedStatement preparedStatement =
-                        connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, number);
-            
-            ResultSet resultSet = preparedStatement.executeQuery(sql);
+                Statement statement =
+                        connection.prepareStatement(sqlRetrieve);) {
+            ResultSet resultSet = statement.executeQuery(sqlRetrieve);
             
             while (resultSet.next()) {
                 bankAccount = new BankAccount();

@@ -1,5 +1,6 @@
 package com.jeewd.jdbc_bank.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ public class OperationDaoImpl implements OperationDao {
     
     @Override
     public boolean registerOperation(String accountNumber, String operation,
-            String amount, String currency, String performedBy) {
+            BigDecimal amount, String currency, String performedBy) {
         String sqlInsert = "INSERT INTO operations (id, account_umber, "
                 + "operation, amount, currency, performed_by) VALUES (?, ?, ?, "
                 + "?, ?, ?)";
@@ -31,7 +32,7 @@ public class OperationDaoImpl implements OperationDao {
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
-            String sqlRetrieve = "SELECT MAX(id) FROM operations";
+            String sqlRetrieve = "SELECT COUNT(*) FROM operations";
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
             
             long lastId = 0L;
@@ -43,7 +44,7 @@ public class OperationDaoImpl implements OperationDao {
             preparedStatement.setLong(1, ++lastId);
             preparedStatement.setString(2, accountNumber);
             preparedStatement.setString(3, operation);
-            preparedStatement.setString(4, amount);
+            preparedStatement.setBigDecimal(4, amount);
             preparedStatement.setString(5, currency);
             preparedStatement.setString(6, performedBy);
             

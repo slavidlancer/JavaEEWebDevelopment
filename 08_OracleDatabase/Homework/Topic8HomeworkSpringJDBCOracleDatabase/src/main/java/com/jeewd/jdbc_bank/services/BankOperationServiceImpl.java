@@ -17,7 +17,7 @@ public class BankOperationServiceImpl implements BankOperationService {
             User user, String currency) {
         bankAccount.setAmount(bankAccount.getAmount().add(changeAmount));
         operationDao.registerOperation(bankAccount.getNumber(), "deposit",
-                changeAmount.toString(), currency, user.getUsername());
+                changeAmount, currency, user.getUsername());
         
         return true;
     }
@@ -34,7 +34,7 @@ public class BankOperationServiceImpl implements BankOperationService {
         
         bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
         operationDao.registerOperation(bankAccount.getNumber(), "withdraw",
-                changeAmount.toString(), currency, user.getUsername());
+                changeAmount, currency, user.getUsername());
         
         return true;
     }
