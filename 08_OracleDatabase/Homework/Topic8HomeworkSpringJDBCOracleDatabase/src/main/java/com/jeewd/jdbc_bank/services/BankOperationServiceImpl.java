@@ -28,15 +28,14 @@ public class BankOperationServiceImpl implements BankOperationService {
         BigDecimal compareAmount = new BigDecimal(bankAccount.getAmount().
                 toString()).subtract(changeAmount);
         
-        if (new BigDecimal(0).compareTo(compareAmount) <= 0) {
-            bankAccount.setAmount(bankAccount.getAmount().subtract(
-                    changeAmount));
-            operationDao.registerOperation(bankAccount.getNumber(), "withdraw",
-                    changeAmount.toString(), currency, user.getUsername());
-            
-            return true;
+        if (!(new BigDecimal(0).compareTo(compareAmount) <= 0)) {
+            return false;
         }
         
-        return false;
+        bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
+        operationDao.registerOperation(bankAccount.getNumber(), "withdraw",
+                changeAmount.toString(), currency, user.getUsername());
+        
+        return true;
     }
 }
