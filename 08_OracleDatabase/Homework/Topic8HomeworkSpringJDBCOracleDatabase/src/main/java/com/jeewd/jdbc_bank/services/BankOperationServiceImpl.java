@@ -16,8 +16,7 @@ public class BankOperationServiceImpl implements BankOperationService {
     public boolean deposit(BankAccount bankAccount, BigDecimal changeAmount,
             User user, String currency) {
         //bankAccount.setAmount(bankAccount.getAmount().add(changeAmount));
-        if (!operationDao.performDeposit(bankAccount, changeAmount,
-                user.getUsername())) {
+        if (!operationDao.performDeposit(bankAccount, changeAmount)) {
             return false;
         }
         
@@ -38,8 +37,7 @@ public class BankOperationServiceImpl implements BankOperationService {
         }
         
         //bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
-        if (!operationDao.performWithdraw(bankAccount, changeAmount,
-                user.getUsername())) {
+        if (!operationDao.performWithdraw(bankAccount, changeAmount)) {
             return false;
         }
         

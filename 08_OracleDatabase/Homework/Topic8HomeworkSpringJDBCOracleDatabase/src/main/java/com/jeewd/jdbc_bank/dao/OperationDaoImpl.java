@@ -23,32 +23,18 @@ public class OperationDaoImpl implements OperationDao {
     
     @Override
     public boolean performDeposit(BankAccount bankAccount,
-            BigDecimal changeAmount, String performedBy) {
-        String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
-                + " amount, currency, created_by) VALUES (?, ?, ?, ?, ?, ?)";
+            BigDecimal changeAmount) {
+        String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
+                + " = ? AND username = ?";
         
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
-                Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
-                        connection.prepareStatement(sqlInsert);) {
-            String sqlRetrieve = "SELECT COUNT(*) FROM accounts";
-            
-            ResultSet resultSet = statement.executeQuery(sqlRetrieve);
-            
-            long lastId = 0L;
-            
-            while (resultSet.next()) {
-                lastId = resultSet.getLong(1);
-            }
-            
-            preparedStatement.setLong(1, ++lastId);
+                        connection.prepareStatement(sqlUpdate);) {
+            preparedStatement.setBigDecimal(1,
+                    bankAccount.getAmount().add(changeAmount));
             preparedStatement.setString(2, bankAccount.getNumber());
             preparedStatement.setString(3, bankAccount.getUsername());
-            preparedStatement.setBigDecimal(4, bankAccount.getAmount());
-            preparedStatement.setObject(5, bankAccount.getCurrency().
-                    toString());
-            preparedStatement.setString(6, bankAccount.getCreatedBy());
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -62,8 +48,27 @@ public class OperationDaoImpl implements OperationDao {
 
     @Override
     public boolean performWithdraw(BankAccount bankAccount,
-            BigDecimal changeAmount, String performedBy) {
-        return false;
+            BigDecimal changeAmount) {
+        String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
+                + " = ? AND username = ?";
+        
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+                PreparedStatement preparedStatement =
+                        connection.prepareStatement(sqlUpdate);) {
+            preparedStatement.setBigDecimal(1,
+                    bankAccount.getAmount().subtract(changeAmount));
+            preparedStatement.setString(2, bankAccount.getNumber());
+            preparedStatement.setString(3, bankAccount.getUsername());
+            
+            preparedStatement.executeQuery();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            
+            return false;
+        }
+        
+        return true;
     }
     
     @Override
