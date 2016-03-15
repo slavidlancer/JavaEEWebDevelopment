@@ -15,7 +15,12 @@ public class BankOperationServiceImpl implements BankOperationService {
     @Override
     public boolean deposit(BankAccount bankAccount, BigDecimal changeAmount,
             User user, String currency) {
-        bankAccount.setAmount(bankAccount.getAmount().add(changeAmount));
+        //bankAccount.setAmount(bankAccount.getAmount().add(changeAmount));
+        if (!operationDao.performDeposit(bankAccount, changeAmount,
+                user.getUsername())) {
+            return false;
+        }
+        
         operationDao.registerOperation(bankAccount.getNumber(), "deposit",
                 changeAmount, currency, user.getUsername());
         
@@ -32,7 +37,12 @@ public class BankOperationServiceImpl implements BankOperationService {
             return false;
         }
         
-        bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
+        //bankAccount.setAmount(bankAccount.getAmount().subtract(changeAmount));
+        if (!operationDao.performWithdraw(bankAccount, changeAmount,
+                user.getUsername())) {
+            return false;
+        }
+        
         operationDao.registerOperation(bankAccount.getNumber(), "withdraw",
                 changeAmount, currency, user.getUsername());
         
