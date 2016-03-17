@@ -1,4 +1,4 @@
-<%@ taglib prefix="ct" uri="http://jdbc_bank.jeewd.com/tags" %>
+<%@ taglib prefix="ct" uri="http://web_store.jeewd.com/tags" %>
 <%@ attribute name="title" %>
 <%@ attribute name="projectName" %>
 <%@ attribute name="currentVersion" %>
