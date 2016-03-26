@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="ct" uri="http://jdbc_bank.jeewd.com/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -16,7 +17,15 @@
           Username:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="username">
+          <sec:authorize access="hasRole('ROLE_BANK_EMPLOYEE')">
+            <c:if test="${not empty users}">
+              <select name="username" style="width: 100%;">
+                <c:forEach var="u" items="${users}">
+                  <option value="${u}">${u}</option>
+                </c:forEach>
+              </select>
+            </c:if>
+          </sec:authorize>
         </jsp:attribute>
         <jsp:attribute name="row2-title">
           Account Number:

@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
@@ -49,5 +51,28 @@ public class UserDaoImpl implements UserDao {
         }
         
         return users;
+    }
+
+    @Override
+    public List<String> getAllUsernames() {
+        List<String> usernames = new ArrayList<>();
+        
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+                Statement statement = connection.createStatement();) {
+            String sql = "SELECT * FROM users";
+            
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+            while (resultSet.next()) {
+                usernames.add(resultSet.getString(2));
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+            
+            return null;
+        }
+        
+        return usernames;
     }
 }

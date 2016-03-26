@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
+import com.jeewd.jdbc_bank.dao.UserDao;
 import com.jeewd.jdbc_bank.entities.BankAccount;
 import com.jeewd.jdbc_bank.security.User;
 import com.jeewd.jdbc_bank.services.BankAccountService;
@@ -34,6 +35,9 @@ public class BankController {
     @Autowired
     private CurrencyConversionService currencyConversionService;
     
+    @Autowired
+    private UserDao userDao;
+    
     @Secured({"ROLE_USER", "ROLE_BANK_EMPLOYEE"})
     @RequestMapping(value = {"/", UrlConstants.BANK_REGISTER_PAGE_URL},
             method = RequestMethod.GET)
@@ -49,6 +53,7 @@ public class BankController {
             method = RequestMethod.GET)
     public String goToAccountCreation(Model model) {
         initializeAttributes(model);
+        model.addAttribute("users", userDao.getAllUsernames());
         
         return "Accountcreation";
     }
