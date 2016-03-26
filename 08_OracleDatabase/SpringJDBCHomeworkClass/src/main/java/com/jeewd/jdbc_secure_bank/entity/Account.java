@@ -3,11 +3,20 @@ package com.jeewd.jdbc_secure_bank.entity;
 import java.math.BigDecimal;
 
 public class Account {
+    private long id;
     private String username;
     private String accountNumber;
     private BigDecimal amount;
     private String currency;
     private String createdBy;
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     
     public String getUsername() {
         return username;

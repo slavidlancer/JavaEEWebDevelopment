@@ -2,13 +2,14 @@ package com.jeewd.jdbc_secure_bank.services;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.jeewd.jdbc_secure_bank.dao.AccountDao;
 import com.jeewd.jdbc_secure_bank.entity.Account;
 import com.jeewd.jdbc_secure_bank.entity.ExchangeRate;
 import com.jeewd.jdbc_secure_bank.utils.UserUtils;
@@ -26,6 +27,9 @@ public class WebBankImpl implements WebBank {
     private Map<String, BigDecimal> initialAmounts = new HashMap<>();
     private Map<String, BigDecimal> totalWithdraws = new HashMap<>();
     
+    @Autowired
+    private AccountDao accountDao;
+    
     static {
         ExchangeRate exchangeRate = new ExchangeRate();
         exchangeRate.setCurrency("BGN");
@@ -36,13 +40,15 @@ public class WebBankImpl implements WebBank {
     
     @Override
     public List<Account> getAccounts() {
-        List<Account> accounts = new ArrayList<>();
+        /*List<Account> accounts = new ArrayList<>();
         
         for (Account account : bankAccounts.values()) {
             accounts.add(account);
         }
         
-        return accounts;
+        return accounts;*/
+        
+        return accountDao.getAccounts();
     }
 
     @Override

@@ -53,7 +53,14 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${org.spring-security-version}</version>
         </dependency>
-                
+        
+        <!-- OJDBC -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0</version>
+        </dependency>
+        
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
