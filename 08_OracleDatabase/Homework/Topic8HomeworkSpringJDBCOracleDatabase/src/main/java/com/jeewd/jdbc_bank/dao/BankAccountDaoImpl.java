@@ -30,6 +30,9 @@ public class BankAccountDaoImpl implements BankAccountDao {
     @Autowired
     private UserDao userDao;
     
+    @Autowired
+    private OperationDao operationDao;
+    
     @Override
     public boolean addBankAccount(BankAccount bankAccount) {
         String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
@@ -73,6 +76,11 @@ public class BankAccountDaoImpl implements BankAccountDao {
                     toString());
             
             preparedStatement.executeQuery();
+            
+            operationDao.registerOperation(bankAccount.getNumber(), "deposit",
+                    bankAccount.getAmount(),
+                    bankAccount.getCurrency().toString(),
+                    bankAccount.getCreatedBy());
         } catch (SQLException sqle) {
             sqle.printStackTrace();
             
