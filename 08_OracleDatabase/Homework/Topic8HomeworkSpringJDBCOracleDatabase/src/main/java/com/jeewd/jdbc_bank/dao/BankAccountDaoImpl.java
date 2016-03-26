@@ -6,13 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
 import com.jeewd.jdbc_bank.entities.BankAccount;
 import com.jeewd.jdbc_bank.entities.CurrencyID;
+import com.jeewd.jdbc_bank.entities.UserDb;
 
 @Repository
 public class BankAccountDaoImpl implements BankAccountDao {
@@ -32,6 +35,9 @@ public class BankAccountDaoImpl implements BankAccountDao {
         String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
                 + " amount, currency, created_by) VALUES (?, ?, ?, ?, ?, ?)";
         
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();
@@ -50,17 +56,21 @@ public class BankAccountDaoImpl implements BankAccountDao {
             preparedStatement.setLong(1, ++lastId);
             preparedStatement.setString(2, bankAccount.getNumber());
             
-            if ("user".equals(bankAccount.getUsername())) {
-                preparedStatement.setLong(3, 2);
+            for (Entry<Long, UserDb> user : users.entrySet()) {
+                if (user.getValue().getUsername().equals(
+                        bankAccount.getUsername())) {
+                    preparedStatement.setLong(3, user.getKey());
+                }
+                
+                if (user.getValue().getUsername().equals(
+                        bankAccount.getCreatedBy())) {
+                    preparedStatement.setLong(6, user.getKey());
+                }
             }
             
             preparedStatement.setBigDecimal(4, bankAccount.getAmount());
             preparedStatement.setObject(5, bankAccount.getCurrency().
                     toString());
-            
-            if ("admin".equals(bankAccount.getCreatedBy())) {
-                preparedStatement.setLong(6, 1);
-            }
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -74,8 +84,19 @@ public class BankAccountDaoImpl implements BankAccountDao {
     
     @Override
     public boolean containsBankAccount(BankAccount bankAccount) {
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        String usernameId = null;
+        
+        for (Entry<Long, UserDb> user : users.entrySet()) {
+            if (user.getValue().getUsername().equals(
+                    bankAccount.getUsername())) {
+                usernameId = user.getKey().toString();
+            }
+        }
+        
         String sqlRetrieve = "SELECT COUNT(1) FROM accounts WHERE username = '"
-                + bankAccount.getUsername() + "' AND account_number = '" +
+                + usernameId + "' AND account_number = '" +
                 bankAccount.getNumber() + "'";
         
         try (Connection connection = DriverManager.getConnection(
@@ -102,8 +123,20 @@ public class BankAccountDaoImpl implements BankAccountDao {
     public BankAccount getBankAccountNumberByUsername(String username,
             String number) {
         BankAccount bankAccount = null;
+        
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        
+        String usernameId = null;
+        
+        for (Entry<Long, UserDb> user : users.entrySet()) {
+            if (user.getValue().getUsername().equals(username)) {
+                usernameId = user.getKey().toString();
+            }
+        }
+        
         String sqlRetrieve = "SELECT * FROM accounts WHERE username = '"
-                + username + "' AND account_number = '" + number + "'";
+                + usernameId + "' AND account_number = '" + number + "'";
         
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
@@ -114,9 +147,20 @@ public class BankAccountDaoImpl implements BankAccountDao {
             while (resultSet.next()) {
                 bankAccount = new BankAccount();
                 CurrencyID currency = null;
-                    
+                
+                bankAccount.setId(resultSet.getLong(1));
                 bankAccount.setNumber(resultSet.getString(2));
-                bankAccount.setUsername(resultSet.getString(3));
+                
+                for (Entry<Long, UserDb> user : users.entrySet()) {
+                    if (user.getKey().equals(resultSet.getLong(3))) {
+                        bankAccount.setUsername(user.getValue().getUsername());
+                    }
+                    
+                    if (user.getKey().equals(resultSet.getLong(6))) {
+                        bankAccount.setCreatedBy(user.getValue().getUsername());
+                    }
+                }
+                
                 bankAccount.setAmount(resultSet.getBigDecimal(4));
                 
                 switch (resultSet.getString(5)) {
@@ -142,7 +186,6 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 }
                 
                 bankAccount.setCurrency(currency);
-                bankAccount.setCreatedBy(resultSet.getString(6));
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -160,6 +203,9 @@ public class BankAccountDaoImpl implements BankAccountDao {
         try (Connection connection = DriverManager.getConnection(
                 DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
+            HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                    userDao.getAllUsers();
+            
             String sql = "SELECT * FROM accounts";
             
             ResultSet resultSet = statement.executeQuery(sql);
@@ -168,8 +214,19 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 BankAccount bankAccount = new BankAccount();
                 CurrencyID currency = null;
                 
+                bankAccount.setId(resultSet.getLong(1));
                 bankAccount.setNumber(resultSet.getString(2));
-                bankAccount.setUsername(resultSet.getString(3));
+                
+                for (Entry<Long, UserDb> user : users.entrySet()) {
+                    if (user.getKey().equals(resultSet.getLong(3))) {
+                        bankAccount.setUsername(user.getValue().getUsername());
+                    }
+                    
+                    if (user.getKey().equals(resultSet.getLong(6))) {
+                        bankAccount.setCreatedBy(user.getValue().getUsername());
+                    }
+                }
+                
                 bankAccount.setAmount(resultSet.getBigDecimal(4));
                 
                 switch (resultSet.getString(5)) {
@@ -195,7 +252,6 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 }
                 
                 bankAccount.setCurrency(currency);
-                bankAccount.setCreatedBy(resultSet.getString(6));
                 
                 bankAccounts.add(bankAccount);
             }

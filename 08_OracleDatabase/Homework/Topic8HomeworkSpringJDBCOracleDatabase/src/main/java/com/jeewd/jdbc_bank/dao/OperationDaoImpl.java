@@ -7,9 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
 import com.jeewd.jdbc_bank.entities.BankAccount;
+import com.jeewd.jdbc_bank.entities.UserDb;
 
 @Repository
 public class OperationDaoImpl implements OperationDao {
@@ -21,9 +27,18 @@ public class OperationDaoImpl implements OperationDao {
         }
     }
     
+    @Autowired
+    private UserDao userDao;
+    
+    @Autowired
+    private BankAccountDao bankAccountDao;
+    
     @Override
     public boolean performDeposit(BankAccount bankAccount,
             BigDecimal changeAmount) {
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        
         String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
                 + " = ? AND username = ?";
         
@@ -34,7 +49,13 @@ public class OperationDaoImpl implements OperationDao {
             preparedStatement.setBigDecimal(1,
                     bankAccount.getAmount().add(changeAmount));
             preparedStatement.setString(2, bankAccount.getNumber());
-            preparedStatement.setString(3, bankAccount.getUsername());
+            
+            for (Entry<Long, UserDb> user : users.entrySet()) {
+                if (user.getValue().getUsername().equals(
+                        bankAccount.getUsername())) {
+                    preparedStatement.setLong(3, user.getKey());
+                }
+            }
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -49,6 +70,9 @@ public class OperationDaoImpl implements OperationDao {
     @Override
     public boolean performWithdraw(BankAccount bankAccount,
             BigDecimal changeAmount) {
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        
         String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
                 + " = ? AND username = ?";
         
@@ -59,7 +83,13 @@ public class OperationDaoImpl implements OperationDao {
             preparedStatement.setBigDecimal(1,
                     bankAccount.getAmount().subtract(changeAmount));
             preparedStatement.setString(2, bankAccount.getNumber());
-            preparedStatement.setString(3, bankAccount.getUsername());
+            
+            for (Entry<Long, UserDb> user : users.entrySet()) {
+                if (user.getValue().getUsername().equals(
+                        bankAccount.getUsername())) {
+                    preparedStatement.setLong(3, user.getKey());
+                }
+            }
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -74,6 +104,11 @@ public class OperationDaoImpl implements OperationDao {
     @Override
     public boolean registerOperation(String accountNumber, String operation,
             BigDecimal amount, String currency, String performedBy) {
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+                userDao.getAllUsers();
+        HashSet<BankAccount> bankAccounts = (HashSet<BankAccount>)
+                bankAccountDao.getAllBankAccounts();
+        
         String sqlInsert = "INSERT INTO operations (id, account_number, "
                 + "operation, amount, currency, performed_by) VALUES (?, ?, ?, "
                 + "?, ?, ?)";
@@ -93,11 +128,22 @@ public class OperationDaoImpl implements OperationDao {
             }
             
             preparedStatement.setLong(1, ++lastId);
-            preparedStatement.setString(2, accountNumber);
+            
+            for (BankAccount bankAccount : bankAccounts) {
+                if (bankAccount.getNumber().equals(accountNumber)) {
+                    preparedStatement.setLong(2, bankAccount.getId());
+                }
+            }
+            
             preparedStatement.setString(3, operation);
             preparedStatement.setBigDecimal(4, amount);
             preparedStatement.setString(5, currency);
-            preparedStatement.setString(6, performedBy);
+            
+            for (Entry<Long, UserDb> user : users.entrySet()) {
+                if (user.getValue().getUsername().equals(performedBy)) {
+                    preparedStatement.setLong(6, user.getKey());
+                }
+            }
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
