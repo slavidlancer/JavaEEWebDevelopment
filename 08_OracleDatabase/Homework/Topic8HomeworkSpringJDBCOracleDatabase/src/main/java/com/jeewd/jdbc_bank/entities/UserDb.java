@@ -1,8 +1,18 @@
 package com.jeewd.jdbc_bank.entities;
 
 public class UserDb {
+    private Long id;
     private String username;
     private String password;
+    private String role;
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     public String getUsername() {
         return username;
@@ -18,5 +28,13 @@ public class UserDb {
     
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
     }
 }
