@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
 import com.jeewd.jdbc_bank.entities.BankAccount;
@@ -22,6 +23,9 @@ public class BankAccountDaoImpl implements BankAccountDao {
             cnfe.printStackTrace();
         }
     }
+    
+    @Autowired
+    private UserDao userDao;
     
     @Override
     public boolean addBankAccount(BankAccount bankAccount) {
@@ -44,12 +48,19 @@ public class BankAccountDaoImpl implements BankAccountDao {
             }
             
             preparedStatement.setLong(1, ++lastId);
-            preparedStatement.setLong(2, bankAccount.getNumber());
-            preparedStatement.setString(3, bankAccount.getUsername());
+            preparedStatement.setString(2, bankAccount.getNumber());
+            
+            if ("user".equals(bankAccount.getUsername())) {
+                preparedStatement.setLong(3, 2);
+            }
+            
             preparedStatement.setBigDecimal(4, bankAccount.getAmount());
             preparedStatement.setObject(5, bankAccount.getCurrency().
                     toString());
-            preparedStatement.setLong(6, bankAccount.getCreatedBy());
+            
+            if ("admin".equals(bankAccount.getCreatedBy())) {
+                preparedStatement.setLong(6, 1);
+            }
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -104,7 +115,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 bankAccount = new BankAccount();
                 CurrencyID currency = null;
                     
-                bankAccount.setNumber(resultSet.getLong(2));
+                bankAccount.setNumber(resultSet.getString(2));
                 bankAccount.setUsername(resultSet.getString(3));
                 bankAccount.setAmount(resultSet.getBigDecimal(4));
                 
