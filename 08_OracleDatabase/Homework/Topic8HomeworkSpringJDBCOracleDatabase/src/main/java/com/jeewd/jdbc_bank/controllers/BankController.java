@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.UrlConstants;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 import com.jeewd.jdbc_bank.security.User;
 import com.jeewd.jdbc_bank.services.BankAccountService;
 import com.jeewd.jdbc_bank.services.BankOperationService;

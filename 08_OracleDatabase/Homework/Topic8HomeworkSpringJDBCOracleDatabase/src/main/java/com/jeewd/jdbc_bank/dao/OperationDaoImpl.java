@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 
 @Repository
 public class OperationDaoImpl implements OperationDao {

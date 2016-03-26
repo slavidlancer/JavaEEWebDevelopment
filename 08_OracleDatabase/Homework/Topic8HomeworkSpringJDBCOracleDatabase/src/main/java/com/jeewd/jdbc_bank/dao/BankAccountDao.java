@@ -1,7 +1,7 @@
 package com.jeewd.jdbc_bank.dao;
 
 import java.util.Set;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 
 public interface BankAccountDao {
     boolean addBankAccount(BankAccount bankAccount);

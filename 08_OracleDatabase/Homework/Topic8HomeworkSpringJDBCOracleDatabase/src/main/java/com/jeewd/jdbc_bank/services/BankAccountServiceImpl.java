@@ -4,7 +4,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeewd.jdbc_bank.dao.BankAccountDao;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 
 @Service
 public class BankAccountServiceImpl implements BankAccountService {

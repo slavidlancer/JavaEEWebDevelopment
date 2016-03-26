@@ -1,7 +1,7 @@
 package com.jeewd.jdbc_bank.services;
 
 import java.util.Set;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 
 public interface BankAccountService {
     boolean addBankAccount(BankAccount bankAccount, String user);

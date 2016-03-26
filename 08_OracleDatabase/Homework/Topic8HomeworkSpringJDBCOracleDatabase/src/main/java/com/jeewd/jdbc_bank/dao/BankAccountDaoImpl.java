@@ -10,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.springframework.stereotype.Repository;
 import com.jeewd.constants.DbConstants;
-import com.jeewd.jdbc_bank.entity.BankAccount;
-import com.jeewd.jdbc_bank.entity.CurrencyID;
+import com.jeewd.jdbc_bank.entities.BankAccount;
+import com.jeewd.jdbc_bank.entities.CurrencyID;
 
 @Repository
 public class BankAccountDaoImpl implements BankAccountDao {
@@ -44,12 +44,12 @@ public class BankAccountDaoImpl implements BankAccountDao {
             }
             
             preparedStatement.setLong(1, ++lastId);
-            preparedStatement.setString(2, bankAccount.getNumber());
+            preparedStatement.setLong(2, bankAccount.getNumber());
             preparedStatement.setString(3, bankAccount.getUsername());
             preparedStatement.setBigDecimal(4, bankAccount.getAmount());
             preparedStatement.setObject(5, bankAccount.getCurrency().
                     toString());
-            preparedStatement.setString(6, bankAccount.getCreatedBy());
+            preparedStatement.setLong(6, bankAccount.getCreatedBy());
             
             preparedStatement.executeQuery();
         } catch (SQLException sqle) {
@@ -104,7 +104,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 bankAccount = new BankAccount();
                 CurrencyID currency = null;
                     
-                bankAccount.setNumber(resultSet.getString(2));
+                bankAccount.setNumber(resultSet.getLong(2));
                 bankAccount.setUsername(resultSet.getString(3));
                 bankAccount.setAmount(resultSet.getBigDecimal(4));
                 

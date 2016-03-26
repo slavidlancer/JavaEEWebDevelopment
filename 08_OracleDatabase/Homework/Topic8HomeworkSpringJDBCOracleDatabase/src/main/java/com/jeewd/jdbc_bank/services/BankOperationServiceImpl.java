@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jeewd.jdbc_bank.security.User;
 import org.springframework.stereotype.Service;
 import com.jeewd.jdbc_bank.dao.OperationDao;
-import com.jeewd.jdbc_bank.entity.BankAccount;
+import com.jeewd.jdbc_bank.entities.BankAccount;
 
 @Service
 public class BankOperationServiceImpl implements BankOperationService {
