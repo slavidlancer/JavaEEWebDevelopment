@@ -34,8 +34,11 @@
     1 user with ROLE_BANK_EMPLOYEE<br>
     &nbsp;&nbsp;&nbsp;&nbsp;username: admin<br>
     &nbsp;&nbsp;&nbsp;&nbsp;password: 1<br><br>
-    many users (any username) with ROLE_USER<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;password: 123456
+    2 users with ROLE_USER<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;username: user<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;password: 12<br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;username: user02<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;password: 12<br>
     <br><br>
   </jsp:body>
 </ct:Page>
