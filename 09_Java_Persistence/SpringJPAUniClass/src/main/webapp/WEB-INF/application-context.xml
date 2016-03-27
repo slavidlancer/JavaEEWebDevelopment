@@ -56,7 +56,7 @@
   <beans:property name="jpaDialect" ref="jpaDialect" />
  </beans:bean>
  <!-- Hibernate session factory -->
- <beans:bean id="sessionFactory"
+ <!-- <beans:bean id="sessionFactory"
    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
   <beans:property name="dataSource">
    <beans:ref bean="dataSource" />
@@ -70,15 +70,16 @@
    </beans:props>
   </beans:property>
   <beans:property name="packagesToScan" value="com.jeewd.jpa_h_uni.entities" />
- </beans:bean>
+ </beans:bean> -->
  <!-- Transaction Manager -->
- <!-- <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> 
-  <beans:property name="entityManagerFactory" ref="entityManagerFactory" /> 
-  <beans:property name="dataSource" ref="dataSource" /> <beans:property name="jpaDialect" 
-  ref="jpaDialect" /> </beans:bean> -->
  <beans:bean id="transactionManager"
+   class="org.springframework.orm.jpa.JpaTransactionManager"> 
+  <beans:property name="entityManagerFactory" ref="entityManagerFactory" /> 
+  <beans:property name="dataSource" ref="dataSource" /> <beans:property
+    name="jpaDialect" ref="jpaDialect" /> </beans:bean>
+ <!-- <beans:bean id="transactionManager"
    class="org.springframework.orm.hibernate5.HibernateTransactionManager">
   <beans:property name="sessionFactory" ref="sessionFactory"></beans:property>
- </beans:bean>
+ </beans:bean> -->
  <tx:annotation-driven transaction-manager="transactionManager" />
 </beans:beans>

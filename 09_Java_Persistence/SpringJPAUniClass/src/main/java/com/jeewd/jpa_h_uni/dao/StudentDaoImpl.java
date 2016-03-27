@@ -1,78 +1,82 @@
 package com.jeewd.jpa_h_uni.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+//import org.hibernate.Criteria;
+/*import org.hibernate.Session;
+import org.hibernate.Transaction;*/
+//import org.hibernate.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+//import org.hibernate.SessionFactory;
+//import org.hibernate.criterion.Restrictions;
+//import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.TypedQuery;
+/*import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;*/
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 import com.jeewd.jpa_h_uni.entities.Student;
 
 @Repository
 public class StudentDaoImpl implements StudentDao {
-    public static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    public static final String USERNAME = "University";
-    public static final String PASSWORD = "University";
+    @PersistenceContext
+    private EntityManager entityManager;
     
-    static {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-        } catch (ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
-        }
-    }
+    /*@Autowired
+    private SessionFactory sessionFactory;*/
     
     @Override
     public List<Student> getStudents() {
-        List<Student> students = new ArrayList<>();
+        // JPQL
+        String sql = "select s from Student s";
+        TypedQuery<Student> query = entityManager.createQuery(sql,
+                Student.class);
         
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME,
-                    PASSWORD);
-                Statement statement = connection.createStatement();) {
-            String sql = "SELECT * FROM students";
-            ResultSet resultSet = statement.executeQuery(sql);
-            
-            while (resultSet.next()) {
-                Student student = new Student();
-                
-                student.setId(resultSet.getLong("id"));
-                student.setFacultyNumber(resultSet.getString("faculty_number"));
-                student.setName(resultSet.getString("name"));
-                
-                students.add(student);
-            }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            
-            return null;
-        }
+        return query.getResultList();
         
-        return students;
+        // JPA Criteria
+        /*CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Student> criteriaQuery =
+        criteriaBuilder.createQuery(Student.class);
+        Root<Student> from = criteriaQuery.from(Student.class);
+        
+        criteriaQuery.where(from.get("name").in("New Name", "User Name"));
+        
+        criteriaQuery.select(from);
+        TypedQuery<Student> query = entityManager.createQuery(criteriaQuery);
+        
+        return query.getResultList();*/
+        
+        // HQL
+        /*String sql = "FROM com.jeewd.jpa_h_uni.entities.Student";
+        Query query = sessionFactory.openSession().createQuery(sql);
+        
+        return query.list();*/
+        
+        // Hibernate Criteria
+        /*Criteria criteria = sessionFactory.openSession().createCriteria(
+                Student.class);
+        criteria.add(Restrictions.like("name", "User%"));
+
+        return criteria.list();*/
     }
 
     @Override
+    @Transactional
     public boolean addStudent(Student student) {
-        String sql = "INSERT INTO students (id, faculty_number, name) VALUES "
-                + "(?, ?, ?)";
+        student.setId(5L);
         
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME,
-                    PASSWORD);
-                PreparedStatement statement =
-                        connection.prepareStatement(sql);) {
-            statement.setLong(1, 2);
-            statement.setString(2, student.getFacultyNumber());
-            statement.setString(3, student.getName());
-            
-            statement.executeQuery();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            
-            return false;
-        }
+        //JPA
+        entityManager.persist(student);
+        
+        //Hibernate
+        /*Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        
+        session.save(student);
+        transaction.commit();
+        session.close();*/
         
         return true;
     }
