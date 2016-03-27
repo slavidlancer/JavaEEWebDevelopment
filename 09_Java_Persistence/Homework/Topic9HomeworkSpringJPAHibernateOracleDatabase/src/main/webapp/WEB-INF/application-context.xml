@@ -30,14 +30,14 @@
  <context:annotation-config />
  <beans:import resource="security.xml" />
  <!-- Persistence Configuration -->
- <beans:bean id="jpaVendorAdapter"
+ <!-- <beans:bean id="jpaVendorAdapter"
    class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
   <beans:property name="database" value="HSQL" />
   <beans:property name="databasePlatform"
     value="org.hibernate.dialect.HSQLDialect" />
  </beans:bean>
  <beans:bean id="jpaDialect"
-   class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+   class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" /> -->
  <beans:bean id="dataSource"
    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
   <beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
@@ -46,7 +46,7 @@
   <beans:property name="password" value="WebBank" />
  </beans:bean>
  <!-- JPA entity manager factory -->
- <beans:bean id="entityManagerFactory"
+ <!-- <beans:bean id="entityManagerFactory"
    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
   <beans:property name="persistenceXmlLocation"
     value="classpath:META-INF/persistence.xml" />
@@ -54,7 +54,7 @@
   <beans:property name="dataSource" ref="dataSource" />
   <beans:property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
   <beans:property name="jpaDialect" ref="jpaDialect" />
- </beans:bean>
+ </beans:bean> -->
  <!-- Hibernate session factory -->
  <beans:bean id="sessionFactory"
    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
