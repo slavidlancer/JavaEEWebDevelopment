@@ -29,8 +29,8 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> getStudents() {
         // JPQL
-        String sql = "select s from Student s";
-        TypedQuery<Student> query = entityManager.createQuery(sql,
+        String jpql = "select s from Student s";
+        TypedQuery<Student> query = entityManager.createQuery(jpql,
                 Student.class);
         
         return query.getResultList();
@@ -49,8 +49,8 @@ public class StudentDaoImpl implements StudentDao {
         return query.getResultList();*/
         
         // HQL
-        /*String sql = "FROM com.jeewd.jpa_h_uni.entities.Student";
-        Query query = sessionFactory.openSession().createQuery(sql);
+        /*String hql = "FROM com.jeewd.jpa_h_uni.entities.Student";
+        Query query = sessionFactory.openSession().createQuery(hql);
         
         return query.list();*/
         
