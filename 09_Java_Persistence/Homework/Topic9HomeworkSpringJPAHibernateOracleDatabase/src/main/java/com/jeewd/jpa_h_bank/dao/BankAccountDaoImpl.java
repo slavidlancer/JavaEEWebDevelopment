@@ -1,12 +1,32 @@
 package com.jeewd.jpa_h_bank.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.jeewd.constants.DbConstants;
 import com.jeewd.jpa_h_bank.entities.BankAccount;
+import com.jeewd.jpa_h_bank.entities.CurrencyID;
+import com.jeewd.jpa_h_bank.entities.UserDb;
 
 @Repository
 public class BankAccountDaoImpl implements BankAccountDao {
+    static {
+        try {
+            Class.forName("oracle.jdbc.OracleDriver");
+        } catch (ClassNotFoundException cnfe) {
+            cnfe.printStackTrace();
+        }
+    }
+    
     @Autowired
     private UserDao userDao;
     
@@ -15,14 +35,14 @@ public class BankAccountDaoImpl implements BankAccountDao {
     
     @Override
     public boolean addBankAccount(BankAccount bankAccount) {
-        /*String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
+        String sqlInsert = "INSERT INTO accounts (id, account_number, username,"
                 + " amount, currency, created_by) VALUES (?, ?, ?, ?, ?, ?)";
         
         HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                 userDao.getAllUsers();
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
@@ -65,14 +85,14 @@ public class BankAccountDaoImpl implements BankAccountDao {
             sqle.printStackTrace();
             
             return false;
-        }*/
+        }
         
         return true;
     }
     
     @Override
     public boolean containsBankAccount(BankAccount bankAccount) {
-        /*HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
+        HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                 userDao.getAllUsers();
         String usernameId = null;
         
@@ -87,8 +107,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 + usernameId + "' AND account_number = '" +
                 bankAccount.getNumber() + "'";
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement =
                         connection.prepareStatement(sqlRetrieve);) {
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
@@ -102,7 +122,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
             sqle.printStackTrace();
             
             return false;
-        }*/
+        }
         
         return true;
     }
@@ -110,7 +130,7 @@ public class BankAccountDaoImpl implements BankAccountDao {
     @Override
     public BankAccount getBankAccountNumberByUsername(String username,
             String number) {
-        /*BankAccount bankAccount = null;
+        BankAccount bankAccount = null;
         
         HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                 userDao.getAllUsers();
@@ -126,8 +146,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
         String sqlRetrieve = "SELECT * FROM accounts WHERE username = '"
                 + usernameId + "' AND account_number = '" + number + "'";
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement =
                         connection.prepareStatement(sqlRetrieve);) {
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
@@ -179,17 +199,17 @@ public class BankAccountDaoImpl implements BankAccountDao {
             sqle.printStackTrace();
             
             return null;
-        }*/
+        }
         
-        return null;
+        return bankAccount;
     }
 
     @Override
     public Set<BankAccount> getAllBankAccounts() {
-        /*Set<BankAccount> bankAccounts = new HashSet<>();
+        Set<BankAccount> bankAccounts = new HashSet<>();
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
             HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                     userDao.getAllUsers();
@@ -247,8 +267,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
             sqle.printStackTrace();
             
             return null;
-        }*/
+        }
         
-        return null;
+        return bankAccounts;
     }
 }

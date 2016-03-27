@@ -10,8 +10,10 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.jeewd.constants.DbConstants;
 import com.jeewd.jpa_h_bank.entities.BankAccount;
 import com.jeewd.jpa_h_bank.entities.UserDb;
 
@@ -40,8 +42,8 @@ public class OperationDaoImpl implements OperationDao {
         String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
                 + " = ? AND username = ?";
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlUpdate);) {
             preparedStatement.setBigDecimal(1,
@@ -74,8 +76,8 @@ public class OperationDaoImpl implements OperationDao {
         String sqlUpdate = "UPDATE accounts SET amount = ? WHERE account_number"
                 + " = ? AND username = ?";
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlUpdate);) {
             preparedStatement.setBigDecimal(1,
@@ -111,8 +113,8 @@ public class OperationDaoImpl implements OperationDao {
                 + "operation, amount, currency, performed_by) VALUES (?, ?, ?, "
                 + "?, ?, ?)";
         
-        try (Connection connection = DriverManager.getConnection("", "", "");
-                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection(
+                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
