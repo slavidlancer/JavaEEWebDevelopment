@@ -1,9 +1,21 @@
 package com.jeewd.jpa_h_bank.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USERS")
 public class UserDb {
+    @Id
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "USERNAME")
     private String username;
+    @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "ROLE")
     private String role;
     
     public Long getId() {

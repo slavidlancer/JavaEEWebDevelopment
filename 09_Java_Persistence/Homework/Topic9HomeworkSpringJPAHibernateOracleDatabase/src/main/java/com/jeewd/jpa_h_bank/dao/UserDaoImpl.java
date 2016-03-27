@@ -1,12 +1,5 @@
 package com.jeewd.jpa_h_bank.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -14,17 +7,9 @@ import com.jeewd.jpa_h_bank.entities.UserDb;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    static {
-        try {
-            Class.forName("oracle.jdbc.OracleDriver");
-        } catch (ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
-        }
-    }
-    
     @Override
     public Map<Long, UserDb> getAllUsers() {
-        Map<Long, UserDb> users = new HashMap<>();
+        /*Map<Long, UserDb> users = new HashMap<>();
         
         try (Connection connection = DriverManager.getConnection("", "", "");
                 //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
@@ -47,14 +32,14 @@ public class UserDaoImpl implements UserDao {
             sqle.printStackTrace();
             
             return null;
-        }
+        }*/
         
-        return users;
+        return null;
     }
 
     @Override
     public List<String> getAllUsernames() {
-        List<String> usernames = new ArrayList<>();
+        /*List<String> usernames = new ArrayList<>();
         
         try (Connection connection = DriverManager.getConnection("", "", "");
                 //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
@@ -70,8 +55,8 @@ public class UserDaoImpl implements UserDao {
             sqle.printStackTrace();
             
             return null;
-        }
+        }*/
         
-        return usernames;
+        return null;
     }
 }
