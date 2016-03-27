@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
-import com.jeewd.constants.DbConstants;
 import com.jeewd.jpa_h_bank.entities.UserDb;
 
 @Repository
@@ -27,8 +26,8 @@ public class UserDaoImpl implements UserDao {
     public Map<Long, UserDb> getAllUsers() {
         Map<Long, UserDb> users = new HashMap<>();
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
             String sql = "SELECT * FROM users";
             
@@ -57,8 +56,8 @@ public class UserDaoImpl implements UserDao {
     public List<String> getAllUsernames() {
         List<String> usernames = new ArrayList<>();
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
             String sql = "SELECT * FROM users";
             

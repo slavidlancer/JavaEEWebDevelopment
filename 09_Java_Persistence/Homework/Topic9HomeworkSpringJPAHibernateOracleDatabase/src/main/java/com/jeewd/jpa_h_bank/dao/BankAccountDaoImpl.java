@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.jeewd.constants.DbConstants;
 import com.jeewd.jpa_h_bank.entities.BankAccount;
 import com.jeewd.jpa_h_bank.entities.CurrencyID;
 import com.jeewd.jpa_h_bank.entities.UserDb;
@@ -41,8 +40,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
         HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                 userDao.getAllUsers();
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();
                 PreparedStatement preparedStatement =
                         connection.prepareStatement(sqlInsert);) {
@@ -107,8 +106,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
                 + usernameId + "' AND account_number = '" +
                 bankAccount.getNumber() + "'";
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement =
                         connection.prepareStatement(sqlRetrieve);) {
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
@@ -146,8 +145,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
         String sqlRetrieve = "SELECT * FROM accounts WHERE username = '"
                 + usernameId + "' AND account_number = '" + number + "'";
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement =
                         connection.prepareStatement(sqlRetrieve);) {
             ResultSet resultSet = statement.executeQuery(sqlRetrieve);
@@ -208,8 +207,8 @@ public class BankAccountDaoImpl implements BankAccountDao {
     public Set<BankAccount> getAllBankAccounts() {
         Set<BankAccount> bankAccounts = new HashSet<>();
         
-        try (Connection connection = DriverManager.getConnection(
-                DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
+        try (Connection connection = DriverManager.getConnection("", "", "");
+                //DbConstants.URL, DbConstants.USERNAME, DbConstants.PASSWORD);
                 Statement statement = connection.createStatement();) {
             HashMap<Long, UserDb> users = (HashMap<Long, UserDb>)
                     userDao.getAllUsers();
