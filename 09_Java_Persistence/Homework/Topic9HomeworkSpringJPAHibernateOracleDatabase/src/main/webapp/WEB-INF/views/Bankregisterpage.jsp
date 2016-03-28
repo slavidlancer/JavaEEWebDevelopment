@@ -7,7 +7,7 @@
 <c:set var="areAccountsPresent" value="false"/>
 
 <ct:Page title="Web Bank: Bank Register Page"
-    projectName="Topic8HomeworkSpringJDBCOracleDatabase"
+    projectName="Topic9HomeworkSpringJPAHibernateOracleDatabase"
     currentVersion="1.0.0">
   <jsp:body>
     <table border="1">
