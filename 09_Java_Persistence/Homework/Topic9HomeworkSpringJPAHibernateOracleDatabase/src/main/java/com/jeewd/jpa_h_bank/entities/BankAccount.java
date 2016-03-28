@@ -1,26 +1,29 @@
 package com.jeewd.jpa_h_bank.entities;
 
 import java.math.BigDecimal;
-/*import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;*/
+//import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-//@Entity
-//@Table(name="ACCOUNTS")
+@Entity
+@Table(name = "ACCOUNTS")
 public class BankAccount {
-    //@Id
-    //@Column(name = "ID")
+    @Id
+    @Column(name = "ID")
     private Long id;
-    //@Column(name = "USERNAME")
+    //@ManyToOne
+    @Column(name = "USERNAME")
     private String username;
-    //@Column(name = "ACCOUNT_NUMBER")
+    @Column(name = "ACCOUNT_NUMBER")
     private String number;
-    //@Column(name = "AMOUNT")
+    @Column(name = "AMOUNT")
     private BigDecimal amount;
-    //@Column(name = "CURRENCY")
+    @Column(name = "CURRENCY")
     private CurrencyID currency;
-    //@Column(name = "CREATED_BY")
+    //@ManyToOne
+    @Column(name = "CREATED_BY")
     private String createdBy;
     
     public Long getId() {
@@ -81,7 +84,7 @@ public class BankAccount {
     
     @Override
     public int hashCode() {
-        return this.username.hashCode()+this.number.hashCode();
+        return this.username.hashCode() + this.number.hashCode();
     }
 
     @Override
