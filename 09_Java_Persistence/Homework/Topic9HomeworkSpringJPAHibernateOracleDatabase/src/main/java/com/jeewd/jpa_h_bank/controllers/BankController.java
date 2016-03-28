@@ -22,7 +22,7 @@ import com.jeewd.jpa_h_bank.services.BankOperationService;
 import com.jeewd.jpa_h_bank.services.CurrencyConversionService;
 import com.jeewd.jpa_h_bank.utils.UserUtils;
 
-//http://localhost:8080/jdbc_bank
+//http://localhost:8080/jpa_h_bank
 @Controller
 public class BankController {
     @Autowired
