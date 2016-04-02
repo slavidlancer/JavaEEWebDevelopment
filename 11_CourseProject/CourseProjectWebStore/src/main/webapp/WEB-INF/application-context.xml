@@ -28,7 +28,7 @@
  </beans:bean>
  <context:component-scan base-package="com.jeewd.web_store" />
  <context:annotation-config />
- <beans:import resource="security.xml" />
+ <!-- <beans:import resource="security.xml" /> -->
  <!-- Persistence Configuration -->
  <!-- <beans:bean id="jpaVendorAdapter"
    class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
