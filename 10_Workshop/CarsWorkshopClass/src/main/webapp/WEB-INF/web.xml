@@ -15,6 +15,13 @@
    org.springframework.web.context.ContextLoaderListener
   </listener-class>
  </listener>
+ <!-- Spring Security filter -->
+ <filter>
+  <filter-name>springSecurityFilterChain</filter-name>
+  <filter-class>
+   org.springframework.web.filter.DelegatingFilterProxy
+  </filter-class>
+ </filter>
  <!-- Processes application requests -->
  <servlet>
   <servlet-name>appServlet</servlet-name>
