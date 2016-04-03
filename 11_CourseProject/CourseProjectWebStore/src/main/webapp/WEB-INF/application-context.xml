@@ -30,14 +30,14 @@
  <context:annotation-config />
  <!-- <beans:import resource="security.xml" /> -->
  <!-- Persistence Configuration -->
- <!-- <beans:bean id="jpaVendorAdapter"
+ <beans:bean id="jpaVendorAdapter"
    class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
   <beans:property name="database" value="HSQL" />
   <beans:property name="databasePlatform"
     value="org.hibernate.dialect.HSQLDialect" />
  </beans:bean>
  <beans:bean id="jpaDialect"
-   class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" /> -->
+   class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
  <beans:bean id="dataSource"
    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
   <beans:property name="driverClassName" value="oracle.jdbc.OracleDriver" />
