@@ -24,7 +24,7 @@ CREATE TABLE PRODUCT_TYPE
   ENABLE 
 );
 
-alter table "WEBSTORE"."PRODUCTS" add constraint PRODUCT_TYPE_FK foreign key("TYPE") references "PRODUCT_TYPE"("ID");
+alter table PRODUCTS add constraint PRODUCT_TYPE_FK foreign key(TYPE) references PRODUCT_TYPE(ID);
 
 CREATE TABLE CUSTOMERS 
 (
@@ -70,13 +70,17 @@ CREATE TABLE PRODUCT_LIST
   ENABLE 
 );
 
-alter table "WEBSTORE"."PRODUCT_LIST" add constraint ORDER_FK foreign key("ORDER_ID") references "ORDERS"("ID");
-alter table "WEBSTORE"."PRODUCT_LIST" add constraint PRODUCT_FK foreign key("PRODUCT_ID") references "PRODUCTS"("ID");
-alter table "WEBSTORE"."ORDERS" add constraint CUSTOMER_FK foreign key("CUSTOMER") references "CUSTOMERS"("ID");
+alter table PRODUCT_LIST add constraint ORDER_FK foreign key(ORDER_ID) references ORDERS(ID);
+alter table PRODUCT_LIST add constraint PRODUCT_FK foreign key(PRODUCT_ID) references PRODUCTS(ID);
+alter table ORDERS add constraint CUSTOMER_FK foreign key(CUSTOMER) references CUSTOMERS(ID);
 
 ALTER TABLE Customers MODIFY (
    address varchar2(100)
 );
 
-alter table "WEBSTORE"."ORDERS" drop column "PRODUCTS";
-alter table "WEBSTORE"."ORDERS" drop column "QUANTITIES";
+alter table ORDERS drop column PRODUCTS;
+alter table ORDERS drop column QUANTITIES;
+ALTER TABLE products RENAME CONSTRAINT table1_pk TO products_pk;
+
+//customer - add created_by/user owner
+//overall price in product_list for every product?
