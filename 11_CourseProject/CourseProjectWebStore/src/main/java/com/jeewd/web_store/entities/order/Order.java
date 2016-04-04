@@ -2,13 +2,19 @@ package com.jeewd.web_store.entities.order;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.jeewd.web_store.entities.customer.Customer;
 
 @Entity
@@ -23,9 +29,12 @@ public class Order {
     @JoinColumn(name = "CUSTOMER")
     private Customer customer;
     @Column(name = "PURCHASE_DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date purchaseDate;
     @Column(name = "STATUS")
     private String status;
+    @OneToMany
+    private List<ProductList> productList;
     
     public Long getId() {
         return id;
@@ -65,5 +74,13 @@ public class Order {
     
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public List<ProductList> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductList> productList) {
+        this.productList = productList;
     }
 }
