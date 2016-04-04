@@ -11,7 +11,8 @@
     <h2>Menu</h2>
     <ct:VerticalTableHeading>
       <jsp:attribute name="row1-title">
-        
+        <input type="button" value="Add product"
+            onclick="location='${contextPath}${addProductUrl}'">
       </jsp:attribute>
       <jsp:attribute name="row1-value">
         
