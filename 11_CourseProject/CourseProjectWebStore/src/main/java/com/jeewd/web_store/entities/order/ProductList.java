@@ -1,8 +1,11 @@
 package com.jeewd.web_store.entities.order;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.jeewd.web_store.entities.product.Product;
 
@@ -12,9 +15,11 @@ public class ProductList {
     @Id
     @Column(name = "ID")
     private Long id;
-    @Column(name = "ORDER_ID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDER_ID")
     private Order order;
-    @Column(name = "PRODUCT_ID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
     @Column(name = "QUANTITY")
     private Integer quantity;

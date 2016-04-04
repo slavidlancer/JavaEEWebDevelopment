@@ -2,9 +2,12 @@ package com.jeewd.web_store.entities.order;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.jeewd.web_store.entities.customer.Customer;
 
@@ -16,7 +19,8 @@ public class Order {
     private Long id;
     @Column(name = "OVERALL_PRICE")
     private BigDecimal overallPrice;
-    @Column(name = "CUSTOMER")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CUSTOMER")
     private Customer customer;
     @Column(name = "PURCHASE_DATE")
     private Date purchaseDate;

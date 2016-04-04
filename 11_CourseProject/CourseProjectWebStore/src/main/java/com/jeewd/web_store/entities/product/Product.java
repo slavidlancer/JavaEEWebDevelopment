@@ -1,9 +1,12 @@
 package com.jeewd.web_store.entities.product;
 
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +17,8 @@ public class Product {
     private Long id;
     @Column(name = "NAME")
     private String name;
-    @Column(name = "PRODUCT_TYPE")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_TYPE")
     private ProductType type;
     @Column(name = "PRICE")
     private BigDecimal price;
