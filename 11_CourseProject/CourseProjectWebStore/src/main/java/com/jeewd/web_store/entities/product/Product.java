@@ -18,7 +18,7 @@ public class Product {
     @Column(name = "NAME")
     private String name;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_TYPE")
+    @JoinColumn(name = "TYPE")
     private ProductType type;
     @Column(name = "PRICE")
     private BigDecimal price;
