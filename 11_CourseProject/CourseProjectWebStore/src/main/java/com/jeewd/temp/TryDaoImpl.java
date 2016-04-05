@@ -1,4 +1,4 @@
-package com.jeewd.web_store.dao.product;
+package com.jeewd.temp;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

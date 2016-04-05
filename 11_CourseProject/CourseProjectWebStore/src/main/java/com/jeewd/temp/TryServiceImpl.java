@@ -1,10 +1,10 @@
-package com.jeewd.web_store.services.product;
+package com.jeewd.temp;
 
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jeewd.web_store.dao.product.TryDao;
+import com.jeewd.temp.TryDao;
 import com.jeewd.web_store.entities.product.Product;
 
 @Service
