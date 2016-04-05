@@ -9,4 +9,5 @@ public interface TryDao {
     boolean addProduct(Product product);
     boolean updateProduct(Long id, BigDecimal price, String status);
     boolean deleteProduct(Long id);
+    Long getProductTypeId(String name);
 }

@@ -3,6 +3,7 @@ package com.jeewd.web_store.entities.order;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +14,7 @@ import com.jeewd.web_store.entities.product.Product;
 @Table(name = "PRODUCT_LIST")
 public class ProductList {
     @Id
+    @GeneratedValue
     @Column(name = "ID")
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)

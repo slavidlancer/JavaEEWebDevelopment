@@ -35,4 +35,9 @@ public class TryServiceImpl implements TryService {
     public boolean updateProduct(Long id, BigDecimal price, String status) {
         return tryDao.updateProduct(id, price, status);
     }
+    
+    @Override
+    public Long getProductTypeId(String name) {
+        return tryDao.getProductTypeId(name);
+    }
 }

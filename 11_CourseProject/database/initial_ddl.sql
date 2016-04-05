@@ -82,5 +82,33 @@ alter table ORDERS drop column PRODUCTS;
 alter table ORDERS drop column QUANTITIES;
 ALTER TABLE products RENAME CONSTRAINT table1_pk TO products_pk;
 
-//customer - add created_by/user owner
-//overall price in product_list for every product?
+--customer - add created_by/user owner
+--overall price in product_list for every product?
+
+CREATE SEQUENCE product_type_seq
+      INCREMENT BY 1
+      START WITH 1
+      NOMAXVALUE
+      NOCYCLE
+      CACHE 10;
+
+CREATE SEQUENCE product_seq
+      INCREMENT BY 1
+      START WITH 1
+      NOMAXVALUE
+      NOCYCLE
+      CACHE 10;
+
+ALTER TABLE product_type ADD CONSTRAINT product_type_name_unique UNIQUE (name);
+
+ALTER SEQUENCE product_type_seq
+   NOCACHE;
+
+ALTER SEQUENCE product_seq
+   NOCACHE;
+
+ALTER SEQUENCE product_type_seq
+   CACHE 2;
+
+ALTER SEQUENCE product_seq
+   CACHE 2;

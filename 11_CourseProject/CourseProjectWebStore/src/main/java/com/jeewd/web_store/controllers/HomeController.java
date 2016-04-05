@@ -1,7 +1,6 @@
 package com.jeewd.web_store.controllers;
 
 import java.math.BigDecimal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +18,23 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String homePage() {
         Product product = new Product();
-        product.setId((long) 5);
-        product.setName("new_product 02");
+        //product.setId((long) 5);
+        product.setName("new_product 03");
         product.setPrice(new BigDecimal("9.99"));
         product.setQuantity(1);
         product.setStatus("Active");
         ProductType productType = new ProductType();
-        productType.setId((long) 3);
-        productType.setName("drink");
-        product.setType(productType);
+        //productType.setId((long) 3);
+        String productTypeName = "drink2";
+        productType.setName(productTypeName);
+        Long id = tryService.getProductTypeId(productTypeName);
+        
+        if (id != -1) {
+            productType.setId(id);
+            product.setType(productType);
+        } else {
+            product.setType(productType);
+        }
         
         tryService.addProduct(product);
         

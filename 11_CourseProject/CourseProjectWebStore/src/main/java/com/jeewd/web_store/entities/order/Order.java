@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +22,7 @@ import com.jeewd.web_store.entities.customer.Customer;
 @Table(name = "ORDERS")
 public class Order {
     @Id
+    @GeneratedValue
     @Column(name = "ID")
     private Long id;
     @Column(name = "OVERALL_PRICE")

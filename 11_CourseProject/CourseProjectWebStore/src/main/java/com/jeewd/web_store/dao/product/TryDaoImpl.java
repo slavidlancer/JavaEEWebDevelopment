@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.web_store.entities.product.Product;
+import com.jeewd.web_store.entities.product.ProductType;
 
 @Repository
 public class TryDaoImpl implements TryDao {
@@ -135,5 +136,38 @@ public class TryDaoImpl implements TryDao {
          }
          
          return true;
+     }
+     
+     @Override
+     public Long getProductTypeId(String name) {
+         Long id = -1L;
+         Session session = sessionFactory.openSession();
+         Transaction transaction = null;
+         
+         try {
+             transaction = session.beginTransaction();
+             String hql = "from "
+                     + "com.jeewd.web_store.entities.product.ProductType pt "
+                     + "where pt.name = :name";
+             Query query = session.createQuery(hql);
+             query.setParameter("name", name);
+             
+             if (query.uniqueResult() != null) {
+                 ProductType productType = (ProductType) query.uniqueResult();
+                 id = productType.getId();
+             }
+             
+             transaction.commit();
+         } catch (HibernateException he) {
+             if (transaction != null) {
+                 transaction.rollback();
+             }
+             
+             he.printStackTrace();
+         } finally {
+             session.close();
+         }
+         
+         return id;
      }
 }
