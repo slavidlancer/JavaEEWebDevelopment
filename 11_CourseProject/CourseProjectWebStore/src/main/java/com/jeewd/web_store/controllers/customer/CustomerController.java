@@ -13,9 +13,15 @@ public class CustomerController {
         return "CustomerRegistry";
     }
     
-    @RequestMapping(value = UrlConstants.CUSTOMER_ADD_EDIT_PAGE_URL,
+    @RequestMapping(value = UrlConstants.CUSTOMER_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String addEditCustomerPage() {
+    public String addCustomerPage() {
+        return "AddEditCustomer";
+    }
+    
+    @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
+            method = RequestMethod.GET)
+    public String editCustomerPage() {
         return "AddEditCustomer";
     }
 }

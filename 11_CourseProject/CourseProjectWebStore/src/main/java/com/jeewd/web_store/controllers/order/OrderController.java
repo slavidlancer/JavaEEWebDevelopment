@@ -13,9 +13,15 @@ public class OrderController {
         return "OrderRegistry";
     }
     
-    @RequestMapping(value = UrlConstants.ORDER_ADD_EDIT_PAGE_URL,
+    @RequestMapping(value = UrlConstants.ORDER_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String addEditOrderPage() {
+    public String addOrderPage() {
+        return "AddEditOrder";
+    }
+    
+    @RequestMapping(value = UrlConstants.ORDER_EDIT_PAGE_URL,
+            method = RequestMethod.GET)
+    public String editOrderPage() {
         return "AddEditOrder";
     }
 }

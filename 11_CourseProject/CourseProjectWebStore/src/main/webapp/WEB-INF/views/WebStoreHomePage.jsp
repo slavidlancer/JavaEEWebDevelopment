@@ -11,21 +11,26 @@
     <h2>Menu</h2>
     <ct:VerticalTableHeading>
       <jsp:attribute name="row1-title">
-        
+        <input type="button" value="Product Registry"
+            onclick="location='${contextPath}${productRegistryPageUrl}'"
+            style="width: 100%;">
+        <br><br>
       </jsp:attribute>
-      <jsp:attribute name="row1-value">
-        
-      </jsp:attribute>
+      <jsp:attribute name="row1-value"/>
       <jsp:attribute name="row2-title">
-        
+        <input type="button" value="Customer Registry"
+            onclick="location='${contextPath}${customerRegistryPageUrl}'"
+            style="width: 100%;">
+        <br><br>
       </jsp:attribute>
-      <jsp:attribute name="row2-value">
-        
+      <jsp:attribute name="row2-value"/>
+      <jsp:attribute name="row3-title">
+        <input type="button" value="Order Registry"
+            onclick="location='${contextPath}${orderRegistryPageUrl}'"
+            style="width: 100%;">
+        <br><br>
       </jsp:attribute>
-      <jsp:attribute name="row3-title"/>
-      <jsp:attribute name="row3-value">
-        
-      </jsp:attribute>
+      <jsp:attribute name="row3-value"/>
     </ct:VerticalTableHeading>
     <br><br>
   </jsp:body>

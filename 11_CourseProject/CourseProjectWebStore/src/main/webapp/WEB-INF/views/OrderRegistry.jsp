@@ -8,7 +8,8 @@
     projectName="CourseProjectWebStore"
     currentVersion="1.0.0">
   <jsp:body>
-    <h2>Menu</h2>
+    <input type="button" value="Add Order"
+            onclick="location='${contextPath}${addOrderPageUrl}'">
     <ct:VerticalTableHeading>
       <jsp:attribute name="row1-title">
         

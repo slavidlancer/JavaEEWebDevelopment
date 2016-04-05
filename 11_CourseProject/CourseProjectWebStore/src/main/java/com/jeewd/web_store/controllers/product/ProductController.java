@@ -13,9 +13,15 @@ public class ProductController {
         return "ProductRegistry";
     }
     
-    @RequestMapping(value = UrlConstants.PRODUCT_ADD_EDIT_PAGE_URL,
+    @RequestMapping(value = UrlConstants.PRODUCT_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String addEditProductPage() {
+    public String addProductPage() {
+        return "AddEditProduct";
+    }
+    
+    @RequestMapping(value = UrlConstants.PRODUCT_EDIT_PAGE_URL,
+            method = RequestMethod.GET)
+    public String editProductPage() {
         return "AddEditProduct";
     }
 }

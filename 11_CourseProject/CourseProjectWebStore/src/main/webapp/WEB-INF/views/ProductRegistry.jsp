@@ -8,26 +8,42 @@
     projectName="CourseProjectWebStore"
     currentVersion="1.0.0">
   <jsp:body>
-    <h2>Menu</h2>
-    <ct:VerticalTableHeading>
-      <jsp:attribute name="row1-title">
-        <input type="button" value="Add product"
-            onclick="location='${contextPath}${addProductUrl}'">
-      </jsp:attribute>
-      <jsp:attribute name="row1-value">
-        
-      </jsp:attribute>
-      <jsp:attribute name="row2-title">
-        
-      </jsp:attribute>
-      <jsp:attribute name="row2-value">
-        
-      </jsp:attribute>
-      <jsp:attribute name="row3-title"/>
-      <jsp:attribute name="row3-value">
-        
-      </jsp:attribute>
-    </ct:VerticalTableHeading>
+    <input type="button" value="Add Product"
+            onclick="location='${contextPath}${addProductPageUrl}'">
+    <br>
+    <table border="1">
+      <thead>
+        <tr align="center">
+          <th>Name</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>*</th>
+          <th>x</th>
+        </tr>
+      </thead>
+      <c:if test="${not empty products}">
+          <tbody>
+            <c:forEach var="p" items="${products}">
+              <tr align="center">
+                <td>${p.name}</td>
+                <td>${p.type}</td>
+                <td>${p.price}</td>
+                <td>${p.quantity}</td>
+                <td>
+                  <input type="button" value="Edit"
+                      onclick="location='${contextPath}${editProductPageUrl}'">
+                </td>
+                <td>
+                  <input type="button" value="Delete"
+                      onclick="location=
+                          '${contextPath}${deleteProductPageUrl}'">
+                </td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </c:if>
+    </table>
     <br><br>
   </jsp:body>
 </ct:Page>
