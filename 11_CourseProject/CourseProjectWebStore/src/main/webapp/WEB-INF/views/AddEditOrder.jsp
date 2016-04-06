@@ -10,7 +10,7 @@
     currentVersion="1.0.0">
   <jsp:body>
     <form:form action="${contextPath}${addEditOrderUrl}" method="post"
-        modelAttibute="order">
+        modelAttibute="Order">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
           Name:
@@ -43,10 +43,14 @@
         </jsp:attribute>
         <jsp:attribute name="row5-value">
           <br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Save">
         </jsp:attribute>
       </ct:VerticalTableHeading>
     </form:form>
     <br><br>
+    <!-- ${user.username} (logged in)&nbsp;
+    <input type="button" value="Logout"
+        onclick="location='${contextPath}/logout'">
+    <br> -->
   </jsp:body>
 </ct:Page>

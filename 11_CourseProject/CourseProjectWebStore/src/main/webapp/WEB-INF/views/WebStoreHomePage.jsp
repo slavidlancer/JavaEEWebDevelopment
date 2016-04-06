@@ -33,5 +33,9 @@
       <jsp:attribute name="row3-value"/>
     </ct:VerticalTableHeading>
     <br><br>
+    <!-- ${user.username} (logged in)&nbsp;
+    <input type="button" value="Logout"
+        onclick="location='${contextPath}/logout'">
+    <br> -->
   </jsp:body>
 </ct:Page>
