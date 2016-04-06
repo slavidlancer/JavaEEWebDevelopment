@@ -1,18 +1,12 @@
 package com.jeewd.web_store.dto.customer;
 
+import java.util.Date;
+
 public class CustomerSearch {
-    private String username;
     private String name;
-    private String type;
-    private String status;
-    
-    public String getUsername() {
-        return username;
-    }
-    
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String pid;
+    private Date dateOfBirth;
+    private String address;
     
     public String getName() {
         return name;
@@ -22,19 +16,27 @@ public class CustomerSearch {
         this.name = name;
     }
     
-    public String getType() {
-        return type;
+    public String getPid() {
+        return pid;
     }
     
-    public void setType(String type) {
-        this.type = type;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
     
-    public String getStatus() {
-        return status;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
     
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

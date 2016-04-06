@@ -1,40 +1,33 @@
 package com.jeewd.web_store.dto.order;
 
+import java.util.Date;
+
 public class OrderSearch {
-    private String username;
-    private String name;
-    private String type;
-    private String status;
+    private String product;
+    private String customerName;
+    private Date purchaseDate;
     
-    public String getUsername() {
-        return username;
+    public String getProduct() {
+        return product;
     }
     
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProduct(String product) {
+        this.product = product;
     }
     
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     
-    public String getType() {
-        return type;
+    public Date getPurchaseDate() {
+        return purchaseDate;
     }
     
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String getStatus() {
-        return status;
-    }
-    
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 }

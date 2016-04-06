@@ -1,18 +1,12 @@
 package com.jeewd.web_store.dto.product;
 
+import java.math.BigDecimal;
+
 public class ProductSearch {
-    private String username;
     private String name;
     private String type;
-    private String status;
-    
-    public String getUsername() {
-        return username;
-    }
-    
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private BigDecimal price;
+    private int quantity;
     
     public String getName() {
         return name;
@@ -30,11 +24,19 @@ public class ProductSearch {
         this.type = type;
     }
     
-    public String getStatus() {
-        return status;
+    public BigDecimal getPrice() {
+        return price;
     }
     
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
