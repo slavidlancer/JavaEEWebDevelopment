@@ -9,12 +9,16 @@ public final class JspNameConstants {
             "CustomerRegistry";
     public static final String ORDER_REGISTRY_PAGE =
             "OrderRegistry";
+    public static final String USER_REGISTRY_PAGE =
+            "UserRegistry";
     public static final String ADD_EDIT_PRODUCT_PAGE =
             "AddEditProduct";
     public static final String ADD_EDIT_CUSTOMER_PAGE =
             "AddEditCustomer";
     public static final String ADD_EDIT_ORDER_PAGE =
             "AddEditOrder";
+    public static final String ADD_EDIT_USER_PAGE =
+            "AddEditUser";
     
     private JspNameConstants() {}
 }

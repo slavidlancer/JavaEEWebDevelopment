@@ -26,6 +26,8 @@ public class HomeController {
                 UrlConstants.CUSTOMER_REGISTRY_PAGE_URL);
         model.addAttribute("orderRegistryPageUrl",
                 UrlConstants.ORDER_REGISTRY_PAGE_URL);
+        model.addAttribute("userRegistryPageUrl",
+                UrlConstants.USER_REGISTRY_PAGE_URL);
         //model.addAttribute("user", UserUtils.getUser());
     }
 }

@@ -5,12 +5,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<ct:Page title="Web Store: Customer Entry"
+<ct:Page title="Web Store: User Entry"
     projectName="CourseProjectWebStore"
     currentVersion="1.0.0">
   <jsp:body>
-    <form:form action="${contextPath}${addEditCustomerUrl}" method="post"
-        modelAttibute="Customer">
+    <form:form action="${contextPath}${addEditUserUrl}" method="post"
+        modelAttibute="User">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
           Name:
@@ -19,27 +19,27 @@
           <input type="text" name="name">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
-          PID:
+          Type:
         </jsp:attribute>
         <jsp:attribute name="row2-value">
-          <input type="text" name="pid">
+          <input type="text" name="type">
         </jsp:attribute>
         <jsp:attribute name="row3-title">
-          Date of Birth:
+          Price:
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          <input type="text" name="dateOfBirth">
+          <input type="text" name="price">
         </jsp:attribute>
         <jsp:attribute name="row4-title">
-          Address:
+          Quantity:
         </jsp:attribute>
         <jsp:attribute name="row4-value">
-          <input type="text" name="address">
+          <input type="text" name="quantity">
         </jsp:attribute>
         <jsp:attribute name="row5-title">
           <br>
           <input type="button" value="Cancel"
-              onclick="location='${contextPath}${customerRegistryPageUrl}'">
+              onclick="location='${contextPath}${userRegistryPageUrl}'">
         </jsp:attribute>
         <jsp:attribute name="row5-value">
           <br>

@@ -9,6 +9,7 @@ import com.jeewd.constants.UrlConstants;
 
 @Controller
 public class ProductController {
+    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.PRODUCT_REGISTRY_PAGE_URL,
             method = RequestMethod.GET)
     public String goToProductRegistryPage(Model model) {
@@ -17,6 +18,7 @@ public class ProductController {
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
     }
     
+    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_ADD_PAGE_URL,
             method = RequestMethod.GET)
     public String goToAddProductPage(Model model) {
@@ -25,6 +27,7 @@ public class ProductController {
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
     
+    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditProductPage(Model model) {
@@ -33,7 +36,7 @@ public class ProductController {
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
     
-  //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteProduct(Model model) {

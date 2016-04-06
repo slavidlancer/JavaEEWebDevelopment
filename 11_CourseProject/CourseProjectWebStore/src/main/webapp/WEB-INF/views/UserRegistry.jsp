@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<ct:Page title="Web Store: Order Registry"
+<ct:Page title="Web Store: User Registry"
     projectName="CourseProjectWebStore"
     currentVersion="1.0.0">
   <jsp:body>
@@ -15,14 +15,14 @@
           <b>[Menu]</b>&nbsp;&nbsp;
           <input type="button" value="Home Page"
               onclick="location='${contextPath}'">&nbsp;&nbsp;
-          <input type="button" value="Add Order"
-              onclick="location='${contextPath}${addOrderPageUrl}'">
+          <input type="button" value="Add User"
+              onclick="location='${contextPath}${addUserPageUrl}'">
         </td>
       </tr>
     </table>
     <br><hr>
-    <form:form action="${contextPath}${orderRegistryPageUrl}" method="get"
-        modelAttibute="OrderSearch">
+    <form:form action="${contextPath}${userRegistryPageUrl}" method="get"
+        modelAttibute="UserSearch">
       <table>
         <tr>
           <td>Name:</td>
@@ -37,7 +37,7 @@
       </table>
       <input type="submit" value="Search">
     </form:form>
-    <hr><h3>Orders</h3>
+    <hr><h3>Users</h3>
     <table border="1">
       <thead>
         <tr align="center">
@@ -51,37 +51,37 @@
       </thead>
       <tbody>
       <tr align="center">
-                <td>1</td>
-                <td>2</td>
-                <td>o.price</td>
-                <td>o.quantity</td>
+                <td>sdds</td>
+                <td>fdfd</td>
+                <td>dsds</td>
+                <td>sdsw</td>
                 <td>
                   <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editOrderPageUrl}'">
+                      onclick="location='${contextPath}${editUserPageUrl}'">
                 </td>
                 <td>
                   <input type="button" value="Delete"
                       onclick="location=
-                          '${contextPath}${deleteOrderUrl}'">
+                          '${contextPath}${deleteUserUrl}'">
                 </td>
               </tr>
       </tbody>
-      <c:if test="${not empty orders}">
+      <c:if test="${not empty products}">
           <tbody>
-            <c:forEach var="o" items="${orders}">
+            <c:forEach var="p" items="${products}">
               <tr align="center">
-                <td>${o.name}</td>
-                <td>${o.type}</td>
-                <td>${o.price}</td>
-                <td>${o.quantity}</td>
+                <td>${p.name}</td>
+                <td>${p.type}</td>
+                <td>${p.price}</td>
+                <td>${p.quantity}</td>
                 <td>
                   <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editOrderPageUrl}'">
+                      onclick="location='${contextPath}${editUserPageUrl}'">
                 </td>
                 <td>
                   <input type="button" value="Delete"
                       onclick="location=
-                          '${contextPath}${deleteOrderUrl}'">
+                          '${contextPath}${deleteUserUrl}'">
                 </td>
               </tr>
             </c:forEach>

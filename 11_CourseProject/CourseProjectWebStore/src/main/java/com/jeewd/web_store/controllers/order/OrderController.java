@@ -36,7 +36,7 @@ public class OrderController {
         return JspNameConstants.ADD_EDIT_ORDER_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.ORDER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteOrder(Model model) {

@@ -31,6 +31,16 @@ public final class UrlConstants {
             "/AddEditOrder";
     public static final String ORDER_DELETE_URL =
             "/DeleteOrder";
+    public static final String USER_REGISTRY_PAGE_URL =
+            "/UserRegistryPage";
+    public static final String USER_ADD_PAGE_URL =
+            "/AddUserPage";
+    public static final String USER_EDIT_PAGE_URL =
+            "/EditUserPage";
+    public static final String USER_ADD_EDIT_URL =
+            "/AddEditUser";
+    public static final String USER_DELETE_URL =
+            "/DeleteUser";
     
     private UrlConstants() {}
 }

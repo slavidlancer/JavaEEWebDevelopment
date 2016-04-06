@@ -31,11 +31,18 @@
         <br><br>
       </jsp:attribute>
       <jsp:attribute name="row3-value"/>
+      <jsp:attribute name="row4-title">
+        <input type="button" value="User Registry"
+            onclick="location='${contextPath}${userRegistryPageUrl}'"
+            style="width: 100%;">
+        <br><br>
+      </jsp:attribute>
+      <jsp:attribute name="row4-value"/>
     </ct:VerticalTableHeading>
     <br><br>
-    <!-- ${user.username} (logged in)&nbsp;
+    ${user.username} (logged in)&nbsp;
     <input type="button" value="Logout"
         onclick="location='${contextPath}/logout'">
-    <br> -->
+    <br>
   </jsp:body>
 </ct:Page>
