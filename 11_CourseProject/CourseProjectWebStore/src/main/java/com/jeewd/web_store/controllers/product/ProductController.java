@@ -41,26 +41,35 @@ public class ProductController {
     
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_EDIT_PAGE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String goToEditProductPage(Model model,
             @ModelAttribute("Product") ProductTransfer productTransfer) {
         initializeAttributes(model);
         model.addAttribute("customer",
-                productService.getProductById(productTransfer.getId()));
+                productService.getProductById(
+                        Long.valueOf(productTransfer.getId())));
         
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
     
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_ADD_EDIT_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String addEditOrder(Model model,
-            @ModelAttribute("Product") ProductTransfer productTransfer) {
+            @ModelAttribute("ProductTransfer")
+    ProductTransfer productTransfer) {
         initializeAttributes(model);
         
-        if (productTransfer.getId() != null) {
+        System.out.println("id:" + productTransfer.getId());
+        
+        
+        
+        if ((!"0".equals(productTransfer.getId())) ||
+                (productTransfer.getId() != null)) {
+            System.out.println("update");
             productService.updateProduct(productTransfer);
-        } else {
+        } else if ("".equals(productTransfer.getId())) {
+            System.out.println("add");
             productService.addProduct(productTransfer);
         }
         
@@ -69,11 +78,11 @@ public class ProductController {
     
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_DELETE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String deleteProduct(Model model,
             @ModelAttribute("Product") ProductTransfer productTransfer) {
         initializeAttributes(model);
-        productService.deleteProductById(productTransfer.getId());
+        productService.deleteProductById(Long.valueOf(productTransfer.getId()));
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
     }

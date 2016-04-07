@@ -10,7 +10,7 @@
     currentVersion="1.0.0">
   <jsp:body>
     <form:form action="${contextPath}${addEditProductUrl}" method="post"
-        modelAttibute="Product">
+        modelAttibute="ProductTransfer">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
           Name:

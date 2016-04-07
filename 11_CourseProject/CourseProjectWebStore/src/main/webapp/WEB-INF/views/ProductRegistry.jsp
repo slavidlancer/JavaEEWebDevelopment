@@ -65,7 +65,11 @@
                           '${contextPath}${deleteProductUrl}'">
                 </td>
               </tr> -->
-      </tbody>
+      </tbody><tr><td><form:form action="${contextPath}${editProductPageUrl}"
+                      method="post" modelAttibute="ProductTransfer">
+                    <input type="text" name="id" value="123">
+                    <input type="submit" value="Edit">
+                  </form:form></td></tr>
       <c:if test="${not empty products}">
           <tbody>
             <c:forEach var="p" items="${products}">
