@@ -80,8 +80,6 @@
                     <input type="hidden" name="id" value="${p.id}">
                     <input type="submit" value="Edit">
                   </form:form>
-                  <!-- <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editProductPageUrl}'"> -->
                 </td>
                 <td>
                   <form:form action="${contextPath}${deleteProductUrl}"
