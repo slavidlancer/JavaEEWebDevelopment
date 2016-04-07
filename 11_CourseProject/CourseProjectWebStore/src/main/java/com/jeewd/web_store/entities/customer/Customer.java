@@ -3,7 +3,7 @@ package com.jeewd.web_store.entities.customer;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+//import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,7 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "CUSTOMERS")
 public class Customer {
     @Id
-    @GeneratedValue
+    /*@SequenceGenerator(name = "customer_gen", sequenceName = "customer_seq",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "customer_gen")*/
     @Column(name = "ID")
     private Long id;
     @Column(name = "NAME")

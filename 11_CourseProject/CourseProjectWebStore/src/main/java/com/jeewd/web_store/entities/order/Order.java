@@ -22,6 +22,10 @@ import com.jeewd.web_store.entities.customer.Customer;
 @Table(name = "ORDERS")
 public class Order {
     @Id
+    /*@SequenceGenerator(name = "order_gen", sequenceName = "order_seq",
+            initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "order_gen")*/
     @GeneratedValue
     @Column(name = "ID")
     private Long id;

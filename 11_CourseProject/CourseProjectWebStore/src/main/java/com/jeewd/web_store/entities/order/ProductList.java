@@ -3,7 +3,7 @@ package com.jeewd.web_store.entities.order;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+//import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,7 +14,11 @@ import com.jeewd.web_store.entities.product.Product;
 @Table(name = "PRODUCT_LIST")
 public class ProductList {
     @Id
-    @GeneratedValue
+    /*@SequenceGenerator(name = "product_list_gen",
+            sequenceName = "product_list_seq", initialValue = 1,
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "product_list_gen")*/
     @Column(name = "ID")
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
