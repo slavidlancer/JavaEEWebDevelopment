@@ -14,26 +14,26 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders() {
-        return null;
+        return orderDao.getAllOrders();
     }
 
     @Override
     public List<Order> getOrdersBySearch(OrderSearch orderSearch) {
-        return null;
+        return orderDao.getOrdersBySearch(orderSearch);
     }
 
     @Override
     public boolean addOrder(Order order) {
-        return false;
+        return orderDao.addOrder(order);
     }
 
     @Override
     public boolean updateOrder(Order order) {
-        return false;
+        return orderDao.updateOrder(order);
     }
 
     @Override
     public boolean deleteOrder(Order order) {
-        return false;
+        return orderDao.deleteOrder(order);
     }
 }

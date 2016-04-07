@@ -14,26 +14,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userDao.getAllUsers();
     }
 
     @Override
     public List<User> getUsersBySearch(UserSearch userSearch) {
-        return null;
+        return userDao.getUsersBySearch(userSearch);
     }
 
     @Override
     public boolean addUser(User user) {
-        return false;
+        return userDao.addUser(user);
     }
 
     @Override
     public boolean updateUser(User user) {
-        return false;
+        return userDao.updateUser(user);
     }
 
     @Override
     public boolean deleteUser(User user) {
-        return false;
+        return userDao.deleteUser(user);
     }
 }

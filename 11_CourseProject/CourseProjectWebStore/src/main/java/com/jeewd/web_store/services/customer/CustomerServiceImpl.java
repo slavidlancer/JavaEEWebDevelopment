@@ -14,26 +14,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAllCustomers() {
-        return null;
+        return customerDao.getAllCustomers();
     }
 
     @Override
     public List<Customer> getCustomersBySearch(CustomerSearch customerSearch) {
-        return null;
+        return customerDao.getCustomersBySearch(customerSearch);
     }
 
     @Override
     public boolean addCustomer(Customer customer) {
-        return false;
+        return customerDao.addCustomer(customer);
     }
 
     @Override
     public boolean updateCustomer(Customer customer) {
-        return false;
+        return customerDao.updateCustomer(customer);
     }
 
     @Override
     public boolean deleteCustomer(Customer customer) {
-        return false;
+        return customerDao.deleteCustomer(customer);
     }
 }

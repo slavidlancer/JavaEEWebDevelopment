@@ -14,26 +14,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        return null;
+        return productDao.getAllProducts();
     }
 
     @Override
     public List<Product> getProductsBySearch(ProductSearch productSearch) {
-        return null;
+        return productDao.getProductsBySearch(productSearch);
     }
 
     @Override
     public boolean addProduct(Product product) {
-        return false;
+        return productDao.addProduct(product);
     }
 
     @Override
     public boolean updateProduct(Product product) {
-        return false;
+        return productDao.updateProduct(product);
     }
 
     @Override
     public boolean deleteProduct(Product product) {
-        return false;
+        return productDao.deleteProduct(product);
     }
 }
