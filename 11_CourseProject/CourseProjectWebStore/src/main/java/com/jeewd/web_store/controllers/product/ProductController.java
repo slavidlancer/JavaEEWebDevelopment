@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.JspNameConstants;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.product.ProductSearch;
-import com.jeewd.web_store.entities.product.Product;
+import com.jeewd.web_store.dto.product.ProductTransfer;
 import com.jeewd.web_store.services.product.ProductService;
 
 @Controller
@@ -37,8 +37,7 @@ public class ProductController {
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String goToAddProductPage(Model model,
-            @ModelAttribute("Product") Product product) {
+    public String goToAddProductPage(Model model) {
         initializeAttributes(model);
         
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
@@ -48,10 +47,10 @@ public class ProductController {
     @RequestMapping(value = UrlConstants.PRODUCT_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditProductPage(Model model,
-            @ModelAttribute("Product") Product product) {
+            @ModelAttribute("Product") ProductTransfer productTransfer) {
         initializeAttributes(model);
         model.addAttribute("customer",
-                productService.getProductById(product.getId()));
+                productService.getProductById(productTransfer.getId()));
         
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
@@ -60,13 +59,13 @@ public class ProductController {
     @RequestMapping(value = UrlConstants.PRODUCT_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
-            @ModelAttribute("Product") Product product) {
+            @ModelAttribute("Product") ProductTransfer productTransfer) {
         initializeAttributes(model);
         
-        if (product.getId() != null) {
-            productService.updateProduct(product);
+        if (productTransfer.getId() != null) {
+            productService.updateProduct(productTransfer);
         } else {
-            productService.addProduct(product);
+            productService.addProduct(productTransfer);
         }
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
@@ -76,9 +75,9 @@ public class ProductController {
     @RequestMapping(value = UrlConstants.PRODUCT_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteProduct(Model model,
-            @ModelAttribute("Product") Product product) {
+            @ModelAttribute("Product") ProductTransfer productTransfer) {
         initializeAttributes(model);
-        productService.deleteProductById(product.getId());
+        productService.deleteProductById(productTransfer.getId());
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
     }

@@ -37,8 +37,7 @@ public class UserController {
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.USER_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String goToAddUserPage(Model model,
-            @ModelAttribute("User") UserTransfer userTransfer) {
+    public String goToAddUserPage(Model model) {
         initializeAttributes(model);
         
         return JspNameConstants.ADD_EDIT_USER_PAGE;

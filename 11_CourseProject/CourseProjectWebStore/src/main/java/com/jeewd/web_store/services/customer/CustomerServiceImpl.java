@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeewd.web_store.dao.customer.CustomerDao;
 import com.jeewd.web_store.dto.customer.CustomerSearch;
+import com.jeewd.web_store.dto.customer.CustomerTransfer;
 import com.jeewd.web_store.entities.customer.Customer;
 
 @Service
@@ -28,13 +29,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean addCustomer(Customer customer) {
-        return customerDao.addCustomer(customer);
+    public boolean addCustomer(CustomerTransfer customerTransfer) {
+        return customerDao.addCustomer(customerTransfer);
     }
 
     @Override
-    public boolean updateCustomer(Customer customer) {
-        return customerDao.updateCustomer(customer);
+    public boolean updateCustomer(CustomerTransfer customerTransfer) {
+        return customerDao.updateCustomer(customerTransfer);
     }
 
     @Override

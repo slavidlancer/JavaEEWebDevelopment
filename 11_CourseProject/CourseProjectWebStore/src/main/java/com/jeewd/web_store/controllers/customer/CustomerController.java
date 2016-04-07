@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.JspNameConstants;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.customer.CustomerSearch;
-import com.jeewd.web_store.entities.customer.Customer;
+import com.jeewd.web_store.dto.customer.CustomerTransfer;
 import com.jeewd.web_store.services.customer.CustomerService;
 
 @Controller
@@ -37,8 +37,7 @@ public class CustomerController {
     //@Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String goToAddCustomerPage(Model model,
-            @ModelAttribute("Customer") Customer customer) {
+    public String goToAddCustomerPage(Model model) {
         initializeAttributes(model);
         
         return JspNameConstants.ADD_EDIT_CUSTOMER_PAGE;
@@ -48,10 +47,10 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditCustomerPage(Model model,
-            @ModelAttribute("Customer") Customer customer) {
+            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         model.addAttribute("customer",
-                customerService.getCustomerById(customer.getId()));
+                customerService.getCustomerById(customerTransfer.getId()));
         
         return JspNameConstants.ADD_EDIT_CUSTOMER_PAGE;
     }
@@ -60,13 +59,13 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditCustomer(Model model,
-            @ModelAttribute("Customer") Customer customer) {
+            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         
-        if (customer.getId() != null) {
-            customerService.updateCustomer(customer);
+        if (customerTransfer.getId() != null) {
+            customerService.updateCustomer(customerTransfer);
         } else {
-            customerService.addCustomer(customer);
+            customerService.addCustomer(customerTransfer);
         }
         
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
@@ -76,9 +75,9 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteCustomer(Model model,
-            @ModelAttribute("Customer") Customer customer) {
+            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
         initializeAttributes(model);
-        customerService.deleteCustomerById(customer.getId());
+        customerService.deleteCustomerById(customerTransfer.getId());
         
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
     }

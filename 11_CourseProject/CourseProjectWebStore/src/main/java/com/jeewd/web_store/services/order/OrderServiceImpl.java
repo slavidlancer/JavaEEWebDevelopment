@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeewd.web_store.dao.order.OrderDao;
 import com.jeewd.web_store.dto.order.OrderSearch;
+import com.jeewd.web_store.dto.order.OrderTransfer;
 import com.jeewd.web_store.entities.order.Order;
 
 @Service
@@ -28,13 +29,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean addOrder(Order order) {
-        return orderDao.addOrder(order);
+    public boolean addOrder(OrderTransfer orderTransfer) {
+        return orderDao.addOrder(orderTransfer);
     }
 
     @Override
-    public boolean updateOrder(Order order) {
-        return orderDao.updateOrder(order);
+    public boolean updateOrder(OrderTransfer orderTransfer) {
+        return orderDao.updateOrder(orderTransfer);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.web_store.dto.customer.CustomerSearch;
+import com.jeewd.web_store.dto.customer.CustomerTransfer;
 import com.jeewd.web_store.entities.customer.Customer;
 
 @Repository
@@ -28,12 +29,12 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean addCustomer(Customer customer) {
+    public boolean addCustomer(CustomerTransfer customerTransfer) {
         return false;
     }
 
     @Override
-    public boolean updateCustomer(Customer customer) {
+    public boolean updateCustomer(CustomerTransfer customerTransfer) {
         return false;
     }
 

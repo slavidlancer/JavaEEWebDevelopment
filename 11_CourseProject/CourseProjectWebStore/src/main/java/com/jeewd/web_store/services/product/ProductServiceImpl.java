@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeewd.web_store.dao.product.ProductDao;
 import com.jeewd.web_store.dto.product.ProductSearch;
+import com.jeewd.web_store.dto.product.ProductTransfer;
 import com.jeewd.web_store.entities.product.Product;
 
 @Service
@@ -28,13 +29,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean addProduct(Product product) {
-        return productDao.addProduct(product);
+    public boolean addProduct(ProductTransfer productTransfer) {
+        return productDao.addProduct(productTransfer);
     }
 
     @Override
-    public boolean updateProduct(Product product) {
-        return productDao.updateProduct(product);
+    public boolean updateProduct(ProductTransfer productTransfer) {
+        return productDao.updateProduct(productTransfer);
     }
 
     @Override

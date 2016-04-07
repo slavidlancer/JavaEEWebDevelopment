@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jeewd.constants.JspNameConstants;
 import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.order.OrderSearch;
-import com.jeewd.web_store.entities.order.Order;
+import com.jeewd.web_store.dto.order.OrderTransfer;
 import com.jeewd.web_store.services.order.OrderService;
 
 @Controller
@@ -37,8 +37,7 @@ public class OrderController {
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.ORDER_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String goToAddOrderPage(Model model,
-            @ModelAttribute("Order") Order order) {
+    public String goToAddOrderPage(Model model) {
         initializeAttributes(model);
         
         return JspNameConstants.ADD_EDIT_ORDER_PAGE;
@@ -48,9 +47,10 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditOrderPage(Model model,
-            @ModelAttribute("Order") Order order) {
+            @ModelAttribute("Order") OrderTransfer orderTransfer) {
         initializeAttributes(model);
-        model.addAttribute("order", orderService.getOrderById(order.getId()));
+        model.addAttribute("order",
+                orderService.getOrderById(orderTransfer.getId()));
         
         return JspNameConstants.ADD_EDIT_ORDER_PAGE;
     }
@@ -59,13 +59,13 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
-            @ModelAttribute("Order") Order order) {
+            @ModelAttribute("Order") OrderTransfer orderTransfer) {
         initializeAttributes(model);
         
-        if (order.getId() != null) {
-            orderService.updateOrder(order);
+        if (orderTransfer.getId() != null) {
+            orderService.updateOrder(orderTransfer);
         } else {
-            orderService.addOrder(order);
+            orderService.addOrder(orderTransfer);
         }
         
         return JspNameConstants.ORDER_REGISTRY_PAGE;
@@ -75,9 +75,9 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteOrder(Model model,
-            @ModelAttribute("Order") Order order) {
+            @ModelAttribute("Order") OrderTransfer orderTransfer) {
         initializeAttributes(model);
-        orderService.deleteOrderById(order.getId());
+        orderService.deleteOrderById(orderTransfer.getId());
         
         return JspNameConstants.ORDER_REGISTRY_PAGE;
     }

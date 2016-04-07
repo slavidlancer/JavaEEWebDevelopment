@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.web_store.dto.product.ProductSearch;
+import com.jeewd.web_store.dto.product.ProductTransfer;
 import com.jeewd.web_store.entities.product.Product;
 
 @Repository
@@ -28,12 +29,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean addProduct(Product product) {
+    public boolean addProduct(ProductTransfer productTransfer) {
         return false;
     }
 
     @Override
-    public boolean updateProduct(Product product) {
+    public boolean updateProduct(ProductTransfer productTransfer) {
         return false;
     }
 
