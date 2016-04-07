@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.jeewd.web_store.dto.order.OrderSearch;
 import com.jeewd.web_store.dto.order.OrderTransfer;
@@ -12,4 +13,5 @@ public interface OrderService {
     boolean addOrder(OrderTransfer orderTransfer);
     boolean updateOrder(OrderTransfer orderTransfer);
     boolean deleteOrderById(Long id);
+    BigDecimal calculateOverallPurchasePrice(Order order);
 }

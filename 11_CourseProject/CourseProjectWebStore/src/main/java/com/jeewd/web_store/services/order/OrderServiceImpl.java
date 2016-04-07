@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean deleteOrderById(Long id) {
         return orderDao.deleteOrderById(id);
+    }
+
+    @Override
+    public BigDecimal calculateOverallPurchasePrice(Order order) {
+        return null;
     }
 }
