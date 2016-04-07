@@ -75,13 +75,20 @@
                 <td>${c.price}</td>
                 <td>${c.quantity}</td>
                 <td>
-                  <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editCustomerPageUrl}'">
+                  <form:form action="${contextPath}${editCustomerPageUrl}"
+                      method="get" modelAttibute="Customer">
+                    <input type="hidden" name="id" value="${c.id}">
+                    <input type="submit" value="Edit">
+                  </form:form>
+                  <!-- <input type="button" value="Edit"
+                      onclick="location='${contextPath}${editCustomerPageUrl}'"> -->
                 </td>
                 <td>
-                  <input type="button" value="Delete"
-                      onclick="location=
-                          '${contextPath}${deleteCustomerUrl}'">
+                  <form:form action="${contextPath}${deleteCustomerUrl}"
+                      method="get" modelAttibute="Customer">
+                    <input type="hidden" name="id" value="${c.id}">
+                    <input type="submit" value="Delete">
+                  </form:form>
                 </td>
               </tr>
             </c:forEach>

@@ -23,6 +23,11 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+    public Customer getCustomerById(Long id) {
+        return null;
+    }
+
+    @Override
     public boolean addCustomer(Customer customer) {
         return false;
     }
@@ -33,7 +38,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean deleteCustomer(Customer customer) {
+    public boolean deleteCustomerById(Long id) {
         return false;
     }
 }

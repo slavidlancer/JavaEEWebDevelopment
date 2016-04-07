@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.jeewd.web_store.dto.user.UserSearch;
+import com.jeewd.web_store.dto.user.UserTransfer;
 import com.jeewd.web_store.entities.user.User;
 
 @Repository
@@ -23,17 +24,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public User getUserById(Long id) {
+        return null;
+    }
+
+    @Override
+    public boolean addUser(UserTransfer userTransfer) {
         return false;
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateUser(UserTransfer userTransfer) {
         return false;
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean deleteUserById(Long id) {
         return false;
     }
 }

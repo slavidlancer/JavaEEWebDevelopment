@@ -23,6 +23,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order getOrderById(Long id) {
+        return orderDao.getOrderById(id);
+    }
+
+    @Override
     public boolean addOrder(Order order) {
         return orderDao.addOrder(order);
     }
@@ -33,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean deleteOrder(Order order) {
-        return orderDao.deleteOrder(order);
+    public boolean deleteOrderById(Long id) {
+        return orderDao.deleteOrderById(id);
     }
 }

@@ -75,13 +75,20 @@
                 <td>${u.type}</td>
                 <td>${u.status}</td>
                 <td>
-                  <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editUserPageUrl}'">
+                  <form:form action="${contextPath}${editUserPageUrl}"
+                      method="get" modelAttibute="User">
+                    <input type="hidden" name="id" value="${u.id}">
+                    <input type="submit" value="Edit">
+                  </form:form>
+                  <!-- <input type="button" value="Edit"
+                      onclick="location='${contextPath}${editUserPageUrl}'"> -->
                 </td>
                 <td>
-                  <input type="button" value="Delete"
-                      onclick="location=
-                          '${contextPath}${deleteUserUrl}'">
+                  <form:form action="${contextPath}${deleteUserUrl}"
+                      method="get" modelAttibute="User">
+                    <input type="hidden" name="id" value="${u.id}">
+                    <input type="submit" value="Delete">
+                  </form:form>
                 </td>
               </tr>
             </c:forEach>

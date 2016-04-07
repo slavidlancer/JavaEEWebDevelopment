@@ -23,6 +23,11 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public Product getProductById(Long id) {
+        return null;
+    }
+
+    @Override
     public boolean addProduct(Product product) {
         return false;
     }
@@ -33,7 +38,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean deleteProduct(Product product) {
+    public boolean deleteProductById(Long id) {
         return false;
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jeewd.web_store.dao.user.UserDao;
 import com.jeewd.web_store.dto.user.UserSearch;
+import com.jeewd.web_store.dto.user.UserTransfer;
 import com.jeewd.web_store.entities.user.User;
 
 @Service
@@ -23,17 +24,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addUser(User user) {
-        return userDao.addUser(user);
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
     }
 
     @Override
-    public boolean updateUser(User user) {
-        return userDao.updateUser(user);
+    public boolean addUser(UserTransfer userTransfer) {
+        return userDao.addUser(userTransfer);
     }
 
     @Override
-    public boolean deleteUser(User user) {
-        return userDao.deleteUser(user);
+    public boolean updateUser(UserTransfer userTransfer) {
+        return userDao.updateUser(userTransfer);
+    }
+
+    @Override
+    public boolean deleteUserById(Long id) {
+        return userDao.deleteUserById(id);
     }
 }

@@ -23,6 +23,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getCustomerById(Long id) {
+        return customerDao.getCustomerById(id);
+    }
+
+    @Override
     public boolean addCustomer(Customer customer) {
         return customerDao.addCustomer(customer);
     }
@@ -33,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean deleteCustomer(Customer customer) {
-        return customerDao.deleteCustomer(customer);
+    public boolean deleteCustomerById(Long id) {
+        return customerDao.deleteCustomerById(id);
     }
 }
