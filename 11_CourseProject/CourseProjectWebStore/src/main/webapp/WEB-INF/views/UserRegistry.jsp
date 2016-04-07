@@ -25,14 +25,14 @@
         modelAttibute="UserSearch">
       <table>
         <tr>
+          <td>Username:</td>
+          <td><input type="text" name="username"><td>
           <td>Name:</td>
           <td><input type="text" name="name"><td>
           <td>Type:</td>
           <td><input type="text" name="type"><td>
-          <td>Price:</td>
-          <td><input type="text" name="price"><td>
-          <td>Quantity:</td>
-          <td><input type="text" name="quantity"><td>
+          <td>Status:</td>
+          <td><input type="text" name="status"><td>
         </tr>
       </table>
       <input type="submit" value="Search">
@@ -66,14 +66,14 @@
                 </td>
               </tr>
       </tbody>
-      <c:if test="${not empty products}">
+      <c:if test="${not empty users}">
           <tbody>
-            <c:forEach var="p" items="${products}">
+            <c:forEach var="u" items="${users}">
               <tr align="center">
-                <td>${p.name}</td>
-                <td>${p.type}</td>
-                <td>${p.price}</td>
-                <td>${p.quantity}</td>
+                <td>${u.username}</td>
+                <td>${u.name}</td>
+                <td>${u.type}</td>
+                <td>${u.status}</td>
                 <td>
                   <input type="button" value="Edit"
                       onclick="location='${contextPath}${editUserPageUrl}'">
