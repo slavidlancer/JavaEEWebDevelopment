@@ -1,11 +1,9 @@
 package com.jeewd.web_store.dto.order;
 
-import java.util.Date;
-
 public class OrderSearch {
     private String product;
     private String customerName;
-    private Date purchaseDate;
+    private String purchaseDate;
     
     public String getProduct() {
         return product;
@@ -23,11 +21,11 @@ public class OrderSearch {
         this.customerName = customerName;
     }
     
-    public Date getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
     
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(String purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 }

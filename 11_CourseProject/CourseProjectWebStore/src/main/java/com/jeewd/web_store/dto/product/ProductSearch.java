@@ -1,12 +1,10 @@
 package com.jeewd.web_store.dto.product;
 
-import java.math.BigDecimal;
-
 public class ProductSearch {
     private String name;
     private String type;
-    private BigDecimal price;
-    private int quantity;
+    private String price;
+    private String quantity;
     
     public String getName() {
         return name;
@@ -24,19 +22,28 @@ public class ProductSearch {
         this.type = type;
     }
     
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
     
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
     
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
     
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+    
+    public boolean isEmpty() {
+        if (this.getName().isEmpty() && this.getPrice().isEmpty() &&
+                this.getQuantity().isEmpty() && this.getType().isEmpty()) {
+            return true;
+        }
+        
+        return false;
     }
 }

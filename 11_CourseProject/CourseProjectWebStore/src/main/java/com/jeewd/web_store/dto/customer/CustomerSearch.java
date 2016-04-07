@@ -1,11 +1,9 @@
 package com.jeewd.web_store.dto.customer;
 
-import java.util.Date;
-
 public class CustomerSearch {
     private String name;
     private String pid;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String address;
     
     public String getName() {
@@ -24,11 +22,11 @@ public class CustomerSearch {
         this.pid = pid;
     }
     
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
     
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     
