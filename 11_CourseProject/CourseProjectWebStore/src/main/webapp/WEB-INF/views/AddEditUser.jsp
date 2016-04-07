@@ -13,28 +13,28 @@
         modelAttibute="User">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
-          Name:
+          Customer Name:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="name">
+          <input type="text" name="customerName">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
-          Type:
+          Username:
         </jsp:attribute>
         <jsp:attribute name="row2-value">
-          <input type="text" name="type">
+          <input type="text" name="username">
         </jsp:attribute>
         <jsp:attribute name="row3-title">
-          Price:
+          Password:
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          <input type="text" name="price">
+          <input type="password" name="password">
         </jsp:attribute>
         <jsp:attribute name="row4-title">
-          Quantity:
+          Type:
         </jsp:attribute>
         <jsp:attribute name="row4-value">
-          <input type="text" name="quantity">
+          <input type="text" name="type">
         </jsp:attribute>
         <jsp:attribute name="row5-title">
           <br>

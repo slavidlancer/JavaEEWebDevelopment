@@ -13,28 +13,28 @@
         modelAttibute="Order">
       <ct:VerticalTableHeading>
         <jsp:attribute name="row1-title">
-          Name:
+          Products:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="name">
+          <input type="text" name="products">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
-          Type:
-        </jsp:attribute>
-        <jsp:attribute name="row2-value">
-          <input type="text" name="type">
-        </jsp:attribute>
-        <jsp:attribute name="row3-title">
-          Price:
-        </jsp:attribute>
-        <jsp:attribute name="row3-value">
-          <input type="text" name="price">
-        </jsp:attribute>
-        <jsp:attribute name="row4-title">
           Quantity:
         </jsp:attribute>
-        <jsp:attribute name="row4-value">
+        <jsp:attribute name="row2-value">
           <input type="text" name="quantity">
+        </jsp:attribute>
+        <jsp:attribute name="row3-title">
+          Customer Name:
+        </jsp:attribute>
+        <jsp:attribute name="row3-value">
+          <input type="text" name="customerName">
+        </jsp:attribute>
+        <jsp:attribute name="row4-title">
+          Date of Purchase:
+        </jsp:attribute>
+        <jsp:attribute name="row4-value">
+          <input type="text" name="dateOfPurchase">
         </jsp:attribute>
         <jsp:attribute name="row5-title">
           <br>

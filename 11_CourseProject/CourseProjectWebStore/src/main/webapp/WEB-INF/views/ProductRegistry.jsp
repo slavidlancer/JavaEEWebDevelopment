@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr align="center">
+      <!-- <tr align="center">
                 <td>sdds</td>
                 <td>fdfd</td>
                 <td>dsds</td>
@@ -64,7 +64,7 @@
                       onclick="location=
                           '${contextPath}${deleteProductUrl}'">
                 </td>
-              </tr>
+              </tr> -->
       </tbody>
       <c:if test="${not empty products}">
           <tbody>

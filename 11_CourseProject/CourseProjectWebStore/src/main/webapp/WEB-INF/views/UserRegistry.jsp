@@ -27,8 +27,8 @@
         <tr>
           <td>Username:</td>
           <td><input type="text" name="username"><td>
-          <td>Name:</td>
-          <td><input type="text" name="name"><td>
+          <td>Customer Name:</td>
+          <td><input type="text" name="customerName"><td>
           <td>Type:</td>
           <td><input type="text" name="type"><td>
           <td>Status:</td>
@@ -41,16 +41,16 @@
     <table border="1">
       <thead>
         <tr align="center">
-          <th>Name</th>
+          <th>Username</th>
+          <th>Customer Name</th>
           <th>Type</th>
-          <th>Price</th>
-          <th>Quantity</th>
+          <th>Status</th>
           <th>*</th>
           <th>x</th>
         </tr>
       </thead>
       <tbody>
-      <tr align="center">
+      <!-- <tr align="center">
                 <td>sdds</td>
                 <td>fdfd</td>
                 <td>dsds</td>
@@ -64,14 +64,14 @@
                       onclick="location=
                           '${contextPath}${deleteUserUrl}'">
                 </td>
-              </tr>
+              </tr> -->
       </tbody>
       <c:if test="${not empty users}">
           <tbody>
             <c:forEach var="u" items="${users}">
               <tr align="center">
                 <td>${u.username}</td>
-                <td>${u.name}</td>
+                <td>${u.customerName}</td>
                 <td>${u.type}</td>
                 <td>${u.status}</td>
                 <td>
@@ -80,8 +80,6 @@
                     <input type="hidden" name="id" value="${u.id}">
                     <input type="submit" value="Edit">
                   </form:form>
-                  <!-- <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editUserPageUrl}'"> -->
                 </td>
                 <td>
                   <form:form action="${contextPath}${deleteUserUrl}"

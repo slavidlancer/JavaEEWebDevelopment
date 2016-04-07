@@ -25,14 +25,12 @@
         modelAttibute="OrderSearch">
       <table>
         <tr>
-          <td>Name:</td>
-          <td><input type="text" name="name"><td>
-          <td>Type:</td>
-          <td><input type="text" name="type"><td>
-          <td>Price:</td>
-          <td><input type="text" name="price"><td>
-          <td>Quantity:</td>
-          <td><input type="text" name="quantity"><td>
+          <td>Product:</td>
+          <td><input type="text" name="product"><td>
+          <td>Customer Name:</td>
+          <td><input type="text" name="customerName"><td>
+          <td>Date of Purchase:</td>
+          <td><input type="text" name="dateOfPurchase"><td>
         </tr>
       </table>
       <input type="submit" value="Search">
@@ -41,16 +39,17 @@
     <table border="1">
       <thead>
         <tr align="center">
-          <th>Name</th>
-          <th>Type</th>
-          <th>Price</th>
+          <th>Products</th>
           <th>Quantity</th>
+          <th>Customer Name</th>
+          <th>Date of Purchase</th>
+          <th>Overall Price</th>
           <th>*</th>
           <th>x</th>
         </tr>
       </thead>
       <tbody>
-      <tr align="center">
+      <!-- <tr align="center">
                 <td>1</td>
                 <td>2</td>
                 <td>o.price</td>
@@ -64,24 +63,23 @@
                       onclick="location=
                           '${contextPath}${deleteOrderUrl}'">
                 </td>
-              </tr>
+              </tr> -->
       </tbody>
       <c:if test="${not empty orders}">
           <tbody>
             <c:forEach var="o" items="${orders}">
               <tr align="center">
-                <td>${o.name}</td>
-                <td>${o.type}</td>
-                <td>${o.price}</td>
+                <td>${o.products}</td>
                 <td>${o.quantity}</td>
+                <td>${o.customerName}</td>
+                <td>${o.dateOfPurchase}</td>
+                <td>${o.overallPrice}</td>
                 <td>
                   <form:form action="${contextPath}${editOrderPageUrl}"
                       method="get" modelAttibute="Order">
                     <input type="hidden" name="id" value="${o.id}">
                     <input type="submit" value="Edit">
                   </form:form>
-                  <!-- <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editOrderPageUrl}'"> -->
                 </td>
                 <td>
                   <form:form action="${contextPath}${deleteOrderUrl}"

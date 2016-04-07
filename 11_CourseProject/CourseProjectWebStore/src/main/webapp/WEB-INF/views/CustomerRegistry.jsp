@@ -27,12 +27,12 @@
         <tr>
           <td>Name:</td>
           <td><input type="text" name="name"><td>
-          <td>Type:</td>
-          <td><input type="text" name="type"><td>
-          <td>Price:</td>
-          <td><input type="text" name="price"><td>
-          <td>Quantity:</td>
-          <td><input type="text" name="quantity"><td>
+          <td>PID:</td>
+          <td><input type="text" name="pid"><td>
+          <td>Date of Birth:</td>
+          <td><input type="text" name="dateOfBirth"><td>
+          <td>Address:</td>
+          <td><input type="text" name="address"><td>
         </tr>
       </table>
       <input type="submit" value="Search">
@@ -42,15 +42,15 @@
       <thead>
         <tr align="center">
           <th>Name</th>
-          <th>Type</th>
-          <th>Price</th>
-          <th>Quantity</th>
+          <th>PID</th>
+          <th>Date of Birth</th>
+          <th>Address</th>
           <th>*</th>
           <th>x</th>
         </tr>
       </thead>
       <tbody>
-      <tr align="center">
+      <!-- <tr align="center">
                 <td>c.name</td>
                 <td>c.type</td>
                 <td>c.price</td>
@@ -64,24 +64,22 @@
                       onclick="location=
                           '${contextPath}${deleteCustomerUrl}'">
                 </td>
-              </tr>
+              </tr> -->
       </tbody>
       <c:if test="${not empty customers}">
           <tbody>
             <c:forEach var="c" items="${customers}">
               <tr align="center">
                 <td>${c.name}</td>
-                <td>${c.type}</td>
-                <td>${c.price}</td>
-                <td>${c.quantity}</td>
+                <td>${c.pid}</td>
+                <td>${c.dateOfBirth}</td>
+                <td>${c.address}</td>
                 <td>
                   <form:form action="${contextPath}${editCustomerPageUrl}"
                       method="get" modelAttibute="Customer">
                     <input type="hidden" name="id" value="${c.id}">
                     <input type="submit" value="Edit">
                   </form:form>
-                  <!-- <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editCustomerPageUrl}'"> -->
                 </td>
                 <td>
                   <form:form action="${contextPath}${deleteCustomerUrl}"
