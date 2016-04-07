@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 //import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import com.jeewd.web_store.entities.customer.Customer;
@@ -25,7 +25,7 @@ public class User {
             generator = "user_gen")*/
     @Column(name = "ID")
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "NAME")
     private Customer customer;
     @Column(name = "USERNAME")
