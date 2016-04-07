@@ -37,13 +37,4 @@ public class ProductSearch {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-    
-    public boolean isEmpty() {
-        if (this.getName().isEmpty() && this.getPrice().isEmpty() &&
-                this.getQuantity().isEmpty() && this.getType().isEmpty()) {
-            return true;
-        }
-        
-        return false;
-    }
 }

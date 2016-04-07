@@ -24,12 +24,8 @@ public class ProductController {
             @ModelAttribute("ProductSearch") ProductSearch productSearch) {
         initializeAttributes(model);
         
-        if (!productSearch.isEmpty()) {
-            model.addAttribute("products",
-                    productService.getProductsBySearch(productSearch));
-        } else {
-            model.addAttribute("products", productService.getAllProducts());
-        }
+        model.addAttribute("products",
+                productService.getProductsBySearch(productSearch));
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
     }
