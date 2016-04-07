@@ -24,7 +24,7 @@ public class ProductController {
             @ModelAttribute("ProductSearch") ProductSearch productSearch) {
         initializeAttributes(model);
         
-        if (productSearch != null) {
+        if (!productSearch.isEmpty()) {
             model.addAttribute("products",
                     productService.getProductsBySearch(productSearch));
         } else {
