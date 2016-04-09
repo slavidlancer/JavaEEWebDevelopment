@@ -89,19 +89,21 @@
               </c:when>
               <c:otherwise>
                 <c:if test="${u.status eq 'Active'}">
-                  <tr align="center">
-                    <td>${u.username}</td>
-                    <td>${u.customerName}</td>
-                    <td>${u.type}</td>
-                    <td>${u.status}</td>
-                    <td>
-                      <form:form action="${contextPath}${editUserPageUrl}"
-                          method="get" modelAttibute="User">
-                        <input type="hidden" name="id" value="${u.id}">
-                        <input type="submit" value="Edit">
-                      </form:form>
-                    </td>
-                  </tr>
+                  <c:if test="${u.username eq userPrincipal.username}">
+                    <tr align="center">
+                      <td>${u.username}</td>
+                      <td>${u.customerName}</td>
+                      <td>${u.type}</td>
+                      <td>${u.status}</td>
+                      <td>
+                        <form:form action="${contextPath}${editUserPageUrl}"
+                            method="get" modelAttibute="User">
+                          <input type="hidden" name="id" value="${u.id}">
+                          <input type="submit" value="Edit">
+                        </form:form>
+                      </td>
+                    </tr>
+                  </c:if>
                 </c:if>
               </c:otherwise>
             </c:choose>
