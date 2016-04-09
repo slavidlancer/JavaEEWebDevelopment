@@ -17,7 +17,7 @@
           Name:
         </jsp:attribute>
         <jsp:attribute name="row1-value">
-          <input type="text" name="name" value="${ProductTransfer.id}">
+          <input type="text" name="name" value="${ProductTransfer.name}">
         </jsp:attribute>
         <jsp:attribute name="row2-title">
           Type:

@@ -73,14 +73,14 @@
                   <td>${u.status}</td>
                   <td>
                     <form:form action="${contextPath}${editUserPageUrl}"
-                        method="get" modelAttibute="User">
+                        method="post" modelAttibute="User">
                       <input type="hidden" name="id" value="${u.id}">
                       <input type="submit" value="Edit">
                     </form:form>
                   </td>
                   <td>
                     <form:form action="${contextPath}${deleteUserUrl}"
-                        method="get" modelAttibute="User">
+                        method="post" modelAttibute="User">
                       <input type="hidden" name="id" value="${u.id}">
                       <input type="submit" value="Delete">
                     </form:form>

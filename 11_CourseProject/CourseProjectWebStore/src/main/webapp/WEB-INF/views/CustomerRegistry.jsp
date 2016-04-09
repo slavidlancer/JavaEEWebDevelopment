@@ -69,14 +69,14 @@
                   <td>${c.address}</td>
                   <td>
                     <form:form action="${contextPath}${editCustomerPageUrl}"
-                        method="get" modelAttibute="Customer">
+                        method="post" modelAttibute="Customer">
                       <input type="hidden" name="id" value="${c.id}">
                       <input type="submit" value="Edit">
                     </form:form>
                   </td>
                   <td>
                     <form:form action="${contextPath}${deleteCustomerUrl}"
-                        method="get" modelAttibute="Customer">
+                        method="post" modelAttibute="Customer">
                       <input type="hidden" name="id" value="${c.id}">
                       <input type="submit" value="Delete">
                     </form:form>

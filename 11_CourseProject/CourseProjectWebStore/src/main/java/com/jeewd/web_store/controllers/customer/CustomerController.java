@@ -47,7 +47,7 @@ public class CustomerController {
     
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String goToEditCustomerPage(Model model,
             @ModelAttribute("CustomerTransfer")
     CustomerTransfer customerTransfer) {
@@ -60,7 +60,7 @@ public class CustomerController {
     
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_EDIT_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String addEditCustomer(Model model,
             @ModelAttribute("CustomerTransfer")
     CustomerTransfer customerTransfer) {
@@ -72,12 +72,15 @@ public class CustomerController {
             customerService.addCustomer(customerTransfer);
         }
         
+        model.addAttribute("customers",
+                customerService.getCustomersBySearch(new CustomerSearch()));
+        
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
     }
     
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_DELETE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String deleteCustomer(Model model,
             @ModelAttribute("CustomerTransfer")
     CustomerTransfer customerTransfer) {

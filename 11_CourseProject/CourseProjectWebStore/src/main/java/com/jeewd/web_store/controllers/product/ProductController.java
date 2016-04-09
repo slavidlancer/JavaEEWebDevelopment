@@ -39,12 +39,6 @@ public class ProductController {
             @ModelAttribute("ProductTransfer")
     ProductTransfer productTransfer) {
         initializeAttributes(model);
-        System.out.println("add_page");
-        System.out.println("id:" + productTransfer.getId());
-        System.out.println("name:" + productTransfer.getName());
-        System.out.println("price:" + productTransfer.getPrice());
-        System.out.println("type:" + productTransfer.getType());
-        System.out.println("quantity:" + productTransfer.getQuantity());
         
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
@@ -56,12 +50,6 @@ public class ProductController {
             @ModelAttribute("ProductTransfer")
     ProductTransfer productTransfer) {
         initializeAttributes(model);
-        System.out.println("edit_page");
-        System.out.println("id:" + productTransfer.getId());
-        System.out.println("name:" + productTransfer.getName());
-        System.out.println("price:" + productTransfer.getPrice());
-        System.out.println("type:" + productTransfer.getType());
-        System.out.println("quantity:" + productTransfer.getQuantity());
         model.addAttribute("ProductTransfer",
                 productService.getProductById(
                         Long.valueOf(productTransfer.getId())));
@@ -77,21 +65,14 @@ public class ProductController {
     ProductTransfer productTransfer) {
         initializeAttributes(model);
         
-        System.out.println("add_edit_url");
-        System.out.println("id:" + productTransfer.getId());
-        System.out.println("name:" + productTransfer.getName());
-        System.out.println("price:" + productTransfer.getPrice());
-        System.out.println("type:" + productTransfer.getType());
-        System.out.println("quantity:" + productTransfer.getQuantity());
-        
         if (productTransfer.getId() == null) {
-            //productTransfer.setId("");
             productService.addProduct(productTransfer);
-            System.out.println("add");
         } else {
             productService.updateProduct(productTransfer);
-            System.out.println("update");
         }
+        
+        model.addAttribute("products",
+                productService.getProductsBySearch(new ProductSearch()));
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
     }

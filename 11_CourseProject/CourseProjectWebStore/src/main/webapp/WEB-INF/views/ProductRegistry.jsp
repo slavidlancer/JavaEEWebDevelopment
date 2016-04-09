@@ -73,14 +73,14 @@
                   <td>${p.quantity}</td>
                   <td>
                     <form:form action="${contextPath}${editProductPageUrl}"
-                        method="get" modelAttibute="ProductTransfer">
+                        method="post" modelAttibute="ProductTransfer">
                       <input type="hidden" name="id" value="${p.id}">
                       <input type="submit" value="Edit">
                     </form:form>
                   </td>
                   <td>
                     <form:form action="${contextPath}${deleteProductUrl}"
-                        method="get" modelAttibute="ProductTransfer">
+                        method="post" modelAttibute="ProductTransfer">
                       <input type="hidden" name="id" value="${p.id}">
                       <input type="submit" value="Delete">
                     </form:form>

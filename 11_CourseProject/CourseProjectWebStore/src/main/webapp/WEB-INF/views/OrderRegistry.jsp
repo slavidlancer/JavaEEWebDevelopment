@@ -73,14 +73,14 @@
                   <td>${o.overallPrice}</td>
                   <td>
                     <form:form action="${contextPath}${editOrderPageUrl}"
-                        method="get" modelAttibute="Order">
+                        method="post" modelAttibute="Order">
                       <input type="hidden" name="id" value="${o.id}">
                       <input type="submit" value="Edit">
                     </form:form>
                   </td>
                   <td>
                     <form:form action="${contextPath}${deleteOrderUrl}"
-                        method="get" modelAttibute="Order">
+                        method="post" modelAttibute="Order">
                       <input type="hidden" name="id" value="${o.id}">
                       <input type="submit" value="Delete">
                     </form:form>

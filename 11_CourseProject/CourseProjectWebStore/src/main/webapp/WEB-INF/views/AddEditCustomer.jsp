@@ -28,7 +28,7 @@
           Date of Birth:
         </jsp:attribute>
         <jsp:attribute name="row3-value">
-          <input type="text" name="dateOfBirth">
+          <input type="text" name="birthDate">
         </jsp:attribute>
         <jsp:attribute name="row4-title">
           Address:

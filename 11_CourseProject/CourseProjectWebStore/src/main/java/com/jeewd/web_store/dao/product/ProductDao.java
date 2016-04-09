@@ -9,7 +9,8 @@ public interface ProductDao {
     List<Product> getAllProducts();
     List<Product> getProductsBySearch(ProductSearch productSearch);
     Product getProductById(Long id);
-    boolean addProduct(ProductTransfer productTransfer);
+    Long getProductTypeId(String productTypeName);
+    boolean addProduct(Product product);
     boolean updateProduct(ProductTransfer productTransfer);
     boolean deleteProductById(Long id);
 }

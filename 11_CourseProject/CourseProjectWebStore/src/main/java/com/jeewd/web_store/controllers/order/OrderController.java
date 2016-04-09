@@ -47,7 +47,7 @@ public class OrderController {
     
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_EDIT_PAGE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String goToEditOrderPage(Model model,
             @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
@@ -59,7 +59,7 @@ public class OrderController {
     
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_ADD_EDIT_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String addEditOrder(Model model,
             @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
@@ -70,12 +70,15 @@ public class OrderController {
             orderService.addOrder(orderTransfer);
         }
         
+        model.addAttribute("orders",
+                orderService.getOrdersBySearch(new OrderSearch()));
+        
         return JspNameConstants.ORDER_REGISTRY_PAGE;
     }
     
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.ORDER_DELETE_URL,
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public String deleteOrder(Model model,
             @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);

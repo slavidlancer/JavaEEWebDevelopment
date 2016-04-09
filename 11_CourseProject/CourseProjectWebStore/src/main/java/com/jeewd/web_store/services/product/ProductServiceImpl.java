@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.product;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import com.jeewd.web_store.dao.product.ProductDao;
 import com.jeewd.web_store.dto.product.ProductSearch;
 import com.jeewd.web_store.dto.product.ProductTransfer;
 import com.jeewd.web_store.entities.product.Product;
+import com.jeewd.web_store.entities.product.ProductType;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -44,13 +46,40 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) {
-        return productDao.getProductById(id);
+    public ProductTransfer getProductById(Long id) {
+        ProductTransfer productTransfer = new ProductTransfer();
+        Product product = productDao.getProductById(id);
+        ProductType productType = product.getType();
+        productTransfer.setId(product.getId());
+        productTransfer.setName(product.getName());
+        productTransfer.setType(productType.getName());
+        productTransfer.setPrice(product.getPrice().toString());
+        productTransfer.setQuantity(product.getQuantity().toString());
+        
+        return productTransfer;
     }
 
     @Override
     public boolean addProduct(ProductTransfer productTransfer) {
-        return productDao.addProduct(productTransfer);
+        Product product = new Product();
+        product.setName(productTransfer.getName());
+        ProductType productType = new ProductType();
+        String productTypeName = productTransfer.getType();
+        productType.setName(productTransfer.getType());
+        Long id = productDao.getProductTypeId(productTypeName);
+        
+        if (id != -1) {
+            productType.setId(id);
+            product.setType(productType);
+        } else {
+            product.setType(productType);
+        }
+        
+        product.setPrice(new BigDecimal(productTransfer.getPrice()));
+        product.setQuantity(Integer.parseInt(productTransfer.getQuantity()));
+        product.setStatus("Active");
+        
+        return productDao.addProduct(product);
     }
 
     @Override

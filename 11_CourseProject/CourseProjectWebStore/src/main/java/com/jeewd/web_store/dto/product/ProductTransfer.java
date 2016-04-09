@@ -1,17 +1,17 @@
 package com.jeewd.web_store.dto.product;
 
 public class ProductTransfer {
-    private String id;
+    private Long id;
     private String name;
     private String type;
     private String price;
     private String quantity;
     
-    public String getId() {
+    public Long getId() {
         return id;
     }
     
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
