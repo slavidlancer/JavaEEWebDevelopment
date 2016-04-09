@@ -82,9 +82,6 @@ alter table ORDERS drop column PRODUCTS;
 alter table ORDERS drop column QUANTITIES;
 ALTER TABLE products RENAME CONSTRAINT table1_pk TO products_pk;
 
---customer - add created_by/user owner
---overall price in product_list for every product?
-
 CREATE SEQUENCE product_type_seq
       INCREMENT BY 1
       START WITH 1
@@ -112,3 +109,49 @@ ALTER SEQUENCE product_type_seq
 
 ALTER SEQUENCE product_seq
    CACHE 2;
+
+CREATE TABLE ROLES (
+    ID NUMBER NOT NULL ENABLE, 
+	ROLE VARCHAR2(50 BYTE), 
+	CONSTRAINT ROLES_PK PRIMARY KEY (ID)
+);
+
+CREATE TABLE USERS 
+(
+  ID NUMBER NOT NULL 
+, NAME VARCHAR2(50) 
+, USERNAME VARCHAR2(20) 
+, PASSWORD VARCHAR2(100) 
+, STATUS VARCHAR2(20) 
+, CONSTRAINT USERS_PK PRIMARY KEY 
+  (
+    ID 
+  )
+  ENABLE 
+);
+
+CREATE TABLE USER_ROLES 
+(
+  USER_ID NUMBER 
+, ROLE_ID NUMBER 
+);
+
+ALTER TABLE Users MODIFY (
+   name number
+);
+
+alter table USERS drop column NAME;
+
+UPDATE USERS SET PASSWORD = 'c20ad4d76fe97759aa27a0c99bff6710' WHERE USERNAME LIKE 'user%';
+
+CREATE TABLE USER_CUSTOMERS 
+(
+  USER_ID NUMBER 
+, CUSTOMER_ID NUMBER 
+);
+
+alter table USER_CUSTOMERS add constraint USER_FK foreign key(USER_ID) references USERS(ID);
+alter table USER_CUSTOMERS add constraint CUSTOMERS_FK foreign key(CUSTOMER_ID) references CUSTOMERS(ID);
+
+alter table USER_ROLES add constraint USER_FK2 foreign key(USER_ID) references USERS(ID);
+alter table USER_ROLES add constraint ROLE_FK foreign key(ROLE_ID) references ROLES(ID);
