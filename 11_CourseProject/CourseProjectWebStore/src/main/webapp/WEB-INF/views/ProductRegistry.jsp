@@ -16,8 +16,10 @@
           <b>[Menu]</b>&nbsp;&nbsp;
           <input type="button" value="Home Page"
               onclick="location='${contextPath}'">&nbsp;&nbsp;
-          <input type="button" value="Add Product"
-              onclick="location='${contextPath}${addProductPageUrl}'">
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <input type="button" value="Add Product"
+                onclick="location='${contextPath}${addProductPageUrl}'">
+          </sec:authorize>
         </td>
       </tr>
     </table>

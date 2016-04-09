@@ -16,8 +16,10 @@
           <b>[Menu]</b>&nbsp;&nbsp;
           <input type="button" value="Home Page"
               onclick="location='${contextPath}'">&nbsp;&nbsp;
-          <input type="button" value="Add User"
-              onclick="location='${contextPath}${addUserPageUrl}'">
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <input type="button" value="Add User"
+                onclick="location='${contextPath}${addUserPageUrl}'">
+          </sec:authorize>
         </td>
       </tr>
     </table>
@@ -54,23 +56,6 @@
           <!-- </sec:authorize> -->
         </tr>
       </thead>
-      <tbody>
-      <!-- <tr align="center">
-                <td>sdds</td>
-                <td>fdfd</td>
-                <td>dsds</td>
-                <td>sdsw</td>
-                <td>
-                  <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editUserPageUrl}'">
-                </td>
-                <td>
-                  <input type="button" value="Delete"
-                      onclick="location=
-                          '${contextPath}${deleteUserUrl}'">
-                </td>
-              </tr> -->
-      </tbody>
       <c:if test="${not empty users}">
           <tbody>
             <c:forEach var="u" items="${users}">

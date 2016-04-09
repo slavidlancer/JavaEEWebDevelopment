@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ct" uri="http://web_store.jeewd.com/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Store: Order Registry"
@@ -44,27 +45,12 @@
           <th>Customer Name</th>
           <th>Date of Purchase</th>
           <th>Overall Price</th>
-          <th>*</th>
-          <th>x</th>
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <th>*</th>
+            <th>x</th>
+          </sec:authorize>
         </tr>
       </thead>
-      <tbody>
-      <!-- <tr align="center">
-                <td>1</td>
-                <td>2</td>
-                <td>o.price</td>
-                <td>o.quantity</td>
-                <td>
-                  <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editOrderPageUrl}'">
-                </td>
-                <td>
-                  <input type="button" value="Delete"
-                      onclick="location=
-                          '${contextPath}${deleteOrderUrl}'">
-                </td>
-              </tr> -->
-      </tbody>
       <c:if test="${not empty orders}">
           <tbody>
             <c:forEach var="o" items="${orders}">
@@ -74,20 +60,22 @@
                 <td>${o.customerName}</td>
                 <td>${o.dateOfPurchase}</td>
                 <td>${o.overallPrice}</td>
-                <td>
-                  <form:form action="${contextPath}${editOrderPageUrl}"
-                      method="get" modelAttibute="Order">
-                    <input type="hidden" name="id" value="${o.id}">
-                    <input type="submit" value="Edit">
-                  </form:form>
-                </td>
-                <td>
-                  <form:form action="${contextPath}${deleteOrderUrl}"
-                      method="get" modelAttibute="Order">
-                    <input type="hidden" name="id" value="${o.id}">
-                    <input type="submit" value="Delete">
-                  </form:form>
-                </td>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                  <td>
+                    <form:form action="${contextPath}${editOrderPageUrl}"
+                        method="get" modelAttibute="Order">
+                      <input type="hidden" name="id" value="${o.id}">
+                      <input type="submit" value="Edit">
+                    </form:form>
+                  </td>
+                  <td>
+                    <form:form action="${contextPath}${deleteOrderUrl}"
+                        method="get" modelAttibute="Order">
+                      <input type="hidden" name="id" value="${o.id}">
+                      <input type="submit" value="Delete">
+                    </form:form>
+                  </td>
+                </sec:authorize>
               </tr>
             </c:forEach>
           </tbody>
