@@ -2,7 +2,7 @@ package com.jeewd.web_store.dto.user;
 
 public class UserSearch {
     private String username;
-    private String name;
+    private String customerName;
     private String type;
     private String status;
     
@@ -14,12 +14,12 @@ public class UserSearch {
         this.username = username;
     }
     
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     
     public String getType() {
