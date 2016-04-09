@@ -67,7 +67,7 @@
               </tr> -->
       </tbody><tr><td><form:form action="${contextPath}${editProductPageUrl}"
                       method="post" modelAttibute="ProductTransfer">
-                    <input type="text" name="id" value="123">
+                    <input type="hidden" name="id" value="123">
                     <input type="submit" value="Edit">
                   </form:form></td></tr>
       <c:if test="${not empty products}">
@@ -80,14 +80,14 @@
                 <td>${p.quantity}</td>
                 <td>
                   <form:form action="${contextPath}${editProductPageUrl}"
-                      method="get" modelAttibute="Product">
+                      method="get" modelAttibute="ProductTransfer">
                     <input type="hidden" name="id" value="${p.id}">
                     <input type="submit" value="Edit">
                   </form:form>
                 </td>
                 <td>
                   <form:form action="${contextPath}${deleteProductUrl}"
-                      method="get" modelAttibute="Product">
+                      method="get" modelAttibute="ProductTransfer">
                     <input type="hidden" name="id" value="${p.id}">
                     <input type="submit" value="Delete">
                   </form:form>
