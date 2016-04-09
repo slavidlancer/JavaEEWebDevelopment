@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.jeewd.web_store.dao.user.UserDao;
 import com.jeewd.web_store.dto.user.UserSearch;
 import com.jeewd.web_store.dto.user.UserTransfer;
+import com.jeewd.web_store.entities.customer.Customer;
 import com.jeewd.web_store.entities.user.Role;
 import com.jeewd.web_store.entities.user.User;
 
@@ -17,33 +18,55 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> usersActive = new ArrayList<>();
-        
-        for (User userObject : userDao.getAllUsers()) {
-            if ("Active".equals(userObject.getStatus())) {
-                usersActive.add(userObject);
-            }
-        }
-        
-        return usersActive;
+        return userDao.getAllUsers();
     }
 
     @Override
     public List<UserSearch> getUsersBySearch(UserSearch userSearch) {
         List<UserSearch> usersSearchResult = new ArrayList<>();
+        boolean isAdmin = false;
+        boolean isUser = false;
         
         for (User user : userDao.getUsersBySearch(userSearch)) {
             UserSearch userSearchResult = new UserSearch();
             userSearch.setId(user.getId());
             userSearchResult.setUsername(user.getUsername());
-            userSearchResult.setCustomerName("");
+            
+            if (user.getCustomers() != null) {
+                String customerName = "";
+                
+                for (Customer customer : user.getCustomers()) {
+                    if ("Active".equals(customer.getStatus())) {
+                        customerName = customer.getName();
+                    }
+                }
+                
+                userSearchResult.setCustomerName(customerName);
+            } else {
+                userSearchResult.setCustomerName("");
+            }
+            
+            isAdmin = false;
+            isUser = false;
             
             for (Role userRole : user.getRoles()) {
+                userSearchResult.setType(userRole.getRole());
+                
                 if ("ROLE_ADMIN".equals(userRole.getRole())) {
-                    userSearchResult.setType("admin");
-                } else {
-                    userSearchResult.setType("user");
+                    isAdmin = true;
                 }
+                
+                if ("ROLE_USER".equals(userRole.getRole())) {
+                    isUser = true;
+                }
+            }
+            
+            if (isAdmin) {
+                userSearchResult.setType("admin");
+            } else if (isUser) {
+                userSearchResult.setType("user");
+            } else {
+                userSearchResult.setType("none");
             }
             
             userSearchResult.setStatus(user.getStatus());

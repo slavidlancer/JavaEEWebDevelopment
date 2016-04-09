@@ -1,10 +1,19 @@
 package com.jeewd.web_store.dto.product;
 
 public class ProductSearch {
+    private Long id;
     private String name;
     private String type;
     private String price;
     private String quantity;
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     public String getName() {
         return name;

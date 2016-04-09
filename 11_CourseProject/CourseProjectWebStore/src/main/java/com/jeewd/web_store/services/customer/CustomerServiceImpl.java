@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.customer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,24 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerSearch> getCustomersBySearch(
             CustomerSearch customerSearch) {
         List<CustomerSearch> customersSearchResult = new ArrayList<>();
-        customerDao.getCustomersBySearch(customerSearch);
         
-        return customersSearchResult;
+        if (customerDao.getCustomersBySearch(customerSearch) != null) {
+            for (Customer customer :
+                customerDao.getCustomersBySearch(customerSearch)) {
+                CustomerSearch customerSearchResult = new CustomerSearch();
+                customerSearchResult.setId(customer.getId());
+                customerSearchResult.setName(customer.getName());
+                customerSearchResult.setPid(customer.getpID());
+                customerSearchResult.setDateOfBirth(
+                        new SimpleDateFormat("YYYY-MM-dd").format(
+                                customer.getDateOfBirth()).toString());
+                customerSearchResult.setAddress(customer.getAddress());
+                
+                customersSearchResult.add(customerSearchResult);
+            }
+        }
+        
+        return customersSearchResult != null ? customersSearchResult : null;
     }
 
     @Override

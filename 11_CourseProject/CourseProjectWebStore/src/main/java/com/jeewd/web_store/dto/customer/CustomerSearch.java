@@ -1,10 +1,19 @@
 package com.jeewd.web_store.dto.customer;
 
 public class CustomerSearch {
+    private Long id;
     private String name;
     private String pid;
     private String dateOfBirth;
     private String address;
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     public String getName() {
         return name;

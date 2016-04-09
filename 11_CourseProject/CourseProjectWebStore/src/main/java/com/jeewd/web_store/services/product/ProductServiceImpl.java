@@ -23,9 +23,23 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductSearch> getProductsBySearch(
             ProductSearch productSearch) {
         List<ProductSearch> productsSearchResult = new ArrayList<>();
-        productDao.getProductsBySearch(productSearch);
         
-        return productsSearchResult;
+        if (productDao.getProductsBySearch(productSearch) != null) {
+            for (Product product :
+                    productDao.getProductsBySearch(productSearch)) {
+                ProductSearch productSearchResult = new ProductSearch();
+                productSearchResult.setId(product.getId());
+                productSearchResult.setName(product.getName());
+                productSearchResult.setType(product.getType().getName());
+                productSearchResult.setPrice(product.getPrice().toString());
+                productSearchResult.setQuantity(
+                        product.getQuantity().toString());
+                
+                productsSearchResult.add(productSearchResult);
+            }
+        }
+        
+        return productsSearchResult != null ? productsSearchResult : null;
     }
 
     @Override
