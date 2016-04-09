@@ -35,7 +35,8 @@
           Quantity:
         </jsp:attribute>
         <jsp:attribute name="row4-value">
-          <input type="text" name="quantity" value="${ProductTransfer.quantity}">
+          <input type="text" name="quantity"
+              value="${ProductTransfer.quantity}">
         </jsp:attribute>
         <jsp:attribute name="row5-title">
           <br>

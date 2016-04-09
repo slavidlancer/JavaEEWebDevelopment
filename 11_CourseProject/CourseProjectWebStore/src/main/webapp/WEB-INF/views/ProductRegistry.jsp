@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ct" uri="http://web_store.jeewd.com/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Store: Product Registry"
@@ -45,8 +46,10 @@
           <th>Type</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>*</th>
-          <th>x</th>
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <th>*</th>
+            <th>x</th>
+          </sec:authorize>
         </tr>
       </thead>
       <tbody>
@@ -65,11 +68,12 @@
                           '${contextPath}${deleteProductUrl}'">
                 </td>
               </tr> -->
-      </tbody><tr><td><form:form action="${contextPath}${editProductPageUrl}"
+      </tbody><tr><td><sec:authorize access="hasRole('ROLE_ADMIN')">
+      <form:form action="${contextPath}${editProductPageUrl}"
                       method="post" modelAttibute="ProductTransfer">
                     <input type="hidden" name="id" value="123">
                     <input type="submit" value="Edit">
-                  </form:form></td></tr>
+                  </form:form></sec:authorize></td></tr>
       <c:if test="${not empty products}">
           <tbody>
             <c:forEach var="p" items="${products}">
@@ -78,20 +82,22 @@
                 <td>${p.type}</td>
                 <td>${p.price}</td>
                 <td>${p.quantity}</td>
-                <td>
-                  <form:form action="${contextPath}${editProductPageUrl}"
-                      method="get" modelAttibute="ProductTransfer">
-                    <input type="hidden" name="id" value="${p.id}">
-                    <input type="submit" value="Edit">
-                  </form:form>
-                </td>
-                <td>
-                  <form:form action="${contextPath}${deleteProductUrl}"
-                      method="get" modelAttibute="ProductTransfer">
-                    <input type="hidden" name="id" value="${p.id}">
-                    <input type="submit" value="Delete">
-                  </form:form>
-                </td>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                  <td>
+                    <form:form action="${contextPath}${editProductPageUrl}"
+                        method="get" modelAttibute="ProductTransfer">
+                      <input type="hidden" name="id" value="${p.id}">
+                      <input type="submit" value="Edit">
+                    </form:form>
+                  </td>
+                  <td>
+                    <form:form action="${contextPath}${deleteProductUrl}"
+                        method="get" modelAttibute="ProductTransfer">
+                      <input type="hidden" name="id" value="${p.id}">
+                      <input type="submit" value="Delete">
+                    </form:form>
+                  </td>
+                </sec:authorize>
               </tr>
             </c:forEach>
           </tbody>

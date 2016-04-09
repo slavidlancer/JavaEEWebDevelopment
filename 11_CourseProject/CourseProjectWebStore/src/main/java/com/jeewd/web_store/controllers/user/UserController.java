@@ -47,7 +47,7 @@ public class UserController {
     @RequestMapping(value = UrlConstants.USER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditUserPage(Model model,
-            @ModelAttribute("User") UserTransfer userTransfer) {
+            @ModelAttribute("UserTransfer") UserTransfer userTransfer) {
         initializeAttributes(model);
         model.addAttribute("user",
                 userService.getUserById(userTransfer.getId()));
@@ -55,11 +55,11 @@ public class UserController {
         return JspNameConstants.ADD_EDIT_USER_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.USER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
-            @ModelAttribute("User") UserTransfer userTransfer) {
+            @ModelAttribute("UserTransfer") UserTransfer userTransfer) {
         initializeAttributes(model);
         
         if (userTransfer.getId() != null) {
@@ -75,7 +75,7 @@ public class UserController {
     @RequestMapping(value = UrlConstants.USER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteUser(Model model,
-            @ModelAttribute("User") UserTransfer userTransfer) {
+            @ModelAttribute("UserTransfer") UserTransfer userTransfer) {
         initializeAttributes(model);
         userService.deleteUserById(userTransfer.getId());
         

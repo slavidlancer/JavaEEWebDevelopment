@@ -47,7 +47,7 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditOrderPage(Model model,
-            @ModelAttribute("Order") OrderTransfer orderTransfer) {
+            @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
         model.addAttribute("order",
                 orderService.getOrderById(orderTransfer.getId()));
@@ -59,7 +59,7 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
-            @ModelAttribute("Order") OrderTransfer orderTransfer) {
+            @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
         
         if (orderTransfer.getId() != null) {
@@ -75,7 +75,7 @@ public class OrderController {
     @RequestMapping(value = UrlConstants.ORDER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteOrder(Model model,
-            @ModelAttribute("Order") OrderTransfer orderTransfer) {
+            @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
         orderService.deleteOrderById(orderTransfer.getId());
         

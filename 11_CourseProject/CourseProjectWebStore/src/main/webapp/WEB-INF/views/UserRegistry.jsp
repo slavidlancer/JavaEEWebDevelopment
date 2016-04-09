@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ct" uri="http://web_store.jeewd.com/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <ct:Page title="Web Store: User Registry"
@@ -45,8 +46,12 @@
           <th>Customer Name</th>
           <th>Type</th>
           <th>Status</th>
-          <th>*</th>
-          <th>x</th>
+          <!-- <sec:authorize access="hasRole('ROLE_ADMIN')"> -->
+            <th>*</th>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <th>x</th>
+            </sec:authorize>
+          <!-- </sec:authorize> -->
         </tr>
       </thead>
       <tbody>
@@ -74,20 +79,24 @@
                 <td>${u.customerName}</td>
                 <td>${u.type}</td>
                 <td>${u.status}</td>
-                <td>
-                  <form:form action="${contextPath}${editUserPageUrl}"
-                      method="get" modelAttibute="User">
-                    <input type="hidden" name="id" value="${u.id}">
-                    <input type="submit" value="Edit">
-                  </form:form>
-                </td>
-                <td>
-                  <form:form action="${contextPath}${deleteUserUrl}"
-                      method="get" modelAttibute="User">
-                    <input type="hidden" name="id" value="${u.id}">
-                    <input type="submit" value="Delete">
-                  </form:form>
-                </td>
+                <!-- <sec:authorize access="hasRole('ROLE_ADMIN')"> -->
+                  <td>
+                    <form:form action="${contextPath}${editUserPageUrl}"
+                        method="get" modelAttibute="User">
+                      <input type="hidden" name="id" value="${u.id}">
+                      <input type="submit" value="Edit">
+                    </form:form>
+                  </td>
+                  <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <td>
+                      <form:form action="${contextPath}${deleteUserUrl}"
+                          method="get" modelAttibute="User">
+                        <input type="hidden" name="id" value="${u.id}">
+                        <input type="submit" value="Delete">
+                      </form:form>
+                    </td>
+                  </sec:authorize>
+                <!-- </sec:authorize> -->
               </tr>
             </c:forEach>
           </tbody>

@@ -47,7 +47,7 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditCustomerPage(Model model,
-            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
+            @ModelAttribute("CustomerTransfer") CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         model.addAttribute("customer",
                 customerService.getCustomerById(customerTransfer.getId()));
@@ -59,7 +59,8 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditCustomer(Model model,
-            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
+            @ModelAttribute("CustomerTransfer")
+    CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         
         if (customerTransfer.getId() != null) {
@@ -75,7 +76,8 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteCustomer(Model model,
-            @ModelAttribute("Customer") CustomerTransfer customerTransfer) {
+            @ModelAttribute("CustomerTransfer")
+    CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         customerService.deleteCustomerById(customerTransfer.getId());
         
