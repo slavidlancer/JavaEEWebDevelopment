@@ -55,28 +55,6 @@
           </sec:authorize>
         </tr>
       </thead>
-      <tbody>
-      <!-- <tr align="center">
-                <td>sdds</td>
-                <td>fdfd</td>
-                <td>dsds</td>
-                <td>sdsw</td>
-                <td>
-                  <input type="button" value="Edit"
-                      onclick="location='${contextPath}${editProductPageUrl}'">
-                </td>
-                <td>
-                  <input type="button" value="Delete"
-                      onclick="location=
-                          '${contextPath}${deleteProductUrl}'">
-                </td>
-              </tr> -->
-      </tbody><tr><td><sec:authorize access="hasRole('ROLE_ADMIN')">
-      <form:form action="${contextPath}${editProductPageUrl}"
-                      method="post" modelAttibute="ProductTransfer">
-                    <input type="hidden" name="id" value="123">
-                    <input type="submit" value="Edit">
-                  </form:form></sec:authorize></td></tr>
       <c:if test="${not empty products}">
         <tbody>
           <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -110,14 +88,12 @@
                 </tr>
               </c:when>
               <c:otherwise>
-                <c:if test="${p.status eq 'Active'}">
-                  <tr align="center">
-                    <td>${p.name}</td>
-                    <td>${p.type}</td>
-                    <td>${p.price}</td>
-                    <td>${p.quantity}</td>
-                  </tr>
-                </c:if>
+                <tr align="center">
+                  <td>${p.name}</td>
+                  <td>${p.type}</td>
+                  <td>${p.price}</td>
+                  <td>${p.quantity}</td>
+                </tr>
               </c:otherwise>
             </c:choose>
           </c:forEach>

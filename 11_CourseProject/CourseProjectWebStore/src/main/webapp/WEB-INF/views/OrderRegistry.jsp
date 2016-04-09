@@ -41,6 +41,7 @@
     <table border="1">
       <thead>
         <tr align="center">
+          <th>ID</th>
           <th>Products</th>
           <th>Quantity</th>
           <th>Customer Name</th>
@@ -64,10 +65,11 @@
             <c:choose>
               <c:when test="${isUserAdmin}">
                 <tr align="center">
+                  <td>${o.id}</td>
                   <td>${o.products}</td>
                   <td>${o.quantity}</td>
                   <td>${o.customerName}</td>
-                  <td>${o.dateOfPurchase}</td>
+                  <td>${o.purchaseDate}</td>
                   <td>${o.overallPrice}</td>
                   <td>
                     <form:form action="${contextPath}${editOrderPageUrl}"
@@ -86,22 +88,21 @@
                 </tr>
               </c:when>
               <c:otherwise>
-                <c:if test="${o.status eq 'Active'}">
-                  <tr align="center">
-                    <td>${o.products}</td>
-                    <td>${o.quantity}</td>
-                    <td>${o.customerName}</td>
-                    <td>${o.dateOfPurchase}</td>
-                    <td>${o.overallPrice}</td>
-                    <td>
-                      <form:form action="${contextPath}${editOrderPageUrl}"
-                          method="get" modelAttibute="Order">
-                        <input type="hidden" name="id" value="${o.id}">
-                        <input type="submit" value="Edit">
-                      </form:form>
-                    </td>
-                  </tr>
-                </c:if>
+                <tr align="center">
+                  <td>${o.id}</td>
+                  <td>${o.products}</td>
+                  <td>${o.quantity}</td>
+                  <td>${o.customerName}</td>
+                  <td>${o.purchaseDate}</td>
+                  <td>${o.overallPrice}</td>
+                  <td>
+                    <form:form action="${contextPath}${editOrderPageUrl}"
+                        method="get" modelAttibute="Order">
+                      <input type="hidden" name="id" value="${o.id}">
+                      <input type="submit" value="Edit">
+                    </form:form>
+                  </td>
+                </tr>
               </c:otherwise>
             </c:choose>
           </c:forEach>
