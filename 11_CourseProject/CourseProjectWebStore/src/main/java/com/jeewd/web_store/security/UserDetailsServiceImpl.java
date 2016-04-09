@@ -11,15 +11,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.jeewd.web_store.dao.user.UserDao;
 import com.jeewd.web_store.entities.user.Role;
 import com.jeewd.web_store.entities.user.User;
+import com.jeewd.web_store.services.user.UserService;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
     
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User user = userDao.getUserByUsername(username);
+        User user = userService.getUserByUsername(username);
         
         List<GrantedAuthority> roles = new ArrayList<>();
         

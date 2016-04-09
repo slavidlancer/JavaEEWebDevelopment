@@ -50,7 +50,7 @@
       </ct:VerticalTableHeading>
     </form:form>
     <br><br>
-    ${user.username} (logged in)&nbsp;
+    ${userPrincipal.username} (logged in)&nbsp;
     <input type="button" value="Logout"
         onclick="location='${contextPath}/logout'">
     <br>

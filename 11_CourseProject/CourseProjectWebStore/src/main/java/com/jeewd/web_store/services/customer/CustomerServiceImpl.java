@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.customer;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getCustomersBySearch(CustomerSearch customerSearch) {
-        return customerDao.getCustomersBySearch(customerSearch);
+    public List<CustomerSearch> getCustomersBySearch(
+            CustomerSearch customerSearch) {
+        List<CustomerSearch> customersSearchResult = new ArrayList<>();
+        customerDao.getCustomersBySearch(customerSearch);
+        
+        return customersSearchResult;
     }
 
     @Override

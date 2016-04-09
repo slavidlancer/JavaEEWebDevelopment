@@ -6,7 +6,6 @@ public class UserTransfer {
     private String username;
     private String password;
     private String status;
-    //private List<Role> roles;
     
     public Long getId() {
         return id;

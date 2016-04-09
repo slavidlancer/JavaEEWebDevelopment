@@ -11,6 +11,7 @@ import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.user.UserSearch;
 import com.jeewd.web_store.dto.user.UserTransfer;
 import com.jeewd.web_store.services.user.UserService;
+import com.jeewd.web_store.utils.UserUtils;
 
 @Controller
 public class UserController {
@@ -78,6 +79,8 @@ public class UserController {
             @ModelAttribute("UserTransfer") UserTransfer userTransfer) {
         initializeAttributes(model);
         userService.deleteUserById(userTransfer.getId());
+        model.addAttribute("users",
+                userService.getUsersBySearch(new UserSearch()));
         
         return JspNameConstants.USER_REGISTRY_PAGE;
     }
@@ -93,6 +96,6 @@ public class UserController {
                 UrlConstants.USER_ADD_EDIT_URL);
         model.addAttribute("deleteUserUrl",
                 UrlConstants.USER_DELETE_URL);
-        //model.addAttribute("user", UserUtils.getUser());
+        model.addAttribute("userPrincipal", UserUtils.getUser());
     }
 }

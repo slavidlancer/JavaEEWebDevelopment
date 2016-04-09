@@ -1,6 +1,7 @@
 package com.jeewd.web_store.controllers.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,13 +12,14 @@ import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.customer.CustomerSearch;
 import com.jeewd.web_store.dto.customer.CustomerTransfer;
 import com.jeewd.web_store.services.customer.CustomerService;
+import com.jeewd.web_store.utils.UserUtils;
 
 @Controller
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_REGISTRY_PAGE_URL,
             method = RequestMethod.GET)
     public String goToCustomerRegistryPage(Model model,
@@ -34,7 +36,7 @@ public class CustomerController {
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_PAGE_URL,
             method = RequestMethod.GET)
     public String goToAddCustomerPage(Model model) {
@@ -43,7 +45,7 @@ public class CustomerController {
         return JspNameConstants.ADD_EDIT_CUSTOMER_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditCustomerPage(Model model,
@@ -55,7 +57,7 @@ public class CustomerController {
         return JspNameConstants.ADD_EDIT_CUSTOMER_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditCustomer(Model model,
@@ -72,7 +74,7 @@ public class CustomerController {
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.CUSTOMER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteCustomer(Model model,
@@ -80,6 +82,8 @@ public class CustomerController {
     CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         customerService.deleteCustomerById(customerTransfer.getId());
+        model.addAttribute("customers",
+                customerService.getCustomersBySearch(new CustomerSearch()));
         
         return JspNameConstants.CUSTOMER_REGISTRY_PAGE;
     }
@@ -95,6 +99,6 @@ public class CustomerController {
                 UrlConstants.CUSTOMER_ADD_EDIT_URL);
         model.addAttribute("deleteCustomerUrl",
                 UrlConstants.CUSTOMER_DELETE_URL);
-        //model.addAttribute("user", UserUtils.getUser());
+        model.addAttribute("userPrincipal", UserUtils.getUser());
     }
 }

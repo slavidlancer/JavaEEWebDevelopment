@@ -19,7 +19,8 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public List<Customer> getCustomersBySearch(CustomerSearch customerSearch) {
+    public List<Customer> getCustomersBySearch(
+            CustomerSearch customerSearch) {
         return null;
     }
 

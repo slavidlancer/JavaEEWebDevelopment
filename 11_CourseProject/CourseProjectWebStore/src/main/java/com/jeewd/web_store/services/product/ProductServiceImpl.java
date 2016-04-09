@@ -1,5 +1,6 @@
 package com.jeewd.web_store.services.product;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsBySearch(ProductSearch productSearch) {
-        return productDao.getProductsBySearch(productSearch);
+    public List<ProductSearch> getProductsBySearch(
+            ProductSearch productSearch) {
+        List<ProductSearch> productsSearchResult = new ArrayList<>();
+        productDao.getProductsBySearch(productSearch);
+        
+        return productsSearchResult;
     }
 
     @Override

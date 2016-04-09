@@ -1,6 +1,7 @@
 package com.jeewd.web_store.services.order;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getOrdersBySearch(OrderSearch orderSearch) {
-        return orderDao.getOrdersBySearch(orderSearch);
+    public List<OrderSearch> getOrdersBySearch(OrderSearch orderSearch) {
+        List<OrderSearch> ordersSearchResult = new ArrayList<>();
+        orderDao.getOrdersBySearch(orderSearch);
+        
+        return ordersSearchResult;
     }
 
     @Override

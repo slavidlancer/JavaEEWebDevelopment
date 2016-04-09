@@ -8,7 +8,7 @@ import com.jeewd.web_store.entities.order.Order;
 
 public interface OrderService {
     List<Order> getAllOrders();
-    List<Order> getOrdersBySearch(OrderSearch orderSearch);
+    List<OrderSearch> getOrdersBySearch(OrderSearch orderSearch);
     Order getOrderById(Long id);
     boolean addOrder(OrderTransfer orderTransfer);
     boolean updateOrder(OrderTransfer orderTransfer);

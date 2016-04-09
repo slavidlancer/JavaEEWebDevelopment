@@ -7,7 +7,7 @@ import com.jeewd.web_store.entities.customer.Customer;
 
 public interface CustomerService {
     List<Customer> getAllCustomers();
-    List<Customer> getCustomersBySearch(CustomerSearch customerSearch);
+    List<CustomerSearch> getCustomersBySearch(CustomerSearch customerSearch);
     Customer getCustomerById(Long id);
     boolean addCustomer(CustomerTransfer customerTransfer);
     boolean updateCustomer(CustomerTransfer customerTransfer);

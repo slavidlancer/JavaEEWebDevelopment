@@ -1,6 +1,7 @@
 package com.jeewd.web_store.controllers.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,13 +12,14 @@ import com.jeewd.constants.UrlConstants;
 import com.jeewd.web_store.dto.order.OrderSearch;
 import com.jeewd.web_store.dto.order.OrderTransfer;
 import com.jeewd.web_store.services.order.OrderService;
+import com.jeewd.web_store.utils.UserUtils;
 
 @Controller
 public class OrderController {
     @Autowired
     private OrderService orderService;
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_REGISTRY_PAGE_URL,
             method = RequestMethod.GET)
     public String goToOrderRegistryPage(Model model,
@@ -34,7 +36,7 @@ public class OrderController {
         return JspNameConstants.ORDER_REGISTRY_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_ADD_PAGE_URL,
             method = RequestMethod.GET)
     public String goToAddOrderPage(Model model) {
@@ -43,7 +45,7 @@ public class OrderController {
         return JspNameConstants.ADD_EDIT_ORDER_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditOrderPage(Model model,
@@ -55,7 +57,7 @@ public class OrderController {
         return JspNameConstants.ADD_EDIT_ORDER_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.ORDER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
@@ -71,13 +73,15 @@ public class OrderController {
         return JspNameConstants.ORDER_REGISTRY_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.ORDER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteOrder(Model model,
             @ModelAttribute("OrderTransfer") OrderTransfer orderTransfer) {
         initializeAttributes(model);
         orderService.deleteOrderById(orderTransfer.getId());
+        model.addAttribute("orders",
+                orderService.getOrdersBySearch(new OrderSearch()));
         
         return JspNameConstants.ORDER_REGISTRY_PAGE;
     }
@@ -93,6 +97,6 @@ public class OrderController {
                 UrlConstants.ORDER_ADD_EDIT_URL);
         model.addAttribute("deleteOrderUrl",
                 UrlConstants.ORDER_DELETE_URL);
-        //model.addAttribute("user", UserUtils.getUser());
+        model.addAttribute("userPrincipal", UserUtils.getUser());
     }
 }

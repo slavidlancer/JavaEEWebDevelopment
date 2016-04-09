@@ -7,7 +7,7 @@ import com.jeewd.web_store.entities.product.Product;
 
 public interface ProductService {
     List<Product> getAllProducts();
-    List<Product> getProductsBySearch(ProductSearch productSearch);
+    List<ProductSearch> getProductsBySearch(ProductSearch productSearch);
     Product getProductById(Long id);
     boolean addProduct(ProductTransfer productTransfer);
     boolean updateProduct(ProductTransfer productTransfer);
