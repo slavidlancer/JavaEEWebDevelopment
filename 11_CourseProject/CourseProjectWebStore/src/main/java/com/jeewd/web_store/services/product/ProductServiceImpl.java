@@ -31,7 +31,8 @@ public class ProductServiceImpl implements ProductService {
                 productSearchResult.setId(product.getId());
                 productSearchResult.setName(product.getName());
                 productSearchResult.setType(product.getType().getName());
-                productSearchResult.setPrice(product.getPrice().toString());
+                productSearchResult.setPrice(product.getPrice().setScale(2).
+                        toString());
                 productSearchResult.setQuantity(
                         product.getQuantity().toString());
                 
