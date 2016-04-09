@@ -9,6 +9,7 @@ public interface UserDao {
     List<User> getAllUsers();
     List<User> getUsersBySearch(UserSearch userSearch);
     User getUserById(Long id);
+    User getUserByUsername(String username);
     boolean addUser(UserTransfer userTransfer);
     boolean updateUser(UserTransfer userTransfer);
     boolean deleteUserById(Long id);

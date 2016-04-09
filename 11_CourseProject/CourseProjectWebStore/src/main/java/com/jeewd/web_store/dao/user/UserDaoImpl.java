@@ -29,6 +29,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        List<User> users = null;
+        
+        return users != null ? users.get(0) : null;
+    }
+
+    @Override
     public boolean addUser(UserTransfer userTransfer) {
         return false;
     }
