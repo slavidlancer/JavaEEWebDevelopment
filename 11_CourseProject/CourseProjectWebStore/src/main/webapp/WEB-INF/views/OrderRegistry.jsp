@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="isUserAdmin" value="false"/>
 
 <ct:Page title="Web Store: Order Registry"
     projectName="CourseProjectWebStore"
@@ -45,22 +46,29 @@
           <th>Customer Name</th>
           <th>Date of Purchase</th>
           <th>Overall Price</th>
+          <th>*</th>
           <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <th>*</th>
             <th>x</th>
           </sec:authorize>
         </tr>
       </thead>
       <c:if test="${not empty orders}">
-          <tbody>
-            <c:forEach var="o" items="${orders}">
-              <tr align="center">
-                <td>${o.products}</td>
-                <td>${o.quantity}</td>
-                <td>${o.customerName}</td>
-                <td>${o.dateOfPurchase}</td>
-                <td>${o.overallPrice}</td>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <tbody>
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="true"/>
+          </sec:authorize>
+          <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="false"/>
+          </sec:authorize>
+          <c:forEach var="o" items="${orders}">
+            <c:choose>
+              <c:when test="${isUserAdmin}">
+                <tr align="center">
+                  <td>${o.products}</td>
+                  <td>${o.quantity}</td>
+                  <td>${o.customerName}</td>
+                  <td>${o.dateOfPurchase}</td>
+                  <td>${o.overallPrice}</td>
                   <td>
                     <form:form action="${contextPath}${editOrderPageUrl}"
                         method="get" modelAttibute="Order">
@@ -75,11 +83,30 @@
                       <input type="submit" value="Delete">
                     </form:form>
                   </td>
-                </sec:authorize>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </c:if>
+                </tr>
+              </c:when>
+              <c:otherwise>
+                <c:if test="${o.status eq 'Active'}">
+                  <tr align="center">
+                    <td>${o.products}</td>
+                    <td>${o.quantity}</td>
+                    <td>${o.customerName}</td>
+                    <td>${o.dateOfPurchase}</td>
+                    <td>${o.overallPrice}</td>
+                    <td>
+                      <form:form action="${contextPath}${editOrderPageUrl}"
+                          method="get" modelAttibute="Order">
+                        <input type="hidden" name="id" value="${o.id}">
+                        <input type="submit" value="Edit">
+                      </form:form>
+                    </td>
+                  </tr>
+                </c:if>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
+        </tbody>
+      </c:if>
     </table>
     <br><br>
     ${userPrincipal.username} (logged in)&nbsp;

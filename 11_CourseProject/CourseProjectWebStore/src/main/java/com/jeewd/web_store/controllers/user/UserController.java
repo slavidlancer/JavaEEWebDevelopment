@@ -1,6 +1,7 @@
 package com.jeewd.web_store.controllers.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +19,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.USER_REGISTRY_PAGE_URL,
             method = RequestMethod.GET)
     public String goToUserRegistryPage(Model model,
@@ -35,7 +36,7 @@ public class UserController {
         return JspNameConstants.USER_REGISTRY_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.USER_ADD_PAGE_URL,
             method = RequestMethod.GET)
     public String goToAddUserPage(Model model) {
@@ -44,7 +45,7 @@ public class UserController {
         return JspNameConstants.ADD_EDIT_USER_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.USER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditUserPage(Model model,
@@ -56,7 +57,7 @@ public class UserController {
         return JspNameConstants.ADD_EDIT_USER_PAGE;
     }
     
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @RequestMapping(value = UrlConstants.USER_ADD_EDIT_URL,
             method = RequestMethod.GET)
     public String addEditOrder(Model model,
@@ -72,7 +73,7 @@ public class UserController {
         return JspNameConstants.USER_REGISTRY_PAGE;
     }
     
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.USER_DELETE_URL,
             method = RequestMethod.GET)
     public String deleteUser(Model model,

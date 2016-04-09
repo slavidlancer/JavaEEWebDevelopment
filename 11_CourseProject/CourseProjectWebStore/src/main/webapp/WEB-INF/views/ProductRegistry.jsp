@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="isUserAdmin" value="false"/>
 
 <ct:Page title="Web Store: Product Registry"
     projectName="CourseProjectWebStore"
@@ -77,14 +78,21 @@
                     <input type="submit" value="Edit">
                   </form:form></sec:authorize></td></tr>
       <c:if test="${not empty products}">
-          <tbody>
-            <c:forEach var="p" items="${products}">
-              <tr align="center">
-                <td>${p.name}</td>
-                <td>${p.type}</td>
-                <td>${p.price}</td>
-                <td>${p.quantity}</td>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <tbody>
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="true"/>
+          </sec:authorize>
+          <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="false"/>
+          </sec:authorize>
+          <c:forEach var="p" items="${products}">
+            <c:choose>
+              <c:when test="${isUserAdmin}">
+                <tr align="center">
+                  <td>${p.name}</td>
+                  <td>${p.type}</td>
+                  <td>${p.price}</td>
+                  <td>${p.quantity}</td>
                   <td>
                     <form:form action="${contextPath}${editProductPageUrl}"
                         method="get" modelAttibute="ProductTransfer">
@@ -99,11 +107,22 @@
                       <input type="submit" value="Delete">
                     </form:form>
                   </td>
-                </sec:authorize>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </c:if>
+                </tr>
+              </c:when>
+              <c:otherwise>
+                <c:if test="${p.status eq 'Active'}">
+                  <tr align="center">
+                    <td>${p.name}</td>
+                    <td>${p.type}</td>
+                    <td>${p.price}</td>
+                    <td>${p.quantity}</td>
+                  </tr>
+                </c:if>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
+        </tbody>
+      </c:if>
     </table>
     <br><br>
     ${userPrincipal.username} (logged in)&nbsp;

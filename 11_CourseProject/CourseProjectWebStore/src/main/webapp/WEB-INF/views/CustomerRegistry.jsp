@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="isUserAdmin" value="false"/>
 
 <ct:Page title="Web Store: Customer Registry"
     projectName="CourseProjectWebStore"
@@ -46,21 +47,26 @@
           <th>PID</th>
           <th>Date of Birth</th>
           <th>Address</th>
-          <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <th>*</th>
-            <th>x</th>
-          </sec:authorize>
+          <th>*</th>
+          <th>x</th>
         </tr>
       </thead>
       <c:if test="${not empty customers}">
-          <tbody>
-            <c:forEach var="c" items="${customers}">
-              <tr align="center">
-                <td>${c.name}</td>
-                <td>${c.pid}</td>
-                <td>${c.dateOfBirth}</td>
-                <td>${c.address}</td>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <tbody>
+          <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="true"/>
+          </sec:authorize>
+          <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <c:set var="isUserAdmin" value="false"/>
+          </sec:authorize>
+          <c:forEach var="c" items="${customers}">
+            <c:choose>
+              <c:when test="${isUserAdmin}">
+                <tr align="center">
+                  <td>${c.name}</td>
+                  <td>${c.pid}</td>
+                  <td>${c.dateOfBirth}</td>
+                  <td>${c.address}</td>
                   <td>
                     <form:form action="${contextPath}${editCustomerPageUrl}"
                         method="get" modelAttibute="Customer">
@@ -75,11 +81,36 @@
                       <input type="submit" value="Delete">
                     </form:form>
                   </td>
-                </sec:authorize>
-              </tr>
-            </c:forEach>
-          </tbody>
-        </c:if>
+                </tr>
+              </c:when>
+              <c:otherwise>
+                <c:if test="${c.status eq 'Active'}">
+                  <tr align="center">
+                    <td>${c.name}</td>
+                    <td>${c.pid}</td>
+                    <td>${c.dateOfBirth}</td>
+                    <td>${c.address}</td>
+                    <td>
+                      <form:form action="${contextPath}${editCustomerPageUrl}"
+                          method="get" modelAttibute="Customer">
+                        <input type="hidden" name="id" value="${c.id}">
+                        <input type="submit" value="Edit">
+                      </form:form>
+                    </td>
+                    <td>
+                      <form:form action="${contextPath}${deleteCustomerUrl}"
+                          method="get" modelAttibute="Customer">
+                        <input type="hidden" name="id" value="${c.id}">
+                        <input type="submit" value="Delete">
+                      </form:form>
+                    </td>
+                  </tr>
+                </c:if>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
+        </tbody>
+      </c:if>
     </table>
     <br><br>
     ${userPrincipal.username} (logged in)&nbsp;

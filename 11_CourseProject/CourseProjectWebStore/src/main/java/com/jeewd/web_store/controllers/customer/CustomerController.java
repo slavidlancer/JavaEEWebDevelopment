@@ -49,7 +49,8 @@ public class CustomerController {
     @RequestMapping(value = UrlConstants.CUSTOMER_EDIT_PAGE_URL,
             method = RequestMethod.GET)
     public String goToEditCustomerPage(Model model,
-            @ModelAttribute("CustomerTransfer") CustomerTransfer customerTransfer) {
+            @ModelAttribute("CustomerTransfer")
+    CustomerTransfer customerTransfer) {
         initializeAttributes(model);
         model.addAttribute("customer",
                 customerService.getCustomerById(customerTransfer.getId()));

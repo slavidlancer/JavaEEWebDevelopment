@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 //import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.jeewd.web_store.entities.customer.Customer;
+
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -35,6 +37,13 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",
                     referencedColumnName = "ID")})
     private List<Role> roles;
+    @ManyToMany //(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_CUSTOMERS",
+            joinColumns = {@JoinColumn(name = "USER_ID",
+                    referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "CUSTOMER_ID",
+                    referencedColumnName = "ID")})
+    private List<Customer> customers;
     
     public Long getId() {
         return id;
@@ -74,5 +83,13 @@ public class User {
     
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+    
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+    
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 }
