@@ -10,8 +10,30 @@
   <security:form-login login-page="/login" />
   <security:csrf disabled="true" />
   <security:intercept-url pattern="/login" access="permitAll" />
-  <!-- <security:intercept-url pattern="/bankRegister" access="hasRole('USER')"/> 
-   <security:intercept-url pattern="/createAccount" access="hasRole('BANK_EMPLOYEE')"/> -->
+  <security:intercept-url pattern="/ProductRegistryPage"
+    access="hasRole('USER')"/>
+  <security:intercept-url pattern="/AddProductPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/EditProductPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/AddEditProduct" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/DeleteProduct" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/CustomerRegistryPage"
+    access="hasRole('USER')"/>
+  <security:intercept-url pattern="/AddCustomerPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/EditCustomerPage"
+    access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/AddEditCustomer" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/DeleteCustomer" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/OrderRegistryPage"
+    access="hasRole('USER')"/>
+  <security:intercept-url pattern="/AddOrderPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/EditOrderPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/AddEditOrder" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/DeleteOrder" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/UserRegistryPage" access="hasRole('USER')"/>
+  <security:intercept-url pattern="/AddUserPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/EditUserPage" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/AddEditUser" access="hasRole('ADMIN')"/>
+  <security:intercept-url pattern="/DeleteUser" access="hasRole('ADMIN')"/>
   <security:intercept-url pattern="/**" access="hasRole('USER')" />
   <security:logout logout-success-url="/login?logout=true"
     invalidate-session="true" delete-cookies="JSESSIONID" />
