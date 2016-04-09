@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             usersSearchResult.add(userSearchResult);
         }
         
-        return usersSearchResult;
+        return usersSearchResult != null ? usersSearchResult : null;
     }
 
     @Override
