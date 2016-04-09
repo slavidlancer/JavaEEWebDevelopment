@@ -33,8 +33,16 @@ public class ProductController {
     //@Secured("ROLE_ADMIN")
     @RequestMapping(value = UrlConstants.PRODUCT_ADD_PAGE_URL,
             method = RequestMethod.GET)
-    public String goToAddProductPage(Model model) {
+    public String goToAddProductPage(Model model,
+            @ModelAttribute("ProductTransfer")
+    ProductTransfer productTransfer) {
         initializeAttributes(model);
+        System.out.println("add_page");
+        System.out.println("id:" + productTransfer.getId());
+        System.out.println("name:" + productTransfer.getName());
+        System.out.println("price:" + productTransfer.getPrice());
+        System.out.println("type:" + productTransfer.getType());
+        System.out.println("quantity:" + productTransfer.getQuantity());
         
         return JspNameConstants.ADD_EDIT_PRODUCT_PAGE;
     }
@@ -43,9 +51,16 @@ public class ProductController {
     @RequestMapping(value = UrlConstants.PRODUCT_EDIT_PAGE_URL,
             method = RequestMethod.POST)
     public String goToEditProductPage(Model model,
-            @ModelAttribute("Product") ProductTransfer productTransfer) {
+            @ModelAttribute("ProductTransfer")
+    ProductTransfer productTransfer) {
         initializeAttributes(model);
-        model.addAttribute("customer",
+        System.out.println("edit_page");
+        System.out.println("id:" + productTransfer.getId());
+        System.out.println("name:" + productTransfer.getName());
+        System.out.println("price:" + productTransfer.getPrice());
+        System.out.println("type:" + productTransfer.getType());
+        System.out.println("quantity:" + productTransfer.getQuantity());
+        model.addAttribute("ProductTransfer",
                 productService.getProductById(
                         Long.valueOf(productTransfer.getId())));
         
@@ -60,17 +75,20 @@ public class ProductController {
     ProductTransfer productTransfer) {
         initializeAttributes(model);
         
+        System.out.println("add_edit_url");
         System.out.println("id:" + productTransfer.getId());
+        System.out.println("name:" + productTransfer.getName());
+        System.out.println("price:" + productTransfer.getPrice());
+        System.out.println("type:" + productTransfer.getType());
+        System.out.println("quantity:" + productTransfer.getQuantity());
         
-        
-        
-        if ((!"0".equals(productTransfer.getId())) ||
-                (productTransfer.getId() != null)) {
-            System.out.println("update");
-            productService.updateProduct(productTransfer);
-        } else if ("".equals(productTransfer.getId())) {
-            System.out.println("add");
+        if (productTransfer.getId() == null) {
+            //productTransfer.setId("");
             productService.addProduct(productTransfer);
+            System.out.println("add");
+        } else {
+            productService.updateProduct(productTransfer);
+            System.out.println("update");
         }
         
         return JspNameConstants.PRODUCT_REGISTRY_PAGE;
