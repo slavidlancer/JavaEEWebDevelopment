@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <title>#{msgs['default.title']}: #{msgs['list.users.title']}</title>
+</h:head>
+<body id="commonBody">
+ <h:form styleClass="commonForm">
+  <h:panelGroup layout="block">
+   <b>welcome #{LOGGED_USER.firstName} #{LOGGED_USER.lastName} a. k. a. 
+#{LOGGED_USER.username}</b>
+   <br />
+   <p:commandButton ajax="false" action="#{listUsersBean.createAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.create']}" style="margin: 5% 5% 5% 5%;" />
+  </h:panelGroup>
+  <h:panelGroup layout="block">
+   <p:dataTable var="user" value="#{listUsersBean.usersBean.users}" rows="10"
+     widgetVar="usersTable" paginator="true" paginatorTemplate="{CurrentPageReport} 
+       {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+       {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15"
+       styleClass="listUsersTable" id="listUsersTable">
+    <f:facet name="header">
+     <p:outputPanel>
+      <h:outputText value="#{msgs['label.search']}" />
+      <p:inputText id="globalFilter" onkeyup="PF('usersTable').filter()"
+        style="width: 150px" placeholder="#{msgs['table.keyword']}"></p:inputText>
+     </p:outputPanel>
+    </f:facet>
+    <p:column headerText="#{msgs['label.username']}" filterBy="#{user.username}"
+      filterMatchMode="startsWith">
+     <h:outputText value="#{user.username}" />
+    </p:column>
+    <p:column headerText="#{msgs['label.firstName']}" filterBy="#{user.firstName}"
+      filterMatchMode="startsWith">
+     <h:outputText value="#{user.firstName}" />
+    </p:column>
+    <p:column headerText="#{msgs['label.lastName']}" filterBy="#{user.lastName}"
+      filterMatchMode="startsWith">
+     <h:outputText value="#{user.lastName}" />
+    </p:column>
+    <p:column headerText="#{msgs['label.email']}" filterBy="#{user.email}"
+      filterMatchMode="startsWith">
+     <h:outputText value="#{user.email}" />
+    </p:column>
+    <p:column exportable="false" styleClass="colType" styke="width: 70px">
+     <f:facet name="header">
+      <h:outputText value="#{msgs['label.actions']}" />
+     </f:facet>
+     <p:commandLink ajax="false" process="@this" immediate="true"
+       action="#{listUsersBean.editAction()}" id="editButton">
+      <f:param name="username" value="#{user.username}"></f:param>
+      <h:graphicImage value="/img/edit-icon.png" title="#{msgs['button.edit']}"
+        alt="#{msgs['button.edit']}" width="20" height="20" />
+     </p:commandLink>
+    </p:column>
+   </p:dataTable>
+   <br />
+   <h:commandLink id="excel">
+    <h:graphicImage value="/img/excel.png" />
+    <p:dataExporter type="xls" target="listUsersTable" fileName="users" />
+   </h:commandLink>
+   <h:commandLink id="pdf">
+    <h:graphicImage value="/img/pdf.png" />
+    <p:dataExporter type="pdf" target="listUsersTable" fileName="users" />
+   </h:commandLink>
+  </h:panelGroup>
+  <br clear="all" />
+  <br />
+  <h:panelGroup layout="block">
+   <p:commandButton ajax="false" action="#{loginBean.logout()}"
+     styleClass="btn btn-info" value="#{msgs['button.logout']}" style="margin: 5% 5% 5% 5%;" />
+  </h:panelGroup>
+ </h:form>
+</body>
+</html>
