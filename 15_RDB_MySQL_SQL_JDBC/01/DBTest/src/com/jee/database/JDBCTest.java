@@ -22,7 +22,7 @@ public class JDBCTest {
             
             connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             
-            System.out.println("creating statement:");
+            System.out.println("creating statement:\n");
             
             statement = connection.createStatement();
             
@@ -38,6 +38,7 @@ public class JDBCTest {
                 System.out.println("username: " + username);
                 System.out.println("password: " + password);
                 System.out.println("fullname: " + fullName);
+                System.out.println();
             }
             
             resultSet.close();

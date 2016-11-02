@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 public class ContextCheck {
+    
     public static boolean hasErrors() {
         Iterator<FacesMessage> messages = FacesContext.getCurrentInstance().getMessages();
         

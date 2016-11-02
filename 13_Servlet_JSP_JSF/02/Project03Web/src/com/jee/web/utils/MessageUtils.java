@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 public class MessageUtils {
+    
     private static final String RESOURCE_BUNDLE_FILE = "resources.application";
     private static final ResourceBundle RESOURCE_BUNDLE = getBundle();
     

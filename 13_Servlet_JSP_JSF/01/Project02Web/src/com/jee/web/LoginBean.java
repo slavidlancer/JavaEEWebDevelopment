@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 @ManagedBean(name = "loginBean")
 @RequestScoped
 public class LoginBean implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     
     @Inject
