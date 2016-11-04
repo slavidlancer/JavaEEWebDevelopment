@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <title>#{msgs['default.title']}: #{msgs['create.user.title']}</title>
+</h:head>
+<body id="editBody">
+ <h:form styleClass="editForm">
+  <p:outputPanel styleClass="alert alert-danger errorPanel"
+    rendered="#{createUserBean.hasErrors()}">
+   <p:messages autoUpdate="false" id="editParameterMessages" globalOnly="false"
+     styleClass="messagesStyle" />
+  </p:outputPanel>
+  <div class="col-md-3 editBox">
+   <h3 class="text-primary bold upper headPaddings">
+    <h:outputText value="#{msgs['create.user.title']}" escape="false" />
+   </h3>
+   <div class="box-field">
+    <label for="username">#{msgs['label.username']}</label>
+    <p:inputText id="username" name="username" styleClass="editInput"
+      value="#{createUserBean.user.username}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:inputText>
+    <p:message for="username" />
+   </div>
+   <br />
+   <div class="box-field">
+    <label for="password">#{msgs['label.password']}</label>
+    <p:password id="password" name="password" styleClass="editInput"
+      value="#{createUserBean.user.password}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:password>
+    <p:message for="password" />
+   </div>
+   <br />
+   <div class="box-field">
+    <label for="firstName">#{msgs['label.firstName']}</label>
+    <p:inputText id="firstName" name="firstName" styleClass="editInput"
+      value="#{createUserBean.user.firstName}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:inputText>
+    <p:message for="firstName" />
+   </div>
+   <br />
+   <div class="box-field">
+    <label for="lastName">#{msgs['label.lastName']}</label>
+    <p:inputText id="lastName" name="lastName" styleClass="editInput"
+      value="#{createUserBean.user.lastName}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:inputText>
+    <p:message for="lastName" />
+   </div>
+   <br />
+   <div class="box-field">
+    <label for="email">#{msgs['label.email']}</label>
+    <p:inputText id="email" name="email" styleClass="editInput"
+      value="#{createUserBean.user.email}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:inputText>
+    <p:message for="email" />
+   </div>
+   <br />
+   <div class="box-field">
+    <p:commandButton ajax="false" id="createUserBtn" action="#{createUserBean.createAction()}"
+     styleClass="btn btn-primary createUserBtn" value="#{msgs['button.create']}" />
+   </div>
+  </div>
+ </h:form>
+ <h:form>
+  <h:panelGroup layout="block">
+   <p:commandButton ajax="false" action="#{listUsersBean.listAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.list']}" style="margin: 5% 0 5% 0;" />
+  </h:panelGroup>&nbsp;&nbsp;
+  <h:panelGroup layout="block">
+   <p:commandButton ajax="false" action="#{loginBean.logout()}"
+     styleClass="btn btn-info" value="#{msgs['button.logout']}" style="margin: 5% 0 5% 0;" />
+  </h:panelGroup>
+ </h:form>
+</body>
+</html>
