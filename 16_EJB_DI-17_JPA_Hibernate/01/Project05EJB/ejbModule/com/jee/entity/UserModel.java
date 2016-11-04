@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.jee.entity.base.BaseDomainObject;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class UserModel extends BaseDomainObject {
 
     private static final long serialVersionUID = 1L;
@@ -21,20 +21,22 @@ public class UserModel extends BaseDomainObject {
     private String password;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String email;
     private List<PostModel> posts;
     //private transient int numberOfPosts;
     
     public UserModel() {}
     
-    public UserModel(Long id, String username, String password, String firstName, String lastName, String email,
-            List<PostModel> posts) {
+    public UserModel(Long id, String username, String password, String firstName, String lastName, String fullName,
+            String email, List<PostModel> posts) {
         super();
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = fullName;
         this.email = email;
         this.posts = posts;
     }
@@ -48,7 +50,7 @@ public class UserModel extends BaseDomainObject {
         this.username = username;
     }
     
-    @Column(name = "password", length = 100, nullable = true)
+    @Column(name = "password_hash", length = 100, nullable = true)
     public String getPassword() {
         return this.password;
     }
@@ -73,6 +75,15 @@ public class UserModel extends BaseDomainObject {
     
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    @Column(name = "full_name", length = 200, nullable = true)
+    public String getFullName() {
+        return this.fullName;
+    }
+    
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
     
     @Column(name = "email", length = 150, nullable = true)

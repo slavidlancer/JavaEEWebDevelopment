@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import com.jee.entity.base.BaseDomainObject;
 
 @Entity
-@Table(name = "POSTS")
+@Table(name = "posts")
 public class PostModel extends BaseDomainObject {
 
     private static final long serialVersionUID = 1L;
