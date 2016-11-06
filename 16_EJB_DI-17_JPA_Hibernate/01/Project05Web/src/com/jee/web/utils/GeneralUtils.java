@@ -17,12 +17,12 @@ public class GeneralUtils {
         return null;
     }
     
-    public static String encodeSha256Password(String plainTextPassword) {
+    public static String encodePlainTextToSha256(String plainText) {
         MessageDigest messageDigest = null;
         
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = messageDigest.digest(plainTextPassword.getBytes("UTF-8"));
+            byte[] hash = messageDigest.digest(plainText.getBytes("UTF-8"));
             
             return new String(Hex.encode(hash));
         } catch (NoSuchAlgorithmException nsae) {
@@ -32,7 +32,7 @@ public class GeneralUtils {
         }
     }
     
-    public static String encodeMd5(String plainText) {
+    public static String encodePlainTextToMd5(String plainText) {
         MessageDigest messageDigest = null;
         
         try {
