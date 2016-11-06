@@ -1,12 +1,15 @@
 package com.jee.web.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.jee.entity.UserModel;
+import com.jee.service.UserServiceLocal;
 import com.jee.web.constants.UrlConstants;
 
 @ManagedBean(name = "listUsersBean")
@@ -15,8 +18,8 @@ public class ListUsersBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    @ManagedProperty("#{usersBean}")
-    private UsersBean usersBean;
+    @EJB
+    UserServiceLocal userService;
     
     @PostConstruct
     public void init() {}
@@ -33,11 +36,8 @@ public class ListUsersBean implements Serializable {
         return UrlConstants.CREATE_URL;
     }
     
-    public UsersBean getUsersBean() {
-        return this.usersBean;
-    }
-    
-    public void setUsersBean(UsersBean usersBean) {
-        this.usersBean = usersBean;
+    public List<UserModel> getAllUsers() {
+        //return userService.findAllUsers();
+        return userService.findAllUsersForDisplay();
     }
 }

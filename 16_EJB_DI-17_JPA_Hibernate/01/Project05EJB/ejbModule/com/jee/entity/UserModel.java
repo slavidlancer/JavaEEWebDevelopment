@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.jee.entity.base.BaseDomainObject;
 
@@ -24,12 +25,12 @@ public class UserModel extends BaseDomainObject {
     private String fullName;
     private String email;
     private List<PostModel> posts;
-    //private transient int numberOfPosts;
+    private Long postsCount;
     
     public UserModel() {}
     
     public UserModel(Long id, String username, String password, String firstName, String lastName, String fullName,
-            String email, List<PostModel> posts) {
+            String email) {
         super();
         this.id = id;
         this.username = username;
@@ -38,7 +39,18 @@ public class UserModel extends BaseDomainObject {
         this.lastName = lastName;
         this.fullName = fullName;
         this.email = email;
-        this.posts = posts;
+    }
+    
+    public UserModel(Long id, String username, String password, String firstName, String lastName, String email,
+            Long postsCount) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.postsCount = postsCount;
     }
     
     @Column(name = "username", length = 30, nullable = false)
@@ -102,5 +114,14 @@ public class UserModel extends BaseDomainObject {
     
     public void setPosts(List<PostModel> posts) {
         this.posts = posts;
+    }
+    
+    @Transient
+    public Long getPostsCount() {
+        return this.postsCount;
+    }
+    
+    public void setPostsCount(Long postsCount) {
+        this.postsCount = postsCount;
     }
 }

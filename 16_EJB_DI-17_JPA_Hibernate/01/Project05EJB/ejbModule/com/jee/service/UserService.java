@@ -27,6 +27,18 @@ public class UserService implements UserServiceLocal {
         return query.getResultList();
     }
     
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<UserModel> findAllUsersForDisplay() {
+        String queryString = "select new UserModel(usermodel.id, usermodel.username, usermodel.password, "
+                + "usermodel.firstName, usermodel.lastName, usermodel.email, COUNT (postmodel)) "
+                + "from UserModel usermodel left join usermodel.posts postmodel group by usermodel.id "
+                + "order by upper(usermodel.username) asc";
+        Query query = entityManager.createQuery(queryString);
+        
+        return query.getResultList();
+    }
+    
     @Override
     public UserModel save(UserModel entity) {
         entityManager.persist(entity);

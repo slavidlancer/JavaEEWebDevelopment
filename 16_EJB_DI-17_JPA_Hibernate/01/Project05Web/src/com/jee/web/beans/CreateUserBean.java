@@ -3,15 +3,17 @@ package com.jee.web.beans;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 /*import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;*/
 import javax.faces.bean.ViewScoped;
 
+import com.jee.entity.UserModel;
+import com.jee.service.UserServiceLocal;
 import com.jee.web.constants.UrlConstants;
-import com.jee.web.dto.UserDto;
 import com.jee.web.utils.ContextCheck;
+import com.jee.web.utils.GeneralUtils;
 import com.jee.web.utils.ValidateUser;
 
 @ManagedBean(name = "createUserBean")
@@ -23,15 +25,15 @@ public class CreateUserBean implements Serializable {
     /*@Inject
     private HttpServletRequest request;*/
     
-    @ManagedProperty("#{usersBean}")
-    private UsersBean usersBean;
+    @EJB
+    UserServiceLocal userService;
     
-    private UserDto user;
+    private UserModel user;
     private String operationType;
     
     @PostConstruct
     public void init() {
-        user = new UserDto();
+        this.user = new UserModel();
     }
     
     public String createAction() {
@@ -39,24 +41,19 @@ public class CreateUserBean implements Serializable {
             return null;
         }
         
-        usersBean.getUsers().add(this.user);
+        String cryptedPassword = GeneralUtils.encodeMd5(this.user.getPassword());
+        this.user.setPassword(cryptedPassword);
+        
+        userService.save(this.user);
         
         return UrlConstants.UPDATE_URL;
     }
     
-    public UsersBean getUsersBean() {
-        return this.usersBean;
-    }
-    
-    public void setUsersBean(UsersBean usersBean) {
-        this.usersBean = usersBean;
-    }
-    
-    public UserDto getUser() {
+    public UserModel getUser() {
         return this.user;
     }
     
-    public void setUser(UserDto user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
     

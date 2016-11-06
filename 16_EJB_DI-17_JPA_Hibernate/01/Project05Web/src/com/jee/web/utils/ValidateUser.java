@@ -4,14 +4,14 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.jee.entity.UserModel;
 import com.jee.web.constants.OtherConstants;
-import com.jee.web.dto.UserDto;
 
 public class ValidateUser {
     
     private static Pattern pattern;
     
-    public static boolean validate(UserDto user) {
+    public static boolean validate(UserModel user) {
         boolean isNotValid = false;
         
         if (StringUtils.isBlank(user.getUsername())) {

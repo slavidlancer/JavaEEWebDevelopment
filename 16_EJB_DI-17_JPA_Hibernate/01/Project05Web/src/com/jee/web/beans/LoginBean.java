@@ -1,4 +1,4 @@
-package com.jee.web;
+package com.jee.web.beans;
 
 import java.io.Serializable;
 
@@ -24,10 +24,11 @@ public class LoginBean implements Serializable {
     @Inject
     private HttpServletRequest request;
     
+    @EJB
+    UserServiceLocal userService;
+    
     private String username;
     private String password;
-    
-    @EJB UserServiceLocal userService;
     
     @PostConstruct
     public void init() {}
@@ -35,6 +36,7 @@ public class LoginBean implements Serializable {
     public String login() {
         
         String encryptedPassword = GeneralUtils.encodeMd5(this.password);
+        
         UserModel user = userService.loginUser(this.username, encryptedPassword);
         
         if (user == null) {

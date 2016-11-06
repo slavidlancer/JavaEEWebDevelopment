@@ -3,15 +3,19 @@ package com.jee.web.beans;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.jee.entity.UserModel;
+import com.jee.service.UserServiceLocal;
 import com.jee.web.constants.UrlConstants;
-import com.jee.web.dto.UserDto;
 import com.jee.web.utils.ContextCheck;
+import com.jee.web.utils.GeneralUtils;
 import com.jee.web.utils.ValidateUser;
 
 @ManagedBean(name = "editUserBean")
@@ -23,21 +27,19 @@ public class EditUserBean implements Serializable {
     @Inject
     private HttpServletRequest request;
     
-    @ManagedProperty("#{usersBean}")
-    private UsersBean usersBean;
+    @EJB
+    UserServiceLocal userService;
     
-    private UserDto user;
+    private UserModel user;
     
     @PostConstruct
     public void init() {
-        String username = request.getParameter("username");
+        String idParameter = request.getParameter("id");
         
-        for (UserDto currentUser : usersBean.getUsers()) {
-            if (currentUser.getUsername().equals(username)) {
-                this.user = currentUser;
-                
-                break;
-            }
+        if (StringUtils.isNotBlank(idParameter) && StringUtils.isNumeric(idParameter)) {
+            Long id = Long.valueOf(idParameter);
+            
+            this.user = userService.findById(id);
         }
     }
     
@@ -46,22 +48,19 @@ public class EditUserBean implements Serializable {
             return null;
         }
         
+        String cryptedPassword = GeneralUtils.encodeMd5(this.user.getPassword());
+        this.user.setPassword(cryptedPassword);
+        
+        userService.update(this.user);
+        
         return UrlConstants.UPDATE_URL;
     }
     
-    public UsersBean getUsersBean() {
-        return this.usersBean;
-    }
-    
-    public void setUsersBean(UsersBean usersBean) {
-        this.usersBean = usersBean;
-    }
-    
-    public UserDto getUser() {
+    public UserModel getUser() {
         return this.user;
     }
     
-    public void setUser(UserDto user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
     

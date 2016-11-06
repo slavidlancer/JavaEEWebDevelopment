@@ -23,7 +23,7 @@
      styleClass="btn btn-info" value="#{msgs['button.create']}" style="margin: 5% 5% 5% 5%;" />
   </h:panelGroup>
   <h:panelGroup layout="block">
-   <p:dataTable var="user" value="#{listUsersBean.usersBean.users}" rows="10"
+   <p:dataTable var="user" value="#{listUsersBean.allUsers}" rows="10"
      widgetVar="usersTable" paginator="true" paginatorTemplate="{CurrentPageReport} 
        {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
        {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15"
@@ -51,13 +51,16 @@
       filterMatchMode="startsWith">
      <h:outputText value="#{user.email}" />
     </p:column>
+    <p:column headerText="#{msgs['label.postsCount']}">
+     <h:outputText value="#{user.postsCount}" />
+    </p:column>
     <p:column exportable="false" styleClass="colType" styke="width: 70px">
      <f:facet name="header">
       <h:outputText value="#{msgs['label.actions']}" />
      </f:facet>
      <p:commandLink ajax="false" process="@this" immediate="true"
        action="#{listUsersBean.editAction()}" id="editButton">
-      <f:param name="username" value="#{user.username}"></f:param>
+      <f:param name="id" value="#{user.id}"></f:param>
       <h:graphicImage value="/img/edit-icon.png" title="#{msgs['button.edit']}"
         alt="#{msgs['button.edit']}" width="20" height="20" />
      </p:commandLink>

@@ -10,6 +10,8 @@ import com.jee.entity.UserModel;
 public interface UserServiceLocal {
     List<UserModel> findAllUsers();
     
+    List<UserModel> findAllUsersForDisplay();
+    
     UserModel save(UserModel entity);
     
     UserModel update(UserModel entity);
