@@ -13,7 +13,7 @@ public class JDBCTest {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        String sql = "SELECT id, username, password_hash, full_name FROM users";
+        String sql = "SELECT id, username, password, first_name, last_name, email FROM users";
         
         try {
             Class.forName(JDBC_DRIVER);
@@ -31,13 +31,17 @@ public class JDBCTest {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
-                String password = resultSet.getString("password_hash");
-                String fullName = resultSet.getString("full_name");
+                String password = resultSet.getString("password");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String email = resultSet.getString("email");
                 
                 System.out.println("id: " + id);
                 System.out.println("username: " + username);
                 System.out.println("password: " + password);
-                System.out.println("fullname: " + fullName);
+                System.out.println("first name: " + firstName);
+                System.out.println("last name: " + lastName);
+                System.out.println("email: " + email);
                 System.out.println();
             }
             
