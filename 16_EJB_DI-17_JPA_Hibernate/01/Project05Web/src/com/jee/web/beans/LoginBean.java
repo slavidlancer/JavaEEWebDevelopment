@@ -35,8 +35,8 @@ public class LoginBean implements Serializable {
     
     public String login() {
         
-        String encryptedPassword = GeneralUtils.encodePlainTextToMd5(this.password);
-        //String encryptedPassword = GeneralUtils.encodePlainTextToSha256(this.password);
+        //String encryptedPassword = GeneralUtils.encodePlainTextToMd5(this.password);
+        String encryptedPassword = GeneralUtils.encodePlainTextToSha256(this.password);
         UserModel user = userService.loginUser(this.username, encryptedPassword);
         
         if (user == null) {

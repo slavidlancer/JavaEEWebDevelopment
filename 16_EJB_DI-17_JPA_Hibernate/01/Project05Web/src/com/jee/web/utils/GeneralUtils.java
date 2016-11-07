@@ -8,13 +8,33 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.bouncycastle.util.encoders.Hex;
 
 import com.jee.entity.UserModel;
 
 public class GeneralUtils {
-    public static UserModel getLoggedUser(Object request) {
-        return null;
+    public static UserModel getLoggedUser(Object requestObject) {
+        UserModel loggedUser = null;
+        
+        if (requestObject instanceof HttpServletRequest) {
+            HttpServletRequest request = (HttpServletRequest) requestObject;
+            loggedUser = (UserModel) request.getSession().getAttribute("LOGGED_USER");
+        }
+        
+        return loggedUser;
+    }
+    
+    public static String getRequestedPath(Object requestObject) {
+        String requestedPath = "";
+        
+        if (requestObject instanceof HttpServletRequest) {
+            HttpServletRequest request = (HttpServletRequest) requestObject;
+            requestedPath = request.getRequestURI().substring(request.getContextPath().length());
+        }
+        
+        return requestedPath;
     }
     
     public static String encodePlainTextToSha256(String plainText) {

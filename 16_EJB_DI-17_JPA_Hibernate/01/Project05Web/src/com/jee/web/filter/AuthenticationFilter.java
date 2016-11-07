@@ -10,11 +10,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.jee.entity.UserModel;
 import com.jee.web.constants.UrlConstants;
+import com.jee.web.utils.GeneralUtils;
 
 public class AuthenticationFilter implements Filter, Serializable {
     
@@ -26,9 +25,7 @@ public class AuthenticationFilter implements Filter, Serializable {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String requestedPath = httpRequest.getRequestURI().substring(
-                httpRequest.getContextPath().length());
+        String requestedPath = GeneralUtils.getRequestedPath(request);
         
         if (UrlConstants.PATH_INDEX.equals(requestedPath)) {
             filterChain.doFilter(request, response);
@@ -42,8 +39,7 @@ public class AuthenticationFilter implements Filter, Serializable {
             return;
         }
         
-        HttpSession Session = httpRequest.getSession();
-        UserModel loggedUser = (UserModel) Session.getAttribute("LOGGED_USER");
+        UserModel loggedUser = GeneralUtils.getLoggedUser(request);
         
         if (loggedUser == null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(

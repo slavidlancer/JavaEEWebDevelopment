@@ -48,8 +48,8 @@ public class EditUserBean implements Serializable {
             return null;
         }
         
-        String encryptedPassword = GeneralUtils.encodePlainTextToMd5(this.user.getPassword());
-        //String encryptedPassword = GeneralUtils.encodePlainTextToSha256(this.user.getPassword());
+        //String encryptedPassword = GeneralUtils.encodePlainTextToMd5(this.user.getPassword());
+        String encryptedPassword = GeneralUtils.encodePlainTextToSha256(this.user.getPassword());
         this.user.setPassword(encryptedPassword);
         
         userService.update(this.user);
