@@ -112,4 +112,35 @@ public class UserModel extends BaseDomainObject {
     public void setPostsCount(Long postsCount) {
         this.postsCount = postsCount;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (this.id != null ? this.id.hashCode() : 0);
+        
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof UserModel)) {
+            return false;
+        }
+        
+        UserModel other = (UserModel) obj;
+        
+        if (((this.id == null) && (other.id != null)) ||
+                ((this.id != null) && !this.id.equals(other.id))) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        String value = "User[id = " + this.id + "]";
+        
+        return value;
+    }
 }

@@ -31,7 +31,7 @@ public class UserService implements UserServiceLocal {
     @Override
     public List<UserModel> findAllUsersForDisplay() {
         String queryString = "select new UserModel(usermodel.id, usermodel.username, usermodel.password, "
-                + "usermodel.firstName, usermodel.lastName, usermodel.email, COUNT (postmodel)) "
+                + "usermodel.firstName, usermodel.lastName, usermodel.email, COUNT(postmodel)) "
                 + "from UserModel usermodel left join usermodel.posts postmodel group by usermodel.id "
                 + "order by upper(usermodel.username) asc";
         Query query = entityManager.createQuery(queryString);
