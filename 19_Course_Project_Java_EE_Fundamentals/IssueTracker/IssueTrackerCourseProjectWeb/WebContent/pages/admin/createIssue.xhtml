@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="user" value="${sessionScope.LOGGED_USER}"></c:set>
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/img/icon/favicon-16x16.png" />
+ <title>#{msgs['default.title']}: #{msgs['create.issue.title']} [#{msgs['label.admin']}]</title>
+</h:head>
+<body id="editBody">
+ <h:form styleClass="editForm">
+  <p:outputPanel styleClass="alert alert-danger errorPanel"
+    rendered="#{createIssueBean.hasErrors()}">
+   <p:messages autoUpdate="false" id="editParameterMessages" globalOnly="false"
+     styleClass="messagesStyle" />
+  </p:outputPanel>
+  <div class="col-md-3 editBox">
+   <h3 class="text-primary bold upper headPaddings">
+    <h:outputText value="#{msgs['create.issue.title']}" escape="false" />
+   </h3>
+   <div class="box-field">
+    <label for="title" style="margin: 0% 0% 0% 50%">#{msgs['label.title']}</label>
+    <p:inputText id="title" name="title" styleClass="editInput"
+      value="#{createIssueBean.issue.title}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </p:inputText>
+    <p:message for="title" />
+   </div>
+   <br />
+   <div class="box-field">
+    <label for="description">#{msgs['label.description']}</label>
+    <h:inputTextarea id="description" name="description" styleClass="editInput"
+      style="color: black; background-color: white;" cols="100" rows="10"
+      value="#{createIssueBean.issue.description}" required="true"
+      requiredMessage="#{msgs['error.required.field']}">
+     <f:validateLength maximum="4000" />
+    </h:inputTextarea>
+    <p:message for="description" />
+   </div>
+   <br />
+   <div class="box-field">
+    <p:commandButton ajax="false" id="createIssueBtn" action="#{createIssueBean.createAdminAction()}"
+     styleClass="btn btn-primary createUserBtn" value="#{msgs['button.issue.create']}" />
+   </div>
+  </div>
+ </h:form>
+ <h:form style="display: inline-block;">
+  <h:panelGroup layout="block" style="display: inline-block;">
+   <p:commandButton ajax="false" action="#{listIssuesBean.listAdminAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.issue.list']}" style="margin: 5% 5% 5% 5%;" />
+   <p:commandButton ajax="false" action="#{adminBean.adminPanelAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.admin.panel']}" style="margin: 5% 5% 5% 5%;" />
+   <br />
+   <h:outputText value="#{msgs['label.user']}: #{user.username} " style="font-weight: bold;" />
+   <p:commandLink ajax="false" process="@this" immediate="true"
+     action="#{listUsersBean.editAdminAction()}" id="userProfileButton">
+    <f:param name="userid" value="#{user.id}"></f:param>
+    <h:graphicImage value="/img/user_profile.png" title="#{msgs['button.user.profile']}"
+      alt="#{msgs['button.user.profile']}" width="30" height="30" />
+   </p:commandLink>&nbsp;
+   <p:commandLink ajax="false" process="@this" immediate="true"
+     action="#{loginBean.logout()}" id="logoutButton">
+    <h:graphicImage value="/img/logout.png" title="#{msgs['button.logout']}"
+      alt="#{msgs['button.logout']}" width="30" height="30" />
+   </p:commandLink>
+  </h:panelGroup>
+ </h:form>
+</body>
+</html>

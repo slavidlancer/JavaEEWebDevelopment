@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="user" value="#{sessionScope.LOGGED_USER}"></c:set>
+<ui:param name="listIssuesRedirectAuth" value="#{request.contextPath}/pages/auth/listIssues.html" />
+<c:if test="${not empty user}">
+ #{facesContext.externalContext.response.sendRedirect(listIssuesRedirectAuth)}
+</c:if>
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/img/icon/favicon-16x16.png" />
+ <title>#{msgs['default.title']}: #{msgs['login.title']}</title>
+</h:head>
+<body id="loginBody">
+ <h:panelGroup id="mainPageContent" layout="block">
+  <h:form>
+   <h:panelGroup layout="block">
+    <p:commandButton ajax="false" action="#{listIssuesBean.listAllAction()}"
+      styleClass="btn btn-info" style="display: block; margin-left: auto; margin-right: auto;"
+      value="#{msgs['list.issue.title']}" />
+    <p:commandButton ajax="false" action="#{listUsersBean.createAction()}"
+      styleClass="btn btn-info"
+      style="display: block; margin: 5% 5% 5% 5%; margin-left: auto; margin-right: auto;"
+      value="#{msgs['button.user.register_new']}" />
+   </h:panelGroup>
+  </h:form>
+  <h:form styleClass="loginForm">
+   <h:panelGroup>
+    <h3 class="loginTitle">#{msgs['login.title']}</h3>
+   </h:panelGroup>
+   <p:messages autoUpdate="false" id="loginDialogMessages" globalOnly="false"
+      styleClass="loginMessage" />
+   <h:panelGroup layout="block">
+    <p:inputText value="#{loginBean.username}" id="username"
+      styleClass="loginInputField" required="true"
+      requiredMessage="#{msgs['error.required.username']}">
+     <p:watermark for="username" value="#{msgs['label.username']}" />
+    </p:inputText>
+   </h:panelGroup>
+   <br clear="all" />
+   <br />
+   <h:panelGroup layout="block">
+    <p:password value="#{loginBean.password}" id="password"
+      styleClass="loginInputField" required="true"
+      requiredMessage="#{msgs['error.required.password']}">
+     <p:watermark for="password" value="#{msgs['label.password']}" />
+    </p:password>
+   </h:panelGroup>
+   <br clear="all" />
+   <br />
+   <h:panelGroup layout="block">
+    <p:commandButton ajax="false" action="#{loginBean.login()}"
+      styleClass="btn btn-info"
+      style="display: block; margin: 5% 5% 5% 5%; margin-left: auto; margin-right: auto;"
+      value="#{msgs['button.login']}" />
+   </h:panelGroup>
+   <br />
+  </h:form>
+ </h:panelGroup>
+</body>
+</html>

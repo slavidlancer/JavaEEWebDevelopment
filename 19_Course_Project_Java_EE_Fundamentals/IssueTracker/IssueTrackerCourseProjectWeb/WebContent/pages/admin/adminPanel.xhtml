@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="user" value="${sessionScope.LOGGED_USER}"></c:set>
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/img/icon/favicon-16x16.png" />
+ <title>#{msgs['default.title']}: #{msgs['admin.title']} [#{msgs['label.admin']}]</title>
+</h:head>
+<body id="commonBody">
+ <h:form styleClass="commonForm">
+  <h:panelGroup layout="block">
+   <b>#{msgs['label.welcome']} #{LOGGED_USER.fullName} #{msgs['label.aka']} #{LOGGED_USER.username}!</b>
+   <br />
+   <p:commandButton ajax="false" action="#{listUsersBean.listAllAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.user.list']}" style="margin: 5% 5% 5% 5%;" />
+   <p:commandButton ajax="false" action="#{listIssuesBean.listSimpleAdminAction()}"
+     styleClass="btn btn-info" value="#{msgs['button.issue.list']}" style="margin: 5% 5% 5% 5%;" />
+  </h:panelGroup>
+  <br clear="all" />
+  <br />
+  <h:panelGroup layout="block">
+   <h:outputText value="#{msgs['label.user']}: #{user.username} " style="font-weight: bold;" />
+   <p:commandLink ajax="false" process="@this" immediate="true"
+     action="#{listUsersBean.editAdminAction()}" id="userProfileButton">
+    <f:param name="userid" value="#{user.id}"></f:param>
+    <h:graphicImage value="/img/user_profile.png" title="#{msgs['button.user.profile']}"
+      alt="#{msgs['button.user.profile']}" width="30" height="30" />
+   </p:commandLink>&nbsp;
+   <p:commandLink ajax="false" process="@this" immediate="true"
+     action="#{loginBean.logout()}" id="logoutButton">
+    <h:graphicImage value="/img/logout.png" title="#{msgs['button.logout']}"
+      alt="#{msgs['button.logout']}" width="30" height="30" />
+   </p:commandLink>
+  </h:panelGroup>
+ </h:form>
+</body>
+</html>

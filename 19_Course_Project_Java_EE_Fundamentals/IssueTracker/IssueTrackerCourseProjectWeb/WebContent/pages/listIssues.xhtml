@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="user" value="#{sessionScope.LOGGED_USER}"></c:set>
+<ui:param name="listIssuesRedirectAuth" value="#{request.contextPath}/pages/auth/listIssues.html" />
+<c:if test="${not empty user}">
+ #{facesContext.externalContext.response.sendRedirect(listIssuesRedirectAuth)}
+</c:if>
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/img/icon/favicon-16x16.png" />
+ <title>#{msgs['default.title']}: #{msgs['list.issue.title']}</title>
+</h:head>
+<body id="commonBody">
+ <h:form styleClass="commonForm">
+  <h:panelGroup layout="block">
+   <p:dataTable var="issue" value="#{listIssuesBean.getIssuesByState(listIssuesBean.state)}"
+     rows="10" widgetVar="IssuesTable" paginator="true" paginatorTemplate="{CurrentPageReport} 
+       {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+       {RowsPerPageDropdown}" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15"
+       style="width:75%; float:right;" styleClass="listIssuesTable" id="listIssuesTable">
+    <f:facet name="header">
+     <p:outputPanel>
+      <h:outputText value="#{msgs['list.issue.title']}" />
+     </p:outputPanel>
+    </f:facet>
+    <p:column headerText="#{msgs['label.id']}" style="width: 70px">
+     <h:outputText value="#{issue.id}" style="float:left;" />
+    </p:column>
+    <p:column headerText="#{msgs['label.title']}" filterBy="#{issue.title}"
+      filterMatchMode="contains">
+     <h:commandLink ajax="false" process="@this" immediate="true"
+       action="#{listIssuesBean.viewAction()}" id="viewButton" target="_blank">
+       <h:outputText value="#{issue.title}" style="float:left; text-align: left; font-weight: bold;" />
+       <f:param name="id" value="#{issue.id}"></f:param>
+     </h:commandLink>
+    </p:column>
+    <p:column headerText="#{msgs['label.state']}" style="width: 100px">
+     <h:outputText value="#{issue.state.state}" />
+    </p:column>
+    <p:column headerText="#{msgs['label.comments']}" style="width: 10%">
+     <h:outputText value="#{listIssuesBean.getIssueCommentsCountById(issue.id)}" />
+    </p:column>
+   </p:dataTable>
+   <p:dataTable var="issue_state" value="#{listStatesBean.allStatesIssuesCount}"
+     widgetVar="StatesTable" style="width:10%;" styleClass="listStatesTable" id="listStatesTable">
+    <f:facet name="header">
+     <p:outputPanel>
+      <p:commandLink ajax="false" process="@this" immediate="true"
+        action="#{listIssuesBean.listSimpleAction()}" id="allButton">
+       <f:param name="state" value=""></f:param>
+       <h:outputText value="#{msgs['label.all']} (#{listIssuesBean.allIssuesCount})" />
+      </p:commandLink>
+     </p:outputPanel>
+    </f:facet>
+    <p:column>
+     <p:commandLink ajax="false" process="@this" immediate="true"
+       action="#{listIssuesBean.listSimpleAction()}" id="#{issue_state.state.toLowerCase()}Button">
+      <f:param name="state" value="#{issue_state.state}"></f:param>
+      <h:outputText value="#{issue_state.state} (#{issue_state.issuesCount})" />
+     </p:commandLink>
+    </p:column>
+   </p:dataTable>
+   <br />
+   <h:commandLink id="excel" title="#{msgs['button.export.xls']}" style="float:left;">
+    <h:graphicImage value="/img/excel.png" />
+    <p:dataExporter type="xls" target="listIssuesTable" fileName="issues" />
+   </h:commandLink>
+   <h:commandLink id="pdf" title="#{msgs['button.export.pdf']}" style="float:left;">
+    <h:graphicImage value="/img/pdf.png" />
+    <p:dataExporter type="pdf" target="listIssuesTable" fileName="issues" />
+   </h:commandLink>
+  </h:panelGroup>
+ </h:form>
+ <h:form style="display: inline-block;">
+  <h:panelGroup layout="block">
+    <p:commandButton ajax="false" action="#{listUsersBean.loginAction()}"
+      styleClass="btn btn-info"
+      style="display: block; margin: 5% 5% 5% 5%; margin-left: auto; margin-right: auto;"
+      value="#{msgs['button.login']}" />
+    <p:commandButton ajax="false" action="#{listUsersBean.createAction()}"
+      styleClass="btn btn-info"
+      style="display: block; margin: 5% 5% 5% 5%; margin-left: auto; margin-right: auto;"
+      value="#{msgs['button.user.register_new']}" />
+   </h:panelGroup>
+ </h:form>
+</body>
+</html>

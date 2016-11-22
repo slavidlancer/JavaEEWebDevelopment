@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:pe="http://primefaces.org/ui/extensions"
+ xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+ <link href="#{application.contextPath}/css/common.css" rel="stylesheet"
+   type="text/css" />
+ <link href="#{application.contextPath}/css/bootstrap.css" rel="stylesheet"
+   type="text/css" />
+ <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/img/icon/favicon-16x16.png" />
+ <title>#{msgs['default.title']}: #{msgs['error.title']}</title>
+ <meta http-equiv="refresh" content="0;url=#{request.contextPath}/pages/listIssues.html" />
+</h:head>
+<body id="commonBody">
+ <h:form styleClass="commonForm">
+  <center>
+   <img src="../img/delete.png" alt="#{msgs['error.title']}" title="#{msgs['error.title']}"
+     width="50" height="50" />
+   <h1>Session expired or another general error!</h1>
+   <h3>You will be redirected to issues list page!</h3>
+   <p><a href="#{request.contextPath}/pages/listIssues.html">Click here</a> (if not redirected)</p>
+  </center>
+ </h:form>
+</body>
+</html>
